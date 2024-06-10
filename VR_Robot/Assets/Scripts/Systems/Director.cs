@@ -1,18 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Director : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static Director instance;
+
+    private void Awake()
     {
-        
+        instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public event Action<string> grabItem;
+    public void GrabItem(string _itemName) { if (grabItem != null) { grabItem.Invoke(_itemName); } }
 }

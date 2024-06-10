@@ -13,6 +13,7 @@ public class Debug_Cheats : MonoBehaviour
     public TMP_InputField input;
     public TextMeshProUGUI text, autoCompleteText, autoCompleteGhostText;
     public GameObject inputField;
+    public GameObject box, apple;
 
     private Coroutine currentFade;
     private CommandTree commands;
@@ -45,31 +46,8 @@ public class Debug_Cheats : MonoBehaviour
     {
         if (!ctx.performed || !inputField.activeInHierarchy) { return; }
 
-        #region Execute Command
         string[] args = input.text.Split(' ');
-        if (args.Length != 0)
-        {
-            string cmd = args[0].ToLower();
-
-            switch (cmd)
-            {
-                case "godmode":
-                    if (args.Length > 1)
-                    {
-                        if (bool.TryParse(args[1], out bool enable))
-                        {
-                            break;
-                        }
-                        else { OutputLog($"Unknown command: {input.text}", Color.red); }
-                    }
-                    OutputLog($"Unknown command: {input.text}", Color.red);
-                    break;
-                default:
-                    OutputLog($"Unknown command: {input.text}", Color.red);
-                    break;
-            }
-        }
-        #endregion
+        EnterCommand(args);
 
         inputField.SetActive(!inputField.activeInHierarchy);
         input.text = "";
@@ -99,6 +77,53 @@ public class Debug_Cheats : MonoBehaviour
         {
             // Update auto-complete suggestions
             UpdateAutoComplete();
+        }
+    }
+
+    private void EnterCommand(string[] args) {
+        if (args.Length != 0)
+        {
+            string cmd = args[0].ToLower();
+
+            switch (cmd)
+            {
+                case "spawn":
+                    if (args.Length > 4)
+                    {
+                        Vector3 spawnPos = Vector3.zero;
+
+                        if (float.TryParse(args[3], out float x) && float.TryParse(args[4], out float y) && float.TryParse(args[5], out float z)) {
+                            spawnPos = new Vector3(x, y, z);
+                        }
+
+                        if (args[1] == "item") { 
+                            if (args[2] == "box") { 
+                                Instantiate(box, spawnPos, Quaternion.identity);
+                                OutputLog($"Spawned Box at position: {spawnPos}", Color.green);
+                                break;
+                            }
+                            if (args[2] == "apple") { 
+                                Instantiate(apple, spawnPos, Quaternion.identity);
+                                OutputLog($"Spawned Box at position: {spawnPos}", Color.green);
+                                break;
+                            }
+                        }
+                        else { OutputLog($"Unknown command: {input.text}", Color.red); }
+                    }
+                    OutputLog($"Unknown command: {input.text}", Color.red);
+                    break;
+                case "grab":
+                    if (args.Length > 0) {
+                        Director.instance.GrabItem(args[1]);
+                        OutputLog($"Grabbing item: {args[1] }", Color.green);
+                        break;
+                    }
+                    OutputLog($"Unknown command: {input.text}", Color.red);
+                    break;
+                default:
+                    OutputLog($"Unknown command: {input.text}", Color.red);
+                    break;
+            }
         }
     }
 
@@ -228,12 +253,25 @@ public class CommandTree
         //Initialize all godmode nodes
         CommandNode node = new CommandNode("BASE");
         commandNodes.Add(node);
-        node = new CommandNode("godmode");
+        node = new CommandNode("spawn");
         commandNodes[0].commandsFromCurrent.Add(node);
-        node = new CommandNode("true");
+        node = new CommandNode("item");
         commandNodes[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
-        node = new CommandNode("false");
-        commandNodes[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
+        node = new CommandNode("apple");
+        commandNodes[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
+        node = new CommandNode("box");
+        commandNodes[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
+
+        node = new CommandNode("grab");
+        commandNodes[0].commandsFromCurrent.Add(node);
+        node = new CommandNode("apple");
+        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent.Add(node);
+        node = new CommandNode("box");
+        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent.Add(node);
+        node = new CommandNode("money");
+        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent.Add(node);
+        node = new CommandNode("vacuum_cleaner");
+        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent.Add(node);
     }
 }
 
