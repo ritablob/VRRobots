@@ -112,11 +112,14 @@ public class Debug_Cheats : MonoBehaviour
                     }
                     OutputLog($"Unknown command: {input.text}", Color.red);
                     break;
-                case "grab":
-                    if (args.Length > 0) {
-                        Director.instance.GrabItem(args[1]);
-                        OutputLog($"Grabbing item: {args[1] }", Color.green);
-                        break;
+                case "robot":
+                    if (args.Length >= 3 && args[1] == "state") {
+                        Debug.Log($"{args.Length}, {args[3]}");
+                        if (args.Length == 4 && args[2] == "grab") {
+                            Director.instance.GrabItem(args[3]);
+                            OutputLog($"Grabbing item: {args[3] }", Color.green);
+                            break;
+                        }
                     }
                     OutputLog($"Unknown command: {input.text}", Color.red);
                     break;
@@ -262,16 +265,20 @@ public class CommandTree
         node = new CommandNode("box");
         commandNodes[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
 
-        node = new CommandNode("grab");
+        node = new CommandNode("robot");
         commandNodes[0].commandsFromCurrent.Add(node);
+        node = new CommandNode("state");
+        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent.Add(node);
+        node = new CommandNode("grab");
+        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent.Add(node);
         node = new CommandNode("apple");
-        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent.Add(node);
+        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
         node = new CommandNode("box");
-        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent.Add(node);
+        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
         node = new CommandNode("money");
-        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent.Add(node);
+        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
         node = new CommandNode("vacuum_cleaner");
-        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent.Add(node);
+        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
     }
 }
 
