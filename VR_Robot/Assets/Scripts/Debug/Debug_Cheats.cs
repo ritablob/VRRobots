@@ -90,11 +90,7 @@ public class Debug_Cheats : MonoBehaviour
                 case "spawn":
                     if (args.Length > 4)
                     {
-                        Vector3 spawnPos = Vector3.zero;
-
-                        if (float.TryParse(args[3], out float x) && float.TryParse(args[4], out float y) && float.TryParse(args[5], out float z)) {
-                            spawnPos = new Vector3(x, y, z);
-                        }
+                        Vector3 spawnPos = ParsePosition(args[3], args[4], args[5]);
 
                         if (args[1] == "item") { 
                             if (args[2] == "box") { 
@@ -178,7 +174,6 @@ public class Debug_Cheats : MonoBehaviour
         string autoCompleteMessage = string.Join("\n", filteredStrings);
         autoCompleteText.text = autoCompleteMessage;
     }
-
     private void AutoComplete()
     {
         string[] args = input.text.Split(' ');
@@ -221,14 +216,21 @@ public class Debug_Cheats : MonoBehaviour
 
         input.MoveTextEnd(false);
     }
-
     private void OutputLog(string msg, Color color)
     {
         if (currentFade != null) { StopCoroutine(currentFade); }
 
         currentFade = StartCoroutine(ShowOutput(msg, color));
     }
+    private Vector3 ParsePosition(string _x, string _y, string _z) {
+        Vector3 pos = Vector3.zero;
 
+        if (float.TryParse(_x, out float x)) { pos.x = x; }
+        if (float.TryParse(_y, out float y)) { pos.y = y; }
+        if (float.TryParse(_z, out float z)) { pos.z = z; }
+
+        return pos;
+    }
     private IEnumerator ShowOutput(string msg, Color color)
     {
         text.text = msg;
@@ -262,8 +264,16 @@ public class CommandTree
         commandNodes[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
         node = new CommandNode("apple");
         commandNodes[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
+        node = new CommandNode("~");
+        commandNodes[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
+        commandNodes[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
+        commandNodes[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
         node = new CommandNode("box");
         commandNodes[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
+        node = new CommandNode("~");
+        commandNodes[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent[1].commandsFromCurrent.Add(node);
+        commandNodes[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent.Add(node);
+        commandNodes[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
 
         node = new CommandNode("robot");
         commandNodes[0].commandsFromCurrent.Add(node);
@@ -275,9 +285,9 @@ public class CommandTree
         commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
         node = new CommandNode("box");
         commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
-        node = new CommandNode("money");
+        node = new CommandNode("brain");
         commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
-        node = new CommandNode("vacuum_cleaner");
+        node = new CommandNode("bonding_adhesive");
         commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
     }
 }
