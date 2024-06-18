@@ -62,3 +62,7 @@ sysinfo.txt
 crashlytics-build.properties
 
 /VR_Robot/Temp
+*.log
+VR_Robot/.idea/.idea.VR_Robot/.idea/projectSettingsUpdater.xml
+VR_Robot/.idea/.idea.VR_Robot/.idea/workspace.xml
+VR_Robot/UserSettings/Layouts/default-2021.dwlt
