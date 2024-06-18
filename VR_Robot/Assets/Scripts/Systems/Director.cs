@@ -11,7 +11,4 @@ public class Director : MonoBehaviour
     {
         instance = this;
     }
-
-    public event Action<string> grabItem;
-    public void GrabItem(string _itemName) { if (grabItem != null) { grabItem.Invoke(_itemName); } }
 }

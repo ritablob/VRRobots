@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using System;
 
 public class Debug_Cheats : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Debug_Cheats : MonoBehaviour
     public TextMeshProUGUI text, autoCompleteText, autoCompleteGhostText;
     public GameObject inputField;
     public GameObject box, apple;
+    public Robot_Interaction_State_Machine robot;
 
     private Coroutine currentFade;
     private CommandTree commands;
@@ -109,13 +111,16 @@ public class Debug_Cheats : MonoBehaviour
                     OutputLog($"Unknown command: {input.text}", Color.red);
                     break;
                 case "robot":
-                    if (args.Length >= 3 && args[1] == "state") {
-                        Debug.Log($"{args.Length}, {args[3]}");
-                        if (args.Length == 4 && args[2] == "grab") {
-                            Director.instance.GrabItem(args[3]);
-                            OutputLog($"Grabbing item: {args[3] }", Color.green);
-                            break;
+                    if (args.Length >= 2 && args[1] == "state") {
+                        if (GetState(args[2]) == Robot_Interaction_State_Machine.ERobotInteractionState.BAD) {
+                            OutputLog($"State: {args[2]} does not exist.", Color.red); 
+                            break; 
                         }
+
+                        Robot_Interaction_State_Machine.ERobotInteractionState state = GetState(args[2]);
+                        FindObjectOfType<Robot_Interaction_State_Machine>().Context.DEBUG_SetState(GetState(args[2]));
+                        OutputLog($"Robot State change to {state.ToString()}", Color.green);
+                        break;
                     }
                     OutputLog($"Unknown command: {input.text}", Color.red);
                     break;
@@ -245,6 +250,17 @@ public class Debug_Cheats : MonoBehaviour
             yield return null;
         }
     }
+    private Robot_Interaction_State_Machine.ERobotInteractionState GetState(string stateName) {
+        string[] enumNames = Enum.GetNames(typeof(Robot_Interaction_State_Machine.ERobotInteractionState));
+
+        for (int i = 0; i < enumNames.Length; i++) {
+            if (enumNames[i].ToLower() == stateName) {
+                return (Robot_Interaction_State_Machine.ERobotInteractionState)Enum.Parse(typeof(Robot_Interaction_State_Machine.ERobotInteractionState), enumNames[i]);
+            }
+        }
+
+        return Robot_Interaction_State_Machine.ERobotInteractionState.BAD;
+    }
 }
 
 public class CommandTree
@@ -279,16 +295,11 @@ public class CommandTree
         commandNodes[0].commandsFromCurrent.Add(node);
         node = new CommandNode("state");
         commandNodes[0].commandsFromCurrent[1].commandsFromCurrent.Add(node);
-        node = new CommandNode("grab");
-        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent.Add(node);
-        node = new CommandNode("apple");
-        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
-        node = new CommandNode("box");
-        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
-        node = new CommandNode("brain");
-        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
-        node = new CommandNode("bonding_adhesive");
-        commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
+
+        foreach (Enum val in Enum.GetValues(typeof(Robot_Interaction_State_Machine.ERobotInteractionState))) {
+            node = new CommandNode(val.ToString().ToLower());
+            commandNodes[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent.Add(node);
+        }
     }
 }
 
