@@ -18,6 +18,8 @@ public class Robot_Search : Robot_Interaction_State
 
             return nextState;
         }
+
+
         //If an object is close by, change state to the grab state.
         if (Vector3.Distance(context.Interactable.position, context.WorldPos) < 3) {
             return Robot_Interaction_State_Machine.ERobotInteractionState.Grab;
@@ -25,6 +27,7 @@ public class Robot_Search : Robot_Interaction_State
 
         return StateKey;
     }
+    public override void LateUpdateState() { }
     public override void OnTriggerEnter(Collider _other) { }
     public override void OnTriggerStay(Collider _other) { }
     public override void OnTriggerExit(Collider _other) { }

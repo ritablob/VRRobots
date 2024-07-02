@@ -25,6 +25,7 @@ public class Robot_Grab : Robot_Interaction_State
 
         return StateKey;
     }
+    public override void LateUpdateState() { context.Head.LookAt(context.Interactable); }
     public override void OnTriggerEnter(Collider _other) { }
     public override void OnTriggerStay(Collider _other) { }
     public override void OnTriggerExit(Collider _other) { }

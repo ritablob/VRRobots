@@ -22,20 +22,20 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
 
     [SerializeField] Animator anim;
     [SerializeField] Transform interactable;
+    [SerializeField] Transform head;
 
     //Validation & Context setup
     private void Awake()
     {
         ValidateConstraints();
 
-        _context = new Robot_Interaction_Context(anim, interactable, transform.position);
+        _context = new Robot_Interaction_Context(anim, interactable, head, transform.position);
 
         InitializeStates();
     }
 
     private void ValidateConstraints()
     {
-        //Assert.
     }
 
     private void InitializeStates() {

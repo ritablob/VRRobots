@@ -21,6 +21,7 @@ public class Robot_Idle : Robot_Interaction_State
 
         return StateKey;
     }
+    public override void LateUpdateState() { }
     public override void OnTriggerEnter(Collider _other) { }
     public override void OnTriggerStay(Collider _other) { }
     public override void OnTriggerExit(Collider _other) { }

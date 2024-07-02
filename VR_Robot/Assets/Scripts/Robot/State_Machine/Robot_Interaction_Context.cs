@@ -8,20 +8,23 @@ public class Robot_Interaction_Context : MonoBehaviour
 {
     //Vars
     private Animator _anim;
-    private Transform _interactable;
+    private Transform _interactable, _head;
     private Vector3 _worldPos;
     private Robot_Interaction_State_Machine.ERobotInteractionState _DEBUG_state;
 
     //Constructor
-    public Robot_Interaction_Context(Animator anim, Transform interactable, Vector3 worldPos) {
+    public Robot_Interaction_Context(Animator anim, Transform interactable, Transform head, Vector3 worldPos) {
         _anim = anim;
         _interactable = interactable;
+        _head = head;
         _worldPos = worldPos;
     }
 
     //Read-only
     public Animator Anim => _anim;
     public Transform Interactable => _interactable;
+    public Transform Head => _head;
+
     public Vector3 WorldPos => _worldPos;
 
     public Robot_Interaction_State_Machine.ERobotInteractionState DEBUG_GetState => _DEBUG_state;
