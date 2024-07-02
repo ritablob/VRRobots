@@ -8,9 +8,15 @@ public class Robot_Grab : Robot_Interaction_State
         Robot_Interaction_Context context = _context;
     }
 
-    public override void EnterState() { context.Anim.SetTrigger("Grab"); }
+    private float grabLerpTime;
+
+    public override void EnterState() { context.Anim.SetTrigger("Grab"); grabLerpTime = 0; }
     public override void ExitState() { }
-    public override void UpdateState() { }
+    public override void UpdateState() {
+        // Move grabable object to grippers
+        context.LookatTarget.position = Vector3.Lerp(context.LookatTarget.position, context.GrabPivot.position, grabLerpTime);
+        grabLerpTime += Time.deltaTime;
+    }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
         if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD) {
             Robot_Interaction_State_Machine.ERobotInteractionState nextState = context.DEBUG_GetState;
@@ -19,13 +25,13 @@ public class Robot_Grab : Robot_Interaction_State
             return nextState;
         }
 
-        if (Vector3.Distance(context.Interactable.position, context.WorldPos) >= 3) {
-            return Robot_Interaction_State_Machine.ERobotInteractionState.Search;
-        }
+        //if (Vector3.Distance(context.LookatTarget.position, context.WorldPos) >= 3) {
+        //    return Robot_Interaction_State_Machine.ERobotInteractionState.Search;
+        //}
 
         return StateKey;
     }
-    public override void LateUpdateState() { context.Head.LookAt(context.Interactable); }
+    public override void LateUpdateState() { context.Head.LookAt(context.LookatTarget); }
     public override void OnTriggerEnter(Collider _other) { }
     public override void OnTriggerStay(Collider _other) { }
     public override void OnTriggerExit(Collider _other) { }
