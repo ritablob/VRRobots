@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c9c8f88d8aed5ad4e8274413cbc86e32
+guid: cfe1f92824f4d9648b6a39652600ec73
 ModelImporter:
   serializedVersion: 21202
   internalIDToNameTable: []
@@ -75,7 +75,8 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips: []
+  referencedClips:
+  - 55d81017bdfa9a544bd7fc546d04e6fb
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -89,7 +90,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: Root
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
@@ -97,7 +98,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   additionalBone: 0
   userData: 
