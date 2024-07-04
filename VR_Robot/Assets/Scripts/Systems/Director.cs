@@ -7,6 +7,9 @@ public class Director : MonoBehaviour
 {
     public static Director instance;
 
+    public AnimationCurve interactLerpCurve;
+    public Transform leftHand, rightHand;
+
     #region
     public event Action<string, ObjectiveType> addObjective;
     public void AddObjective(string name, ObjectiveType objectiveType) { if (addObjective != null) { addObjective.Invoke(name, objectiveType); } }
