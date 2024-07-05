@@ -36,10 +36,10 @@ public class Custom_Interactable : MonoBehaviour
         Vector2 _rightHand = new Vector2(rightHand.position.x, rightHand.position.z);
 
         if (Vector2.Distance(_leftHand, new Vector2(transform.position.x, transform.position.z)) < grabDistance) {
-            if (!rb.isKinematic) { StartCoroutine(LerpUp(leftHand.position.y)); }
+            if (!rb.isKinematic) { StartCoroutine(LerpUp(leftHand)); }
             rb.isKinematic = true;
         } else if (Vector2.Distance(_rightHand, new Vector2(transform.position.x, transform.position.z)) < grabDistance)  {
-            if (!rb.isKinematic) { StartCoroutine(LerpUp(rightHand.position.y)); }
+            if (!rb.isKinematic) { StartCoroutine(LerpUp(rightHand)); }
             rb.isKinematic = true;
         }
         else if (rb.isKinematic) {
@@ -61,10 +61,10 @@ public class Custom_Interactable : MonoBehaviour
         col.enabled = false;
     }
 
-    private IEnumerator LerpUp(float handHeight) {
+    private IEnumerator LerpUp(Transform handToTrack) {
         float timer = 0;
         Vector3 startPos = transform.position;
-        Vector3 endPos = new Vector3(transform.position.x, handHeight - 0.25f, transform.position.z);
+        Vector3 endPos = new Vector3(transform.position.x, handToTrack.position.y - 0.2f, transform.position.z);
 
         while (timer < 1) {
             timer += Time.deltaTime * 3;
