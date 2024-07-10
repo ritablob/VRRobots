@@ -24,6 +24,15 @@ public abstract class StateManager<Estate> : MonoBehaviour where Estate : Enum
         }
     }
 
+    private void LateUpdate()
+    {
+        Estate nextStateKey = currentState.GetNextState();
+
+        if (!isTransitioningState && nextStateKey.Equals(currentState.StateKey)) {
+            currentState.LateUpdateState();
+        }
+    }
+
     public void TransitionToState(Estate _stateKey) {
         isTransitioningState = true;
         currentState.ExitState();

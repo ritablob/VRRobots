@@ -6,22 +6,27 @@ using UnityEngine;
 
 public class Robot_Interaction_Context : MonoBehaviour
 {
-    //Vars
+    // Vars
     private Animator _anim;
-    private Transform _interactable;
+    public Transform _lookatTarget, _head, _grabPivot;
     private Vector3 _worldPos;
     private Robot_Interaction_State_Machine.ERobotInteractionState _DEBUG_state;
 
     //Constructor
-    public Robot_Interaction_Context(Animator anim, Transform interactable, Vector3 worldPos) {
+    public Robot_Interaction_Context(Animator anim, Transform lookatTarget, Transform head, Transform grabPivot, Vector3 worldPos) {
         _anim = anim;
-        _interactable = interactable;
+        _lookatTarget = lookatTarget;
+        _head = head;
+        _grabPivot = grabPivot;
         _worldPos = worldPos;
     }
 
-    //Read-only
+    // Read-only
     public Animator Anim => _anim;
-    public Transform Interactable => _interactable;
+    public Transform LookatTarget => _lookatTarget;
+    public Transform Head => _head;
+    public Transform GrabPivot => _grabPivot;
+
     public Vector3 WorldPos => _worldPos;
 
     public Robot_Interaction_State_Machine.ERobotInteractionState DEBUG_GetState => _DEBUG_state;

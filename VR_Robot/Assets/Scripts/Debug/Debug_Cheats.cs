@@ -124,6 +124,19 @@ public class Debug_Cheats : MonoBehaviour
                     }
                     OutputLog($"Unknown command: {input.text}", Color.red);
                     break;
+                case "task":
+                    if (args.Length >= 3 && args[1] == "add") {
+                        Director.instance.AddObjective(args[2], ObjectiveType.Checkbox);
+                        OutputLog($"Added objective {args[2]}", Color.green);
+                        break;
+                    }
+                    else if (args.Length >= 3 && args[1] == "complete") {
+                        Director.instance.CompleteObjective(args[2]);
+                        OutputLog($"Completed objective {args[2]}", Color.green);
+                        break;
+                    }
+                    OutputLog($"Unknown command: {input.text}", Color.red);
+                    break;
                 default:
                     OutputLog($"Unknown command: {input.text}", Color.red);
                     break;
@@ -291,10 +304,25 @@ public class CommandTree
         commandNodes[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent.Add(node);
         commandNodes[0].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent[1].commandsFromCurrent[0].commandsFromCurrent[0].commandsFromCurrent.Add(node);
 
+
         node = new CommandNode("robot");
         commandNodes[0].commandsFromCurrent.Add(node);
         node = new CommandNode("state");
         commandNodes[0].commandsFromCurrent[1].commandsFromCurrent.Add(node);
+
+
+        node = new CommandNode("task");
+        commandNodes[0].commandsFromCurrent.Add(node);
+        node = new CommandNode("add");
+        commandNodes[0].commandsFromCurrent[2].commandsFromCurrent.Add(node);
+        node = new CommandNode("organizeToys");
+        commandNodes[0].commandsFromCurrent[2].commandsFromCurrent[0].commandsFromCurrent.Add(node);
+        node = new CommandNode("complete");
+        commandNodes[0].commandsFromCurrent[2].commandsFromCurrent.Add(node);
+        node = new CommandNode("organizeToys");
+        commandNodes[0].commandsFromCurrent[2].commandsFromCurrent[1].commandsFromCurrent.Add(node);
+        node = new CommandNode("partialFill");
+        commandNodes[0].commandsFromCurrent[2].commandsFromCurrent.Add(node);
 
         foreach (Enum val in Enum.GetValues(typeof(Robot_Interaction_State_Machine.ERobotInteractionState))) {
             node = new CommandNode(val.ToString().ToLower());
