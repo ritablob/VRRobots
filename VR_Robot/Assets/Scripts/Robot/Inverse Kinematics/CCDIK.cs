@@ -54,16 +54,8 @@ public class CCDIK : MonoBehaviour {
             targetPos = joints[0].transform.position + (dir.normalized * (maxRange * 0.9f));
         }
 
-        // Catching the obejct!
-        if (StartPos == Vector3.zero && Vector3.Distance(Target.position, Tooltip.position) < distanceThreshold) {
-            Director.instance.GrabObject(true);
-            Rigidbody rb = Target.GetComponent<Rigidbody>();
-            rb.isKinematic = false;
-            rb.velocity = Vector3.zero;
-            rb.useGravity = false;
-            rb.angularVelocity = Vector3.zero;
-        }
-
+        // Storing the object
+        // Move the arm & object-to-store to the inside of the robot's stomach
         if (StartPos != Vector3.zero) {
             targetPos = Vector3.Lerp(StartPos, Storage.position, curve.Evaluate(timer));
             Target.position = targetPos;
@@ -107,6 +99,14 @@ public class CCDIK : MonoBehaviour {
         rb.velocity = Vector3.zero;
 
         Destroy(origin);
+    }
+    public void CatchObject() {
+        Director.instance.GrabObject(true);
+        Rigidbody rb = Target.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        rb.velocity = Vector3.zero;
+        rb.useGravity = false;
+        rb.angularVelocity = Vector3.zero;
     }
 
     public void DumpObjects() {

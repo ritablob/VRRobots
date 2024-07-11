@@ -15,9 +15,13 @@ public class Robot_Grab : Robot_Interaction_State
         if (context.IKController.Target == null) { return StateKey; }
 
         if (context.IKController.Target.gameObject.layer == 8 &&
-            Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) { 
+            Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) 
+        {
+            context.IKController.CatchObject();
             return Robot_Interaction_State_Machine.ERobotInteractionState.Store; 
-        } else if (Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) {
+        } 
+        else if (Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) 
+        {
             return Robot_Interaction_State_Machine.ERobotInteractionState.Idle;
         }
 

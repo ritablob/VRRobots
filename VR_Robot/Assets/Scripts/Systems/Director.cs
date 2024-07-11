@@ -8,7 +8,7 @@ public class Director : MonoBehaviour
     public static Director instance;
 
     public AnimationCurve interactLerpCurve;
-    public Transform leftHand, rightHand;
+    public Transform leftHand, rightHand, playerCamera;
 
     private int points;
 
@@ -48,4 +48,5 @@ public class Director : MonoBehaviour
     }
 
     public int Points => points;
+    public float PlayerCameraXRot => playerCamera.localEulerAngles.x;
 }
