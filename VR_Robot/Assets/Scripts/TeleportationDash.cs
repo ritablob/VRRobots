@@ -17,7 +17,8 @@ public class TeleportationDash : TeleportationProvider
     */
     // Start is called before the first frame update
 
-    
+
+    public Transform player;
     public InputActionAsset actionAsset;
     public Transform xrRigTransform;
     private InputAction teleportAction;
@@ -28,31 +29,31 @@ public class TeleportationDash : TeleportationProvider
     private void Start()
     {
         teleportAction = actionAsset.FindActionMap("XRI Right Locomotion").FindAction("Teleport Mode");
+        teleportAction.canceled += DashToDestination;
     }
 
     protected override void Update()
     {
         base.Update();
-        if (teleportAction.WasReleasedThisFrame())
-        {
-            DashToDestination();
-        }
     }
 
-    private void DashToDestination()
+    private void DashToDestination(InputAction.CallbackContext ctx)
     {
         //Vector3 dashDistance = Vector3.Distance(xrRigTransform.position, TODO: GET POSITION OF RAYCAST);
         //StartCoroutine(Dash(dashDistance));
         //Vector3 speed = dashDistance / delayTime;
         
         interactor.GetLineOriginAndDirection(out playerPosition, out teleportationPosition);
-        var dashDistance = Vector3.Distance(playerPosition, teleportationPosition);
+        playerPosition = player.position;
+        Vector3 dashPosition = currentRequest.destinationPosition;
+        //var dashDistance = Vector3.Distance(playerPosition, teleportationPosition);
+        Debug.Log(playerPosition + "player pos, " + dashPosition + "dash pos");
         var dashDirection = teleportationPosition - playerPosition;
-        float speed = dashDistance / delayTime;
-        StartCoroutine(Dash(speed, dashDirection));
+        //float speed = dashDistance / delayTime;
+        StartCoroutine(Dash(playerPosition, dashPosition));
     }
 
-    private IEnumerator Dash(float speed, Vector3 direction)
+    private IEnumerator Dash(Vector3 startPos, Vector3 endPos)
     {
         /* calculate speed based on dash distance and delayTime 
          * every frame, move according to speed
@@ -62,10 +63,11 @@ public class TeleportationDash : TeleportationProvider
         yield return new WaitForSeconds(Time.deltaTime);
         while (currentTime < delayTime)
         {
-            xrRigTransform.position += new Vector3(direction.x + speed * Time.deltaTime,
-                direction.y + speed * Time.deltaTime, direction.z + speed * Time.deltaTime);
+            xrRigTransform.position = Vector3.Lerp(startPos, endPos, currentTime);
+            //xrRigTransform.position += new Vector3(direction.x + speed * Time.deltaTime,
+                //direction.y + speed * Time.deltaTime, direction.z + speed * Time.deltaTime);
             currentTime += Time.deltaTime;
-            yield return new WaitForSeconds(Time.deltaTime);
+            yield return null;
         }
         
         // move xrrig by speed
