@@ -2,20 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Robot_Search : Robot_Interaction_State
+public class Robot_Store : Robot_Interaction_State
 {
-    public Robot_Search(Robot_Interaction_Context _context, Robot_Interaction_State_Machine.ERobotInteractionState estate) : base (_context, estate) {
+    public Robot_Store(Robot_Interaction_Context _context, Robot_Interaction_State_Machine.ERobotInteractionState estate) : base (_context, estate) {
         Robot_Interaction_Context context = _context;
     }
 
-    public override void EnterState() { context.Anim.SetTrigger("Search"); }
-    public override void ExitState() { }
+    public override void EnterState() {
+        context.IKController.StartPos = context.IKController.Tooltip.position;
+        context.Anim.SetTrigger("Open");
+        context.Anim.SetTrigger("Close");
+    }
+    public override void ExitState() { if (context.IKController.Target != null) { Director.instance.CopyObject(context.IKController.Target.gameObject); } }  
     public override void UpdateState() { }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD)
-        {
-            return context.DEBUG_GetState;
-        }
+        if (context.IKController.Timer >= 1) { return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; }
+
         return StateKey;
     }
     public override void LateUpdateState() { }

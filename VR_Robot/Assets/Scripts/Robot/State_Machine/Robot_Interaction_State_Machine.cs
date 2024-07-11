@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_State_Machine.ERobotInteractionState>
 {
@@ -14,6 +15,8 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
         Idle,
         Search,
         Grab,
+        Store,
+        Dump,
         BAD //Use for null/exit cases
     }
 
@@ -22,25 +25,20 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
 
     [SerializeField] Animator anim;
     [SerializeField] Transform lookatTarget;
-    [SerializeField] Transform head;
-    [SerializeField] Transform grabPivot;
+    [SerializeField] Transform storage;
+    [SerializeField] CCDIK ikController;
+    [SerializeField] Transform garbageCanGeneral;
+    [SerializeField] Transform garbageCanPlastic;
+    [SerializeField] Transform garbageCanPaper;
 
     //Validation & Context setup
     private void Awake()
     {
         ValidateConstraints();
 
-        _context = new Robot_Interaction_Context(anim, lookatTarget, head, grabPivot, transform.position);
+        _context = new Robot_Interaction_Context(anim, ikController, transform.position);
 
         InitializeStates();
-    }
-
-    private void Start()
-    {
-        // Subscribe to director events
-        Director.instance.setCurrentLookat += SetLookatTarget;
-
-        Director.instance.releaseObject += ReleaseObject;
     }
 
     private void ValidateConstraints()
@@ -52,29 +50,18 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
         states.Add(ERobotInteractionState.Idle, new Robot_Idle(_context, ERobotInteractionState.Idle));
         states.Add(ERobotInteractionState.Search, new Robot_Search(_context, ERobotInteractionState.Search));
         states.Add(ERobotInteractionState.Grab, new Robot_Grab(_context, ERobotInteractionState.Grab));
+        states.Add(ERobotInteractionState.Store, new Robot_Store(_context, ERobotInteractionState.Store));
+        states.Add(ERobotInteractionState.Dump, new Robot_Dump(_context, ERobotInteractionState.Dump));
 
         currentState = states[ERobotInteractionState.Idle];
     }
 
-    private void SetLookatTarget(Transform _target) {
-        // If already grabbing something, release it
-        if (Context.LookatTarget != null) { 
-            Context.LookatTarget.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-            Context.LookatTarget.GetComponent<Task_Interactable>().grabbed = false;
-            return;
-        }
-
-        Context._lookatTarget = _target;
-        Context.DEBUG_SetState(ERobotInteractionState.Grab);
-    }
-    private void ReleaseObject(Transform _target)
-    {
-        Context._lookatTarget = null;
-        Context.DEBUG_SetState(ERobotInteractionState.Idle);
-    }
-
     public void SearchForObjects() {
         Context.DEBUG_SetState(ERobotInteractionState.Search);
+    }
+
+    public void TossItems(ActivateEventArgs args) {
+        Context._dump = true;
     }
 
     public Robot_Interaction_Context Context => _context;
