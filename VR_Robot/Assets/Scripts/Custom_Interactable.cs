@@ -9,6 +9,8 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 [RequireComponent(typeof(Collider))]
 public class Custom_Interactable : MonoBehaviour
 {
+    public Vector3 startScale;
+
     [SerializeField] private float grabDistance = 0.33f;
     private Transform leftHand, rightHand;
     private Rigidbody rb;
@@ -25,6 +27,8 @@ public class Custom_Interactable : MonoBehaviour
         grab += Grab;
         GetComponent<XRBaseInteractable>().selectExited.AddListener(release);
         GetComponent<XRBaseInteractable>().selectEntered.AddListener(grab);
+
+        if (startScale == Vector3.zero) { startScale = transform.localScale; }
     }
 
     // If the player's hand is close to the object on the x,z plane, raise the object to be just below the hand on a y level
@@ -54,6 +58,11 @@ public class Custom_Interactable : MonoBehaviour
         StopAllCoroutines();
         reGrabTimer = 0;
         rb.isKinematic = false;
+        rb.useGravity = true;
+
+        if (ctx == null) { return; }
+
+        Director.instance.ReleaseObject(transform);
     }
 
     private UnityAction<SelectEnterEventArgs> grab;

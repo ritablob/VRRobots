@@ -8,30 +8,22 @@ public class Robot_Grab : Robot_Interaction_State
         Robot_Interaction_Context context = _context;
     }
 
-    private float grabLerpTime;
-
-    public override void EnterState() { context.Anim.SetTrigger("Grab"); grabLerpTime = 0; }
+    public override void EnterState() { }
     public override void ExitState() { }
-    public override void UpdateState() {
-        // Move grabable object to grippers
-        context.LookatTarget.position = Vector3.Lerp(context.LookatTarget.position, context.GrabPivot.position, grabLerpTime);
-        grabLerpTime += Time.deltaTime;
-    }
+    public override void UpdateState() { }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD) {
-            Robot_Interaction_State_Machine.ERobotInteractionState nextState = context.DEBUG_GetState;
-            context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.BAD);
+        if (context.IKController.Target == null) { return StateKey; }
 
-            return nextState;
+        if (context.IKController.Target.gameObject.layer == 8 &&
+            Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) { 
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Store; 
+        } else if (Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) {
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Idle;
         }
-
-        //if (Vector3.Distance(context.LookatTarget.position, context.WorldPos) >= 3) {
-        //    return Robot_Interaction_State_Machine.ERobotInteractionState.Search;
-        //}
 
         return StateKey;
     }
-    public override void LateUpdateState() { context.Head.LookAt(context.LookatTarget); }
+    public override void LateUpdateState() { }
     public override void OnTriggerEnter(Collider _other) { }
     public override void OnTriggerStay(Collider _other) { }
     public override void OnTriggerExit(Collider _other) { }
