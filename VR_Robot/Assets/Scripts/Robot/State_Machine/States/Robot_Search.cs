@@ -12,19 +12,13 @@ public class Robot_Search : Robot_Interaction_State
     public override void ExitState() { }
     public override void UpdateState() { }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD) {
-            Robot_Interaction_State_Machine.ERobotInteractionState nextState = context.DEBUG_GetState;
-            context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.BAD);
-
-            return nextState;
+        if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD)
+        {
+            return context.DEBUG_GetState;
         }
-        //If an object is close by, change state to the grab state.
-        if (Vector3.Distance(context.Interactable.position, context.WorldPos) < 3) {
-            return Robot_Interaction_State_Machine.ERobotInteractionState.Grab;
-        }
-
         return StateKey;
     }
+    public override void LateUpdateState() { }
     public override void OnTriggerEnter(Collider _other) { }
     public override void OnTriggerStay(Collider _other) { }
     public override void OnTriggerExit(Collider _other) { }
