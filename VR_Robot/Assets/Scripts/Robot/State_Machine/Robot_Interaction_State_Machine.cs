@@ -17,6 +17,7 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
         Grab,
         Store,
         Dump,
+        Attentive,
         BAD //Use for null/exit cases
     }
 
@@ -30,13 +31,14 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
     [SerializeField] Transform garbageCanGeneral;
     [SerializeField] Transform garbageCanPlastic;
     [SerializeField] Transform garbageCanPaper;
+    [SerializeField] Transform head;
 
     //Validation & Context setup
     private void Awake()
     {
         ValidateConstraints();
 
-        _context = new Robot_Interaction_Context(anim, ikController, transform.position);
+        _context = new Robot_Interaction_Context(anim, head, ikController, transform.position);
 
         InitializeStates();
     }
@@ -52,6 +54,7 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
         states.Add(ERobotInteractionState.Grab, new Robot_Grab(_context, ERobotInteractionState.Grab));
         states.Add(ERobotInteractionState.Store, new Robot_Store(_context, ERobotInteractionState.Store));
         states.Add(ERobotInteractionState.Dump, new Robot_Dump(_context, ERobotInteractionState.Dump));
+        states.Add(ERobotInteractionState.Attentive, new Robot_Attentive(_context, ERobotInteractionState.Attentive));
 
         currentState = states[ERobotInteractionState.Idle];
     }
@@ -63,6 +66,15 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
     public void TossItems(ActivateEventArgs args) {
         Context._dump = true;
     }
+
+    public void InteractWithRobot() { 
+        // If attentive, highlight all interactable objects
+        if (currentState.StateKey == ERobotInteractionState.Attentive) {
+            Director.instance.HighlightObjects(true);
+        }
+    }
+
+    public ERobotInteractionState GetCurrentState => currentState.StateKey;
 
     public Robot_Interaction_Context Context => _context;
 }

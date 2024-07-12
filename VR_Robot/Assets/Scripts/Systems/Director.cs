@@ -9,6 +9,7 @@ public class Director : MonoBehaviour
 
     public AnimationCurve interactLerpCurve;
     public Transform leftHand, rightHand, playerCamera;
+    public Transform robot;
 
     private int points;
 
@@ -35,6 +36,9 @@ public class Director : MonoBehaviour
 
     public event Action<GameObject> copyObject;
     public void CopyObject(GameObject origin) { if (copyObject != null) { copyObject.Invoke(origin); } }
+
+    public event Action<bool> highlightObjects;
+    public void HighlightObjects(bool state) { if (highlightObjects != null) { highlightObjects.Invoke(state); } }
     #endregion
 
     private void Awake()

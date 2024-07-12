@@ -17,9 +17,17 @@ public class Robot_Dump : Robot_Interaction_State
         timer = 0;  
     }
     public override void ExitState() { }
-    public override void UpdateState() { }
-    public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
+    public override void UpdateState()
+    {
         timer += Time.deltaTime;
+    }
+    public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
+        if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD)
+        {
+            Robot_Interaction_State_Machine.ERobotInteractionState temp = context.DEBUG_GetState;
+            context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.BAD);
+            return temp;
+        }
 
         if (timer >= 2) {
             return Robot_Interaction_State_Machine.ERobotInteractionState.Idle;
@@ -31,6 +39,7 @@ public class Robot_Dump : Robot_Interaction_State
     public override void OnTriggerEnter(Collider _other) { }
     public override void OnTriggerStay(Collider _other) { }
     public override void OnTriggerExit(Collider _other) { }
+    public override void Interact() { }
 
     public override void DEBUG_SwitchState(Robot_Interaction_State_Machine.ERobotInteractionState state) { 
         DEBUG_NextState = state; 
