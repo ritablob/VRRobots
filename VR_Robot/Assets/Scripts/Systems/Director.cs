@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class Director : MonoBehaviour
 {
     public static Director instance;
 
+    public TextMeshProUGUI text;
     public AnimationCurve interactLerpCurve;
     public Transform leftHand, rightHand, playerCamera;
     public Transform robot;
@@ -40,6 +42,10 @@ public class Director : MonoBehaviour
     public event Action<bool> highlightObjects;
     public void HighlightObjects(bool state) { if (highlightObjects != null) { highlightObjects.Invoke(state); } }
     #endregion
+
+    public void Log(string msg) {
+        text.text = msg;
+    }
 
     private void Awake()
     {

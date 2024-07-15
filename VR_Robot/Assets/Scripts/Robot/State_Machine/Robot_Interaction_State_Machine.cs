@@ -18,6 +18,7 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
         Store,
         Dump,
         Attentive,
+        Place,
         BAD //Use for null/exit cases
     }
 
@@ -55,6 +56,7 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
         states.Add(ERobotInteractionState.Store, new Robot_Store(_context, ERobotInteractionState.Store));
         states.Add(ERobotInteractionState.Dump, new Robot_Dump(_context, ERobotInteractionState.Dump));
         states.Add(ERobotInteractionState.Attentive, new Robot_Attentive(_context, ERobotInteractionState.Attentive));
+        states.Add(ERobotInteractionState.Place, new Robot_PlaceDown(_context, ERobotInteractionState.Place));
 
         currentState = states[ERobotInteractionState.Idle];
     }

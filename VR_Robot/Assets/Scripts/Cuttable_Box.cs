@@ -20,6 +20,7 @@ public class Cuttable_Box : MonoBehaviour
             parts[r].GetComponent<Collider>().enabled = true;
             parts[r].GetComponent<XRGrabInteractable>().enabled = true;
             parts[r].GetComponent<Custom_Interactable>().enabled = true;
+            parts[r].GetComponent<Highlighter>().enabled = true;
 
             // Remove from list
             parts.RemoveAt(r);

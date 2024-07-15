@@ -10,7 +10,7 @@ public class Robot_Grab : Robot_Interaction_State
 
     public override void EnterState() { }
     public override void ExitState() { }
-    public override void UpdateState() { }
+    public override void UpdateState() { context.Head.LookAt(context.IKController.Target); }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
         if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD)
         {
@@ -29,7 +29,8 @@ public class Robot_Grab : Robot_Interaction_State
         } 
         else if (Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) 
         {
-            return Robot_Interaction_State_Machine.ERobotInteractionState.Idle;
+            context.IKController.CatchObject();
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Place;
         }
 
         return StateKey;

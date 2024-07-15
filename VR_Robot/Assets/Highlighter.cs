@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Highlighter : MonoBehaviour
 {
-    public GameObject highlightObj;
+    public GameObject[] highlightObjs;
 
     private void Start()
     {
@@ -16,13 +16,22 @@ public class Highlighter : MonoBehaviour
         Director.instance.highlightObjects -= Highlight;
     }
 
+    public void HoverHighlight(bool state) {
+        for (int i = 0; i < highlightObjs.Length; i++) {
+            highlightObjs[i].SetActive(state);
+        }
+    }
+
     public void Highlight(bool state) {
         StopAllCoroutines();
         StartCoroutine(HighlightDelay(state));
     }
 
     private void ToggleHighlight(bool state) {
-        highlightObj.SetActive(state);
+        for (int i = 0; i < highlightObjs.Length; i++) {
+            highlightObjs[i].SetActive(state);
+        }
+
         if (state) { StartCoroutine(UnHighlightDelay()); }
     }
 
