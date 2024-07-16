@@ -40,6 +40,5 @@ public class Robot_Interaction_Context : MonoBehaviour
 
     public void SetAttentive(bool state) {
         _attentive = state;
-        Debug.Log(" robot_idle " + _attentive);
     }
 }

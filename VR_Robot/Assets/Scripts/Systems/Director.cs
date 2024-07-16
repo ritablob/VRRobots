@@ -9,7 +9,7 @@ public class Director : MonoBehaviour
 {
     public static Director instance;
 
-    public TextMeshProUGUI text;
+    public TextMeshProUGUI text, timeStat, robotCleanPerc;
     public AnimationCurve interactLerpCurve;
     public Transform leftHand, rightHand, playerCamera;
     public Transform robot;
@@ -61,7 +61,9 @@ public class Director : MonoBehaviour
             starImages[i].transform.parent.gameObject.SetActive(false);
         }
 
-        Debug.Log((float)timeToClean / 3);
+        timeStat.gameObject.SetActive(false);
+        robotCleanPerc.gameObject.SetActive(false);
+
         piecesOfTrash = maxPiecesOfTrash;
         timeToClean = maxTimeToClean;
         StartCoroutine(CountDown());
@@ -74,7 +76,6 @@ public class Director : MonoBehaviour
 
     public void GetPoints(int pts) {
         points += pts;
-        Log(points + "pts");
         piecesOfTrash--;
 
         if (piecesOfTrash == 0) {
@@ -90,18 +91,23 @@ public class Director : MonoBehaviour
         // Can only recieve up to 4 stars if sorting perfectly WITHOUT the robot
         float pointsPerStar = ((float)maxPiecesOfTrash * 5) / 3;
 
+        timeStat.gameObject.SetActive(true);
+        robotCleanPerc.gameObject.SetActive(true);
+
         // Add full star if level is completed with 1/3rd time to spare
-        if (timeToClean > (float)maxTimeToClean / 3) { Debug.Log($"TIME = {timeToClean }, threshold = {(float)timeToClean / 3}"); _points += pointsPerStar; }
+        if (timeToClean > (float)maxTimeToClean / 3) { _points += pointsPerStar; }
         // Add half-a-star worth of points if level is completed before the time limit
         else if (timeToClean > 0) { _points += pointsPerStar / 2; }
 
-        Debug.Log(robotTrash + " ROBOT TRASH");
-        if (robotTrash >= (float)maxPiecesOfTrash / 3) { _points += pointsPerStar; }
-        // Add half-a-star worth of points if the robot threw away at least a QUARTER of all trash
-        else if (robotTrash >= (float)maxPiecesOfTrash / 4) { _points += pointsPerStar / 2; }
+        timeStat.text = $"Remaining time = {timeToClean}";
 
         // Remove a full star if the robot threw away everything!
         if (robotTrash >= (float)maxPiecesOfTrash * 0.9f) { _points -= pointsPerStar; }
+        else if (robotTrash >= (float)maxPiecesOfTrash / 3) { _points += pointsPerStar; }
+        // Add half-a-star worth of points if the robot threw away at least a QUARTER of all trash
+        else if (robotTrash >= (float)maxPiecesOfTrash / 4) { _points += pointsPerStar / 2; }
+
+        robotCleanPerc.text = $"Robot clean % = {(robotTrash / (float)maxPiecesOfTrash) * 100}";
 
         for (int i = 0; i < starImages.Length; i++) {
             starImages[i].transform.parent.gameObject.SetActive(true);

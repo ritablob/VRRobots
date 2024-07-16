@@ -92,17 +92,14 @@ public class CustomActions : MonoBehaviour
         if (!IsLookingAt()) { return; }
 
         robot.Context.SetAttentive(true);
-        Director.instance.Log("robot_idle True");
+        Debug.Log("IDNJFIUJFGJDGF WAVE");
     }
 
     private void DEBUG_Wave(InputAction.CallbackContext ctx)
     {
-        Debug.Log("robot_idle pressed");
-
         // If not looking near the robot, return
         if (!IsLookingAt()) { return; }
 
-//        Director.instance.Log("robot_idle entered attentive!");
         robot.Context.SetAttentive(true);
     }
 
@@ -148,7 +145,6 @@ public class CustomActions : MonoBehaviour
             }
             // If nothing else, move the robot to that location
             else if (robot.GetCurrentState == Robot_Interaction_State_Machine.ERobotInteractionState.Attentive) {
-                Director.instance.Log("MOVE TO POS!");
                 robot.gameObject.GetComponent<NavMeshAgent>().SetDestination(hit.point);
                 robot.GetState.DEBUG_SwitchState(Robot_Interaction_State_Machine.ERobotInteractionState.Idle);
             }
@@ -161,8 +157,6 @@ public class CustomActions : MonoBehaviour
 
         Vector3 directionToB = (roboPos - head.position).normalized;
         float angle = Vector3.Angle(head.forward, directionToB);
-
-        Director.instance.Log($"Angle = {angle}, = {lookAngleThreshold / 2}");
 
         return angle <= lookAngleThreshold / 2;
     }

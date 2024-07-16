@@ -20,7 +20,10 @@ public class Robot_PlaceDown : Robot_Interaction_State
             return Robot_Interaction_State_Machine.ERobotInteractionState.Grab;
         }
 
-        if (context.IKController.Timer >= 1 || context.IKController.Target == null) { return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; }
+        if (context.IKController.Timer >= 1 || context.IKController.Target == null) { 
+            if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; 
+        }
 
         return StateKey;
     }

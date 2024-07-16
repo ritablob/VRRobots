@@ -67,8 +67,6 @@ public class Custom_Interactable : MonoBehaviour
     {
         col.enabled = true;
         grabbed = false;
-        Director.instance.Log("RELEASE");
-        Debug.Log("RELEASE");
         StopAllCoroutines();
         reGrabTimer = 0;
         rb.isKinematic = false;
@@ -83,7 +81,6 @@ public class Custom_Interactable : MonoBehaviour
     private void Grab(SelectEnterEventArgs ctx) {
         col.enabled = false;
         grabbed = true;
-        Director.instance.Log("CALLED");
     }
 
     private IEnumerator LerpUp(Transform handToTrack) {

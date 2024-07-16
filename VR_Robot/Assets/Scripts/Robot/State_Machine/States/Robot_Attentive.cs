@@ -11,7 +11,9 @@ public class Robot_Attentive : Robot_Interaction_State
     public override void EnterState()
     {
         DEBUG_NextState = Robot_Interaction_State_Machine.ERobotInteractionState.BAD;
+        context.IKController.Target = null;
         context.SetAttentive(false);
+        Debug.Log("IDNJFIUJFGJDGF");
     }
     public override void ExitState()
     {
@@ -39,7 +41,8 @@ public class Robot_Attentive : Robot_Interaction_State
     public override void OnTriggerExit(Collider _other) { }
     public override void Interact() { Director.instance.HighlightObjects(true); }
 
-    public override void DEBUG_SwitchState(Robot_Interaction_State_Machine.ERobotInteractionState state) { 
+    public override void DEBUG_SwitchState(Robot_Interaction_State_Machine.ERobotInteractionState state) {
+        Debug.Log("ATTENTIVE " + state.ToString());
         DEBUG_NextState = state;
     }
 }
