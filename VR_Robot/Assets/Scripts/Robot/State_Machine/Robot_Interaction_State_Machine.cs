@@ -77,6 +77,7 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
     }
 
     public ERobotInteractionState GetCurrentState => currentState.StateKey;
+    public Robot_Interaction_State GetState => (Robot_Interaction_State)currentState;
 
     public Robot_Interaction_Context Context => _context;
 }

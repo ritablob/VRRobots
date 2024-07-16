@@ -84,7 +84,18 @@ public class CCDIK : MonoBehaviour {
     }
 
     private void SetTarget(Transform _target) {
-        Target = _target;
+        StartCoroutine(SetTargetDelay(_target));
+    }
+
+    private IEnumerator SetTargetDelay(Transform _target) {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+
+        _target.TryGetComponent<Rigidbody>(out Rigidbody rb);
+        
+        if (timer == 0 && Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y) + Mathf.Abs(rb.velocity.z) > 1.5f) {
+            Target = _target;
+        }
     }
 
     private void CreateCopy(GameObject origin) {
@@ -170,6 +181,7 @@ public class CCDIK : MonoBehaviour {
             rb.useGravity = true;
             rb.AddForce(transform.forward * 4, ForceMode.Impulse);
             lastType = storedObjects[i].GetComponent<Garbage_Bit>().type;
+            Director.instance.RobotTrash();
         }
 
         storedObjects.Clear();

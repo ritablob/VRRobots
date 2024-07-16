@@ -13,7 +13,7 @@ public class Robot_Interaction_Context : MonoBehaviour
     private Vector3 _worldPos;
     private Robot_Interaction_State_Machine.ERobotInteractionState _DEBUG_state;
     private Transform _head;
-    public bool _dump;
+    public bool _dump, _attentive;
     private List<GameObject> _garbageBits = new List<GameObject>(0);
 
     //Constructor
@@ -30,6 +30,7 @@ public class Robot_Interaction_Context : MonoBehaviour
     public Vector3 WorldPos => _worldPos;
     public List<GameObject> GarbageBits => _garbageBits;
     public Transform Head => _head;
+    public bool Attentive => _attentive;
 
     public Robot_Interaction_State_Machine.ERobotInteractionState DEBUG_GetState => _DEBUG_state;
 
@@ -37,7 +38,8 @@ public class Robot_Interaction_Context : MonoBehaviour
         _DEBUG_state = _state;
     }
 
-    public void AddGarbageBit(GameObject bit) { 
-        // Add element to list
+    public void SetAttentive(bool state) {
+        _attentive = state;
+        Debug.Log(" robot_idle " + _attentive);
     }
 }

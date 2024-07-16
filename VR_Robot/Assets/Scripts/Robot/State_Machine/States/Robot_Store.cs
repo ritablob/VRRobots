@@ -17,14 +17,8 @@ public class Robot_Store : Robot_Interaction_State
     public override void ExitState() { if (context.IKController.Target != null) { Director.instance.CopyObject(context.IKController.Target.gameObject); } }  
     public override void UpdateState() { }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD)
-        {
-            Robot_Interaction_State_Machine.ERobotInteractionState temp = context.DEBUG_GetState;
-            context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.BAD);
-            return temp;
-        }
-
         if (context.IKController.Timer >= 1) { return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; }
+        if (context.IKController.Timer == 0) { return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; }
 
         return StateKey;
     }

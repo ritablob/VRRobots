@@ -16,14 +16,11 @@ public class Robot_PlaceDown : Robot_Interaction_State
     public override void ExitState() { context.IKController.ReleaseObject(); }  
     public override void UpdateState() { }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD)
-        {
-            Robot_Interaction_State_Machine.ERobotInteractionState temp = context.DEBUG_GetState;
-            context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.BAD);
-            return temp;
+        if (context.IKController.Target.gameObject.layer == 8) {
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Grab;
         }
 
-        if (context.IKController.Timer >= 1) { return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; }
+        if (context.IKController.Timer >= 1 || context.IKController.Target == null) { return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; }
 
         return StateKey;
     }

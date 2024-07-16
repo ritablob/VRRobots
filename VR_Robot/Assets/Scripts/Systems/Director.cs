@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using TMPro;
+using UnityEngine.UI;
 
 public class Director : MonoBehaviour
 {
@@ -12,8 +13,13 @@ public class Director : MonoBehaviour
     public AnimationCurve interactLerpCurve;
     public Transform leftHand, rightHand, playerCamera;
     public Transform robot;
+    public Image[] starImages;
+    public int maxPiecesOfTrash, maxTimeToClean;
 
     private int points;
+    private int piecesOfTrash;
+    private int robotTrash;
+    private int timeToClean;
 
     #region
     public event Action<string, ObjectiveType> addObjective;
@@ -43,21 +49,86 @@ public class Director : MonoBehaviour
     public void HighlightObjects(bool state) { if (highlightObjects != null) { highlightObjects.Invoke(state); } }
     #endregion
 
-    public void Log(string msg) {
-        if (text == null) { return; }
-        text.text = msg;
-    }
-
     private void Awake()
     {
         instance = this;
     }
 
-    public void GetPoints(int pts) {
-        points += pts;
-        Debug.Log(points);
+    private void Start()
+    {
+        for (int i = 0; i < starImages.Length; i++)
+        {
+            starImages[i].transform.parent.gameObject.SetActive(false);
+        }
+
+        Debug.Log((float)timeToClean / 3);
+        piecesOfTrash = maxPiecesOfTrash;
+        timeToClean = maxTimeToClean;
+        StartCoroutine(CountDown());
     }
 
+    public void Log(string msg) {
+        if (text == null) { return; }
+        text.text = msg;
+    }
+
+    public void GetPoints(int pts) {
+        points += pts;
+        Log(points + "pts");
+        piecesOfTrash--;
+
+        if (piecesOfTrash == 0) {
+            ShowScore();
+        }
+    }
+
+    public void ShowScore() {
+        StopAllCoroutines();
+
+        // 180 = max points! 
+        float _points = points;
+        // Can only recieve up to 4 stars if sorting perfectly WITHOUT the robot
+        float pointsPerStar = ((float)maxPiecesOfTrash * 5) / 3;
+
+        // Add full star if level is completed with 1/3rd time to spare
+        if (timeToClean > (float)maxTimeToClean / 3) { Debug.Log($"TIME = {timeToClean }, threshold = {(float)timeToClean / 3}"); _points += pointsPerStar; }
+        // Add half-a-star worth of points if level is completed before the time limit
+        else if (timeToClean > 0) { _points += pointsPerStar / 2; }
+
+        Debug.Log(robotTrash + " ROBOT TRASH");
+        if (robotTrash >= (float)maxPiecesOfTrash / 3) { _points += pointsPerStar; }
+        // Add half-a-star worth of points if the robot threw away at least a QUARTER of all trash
+        else if (robotTrash >= (float)maxPiecesOfTrash / 4) { _points += pointsPerStar / 2; }
+
+        // Remove a full star if the robot threw away everything!
+        if (robotTrash >= (float)maxPiecesOfTrash * 0.9f) { _points -= pointsPerStar; }
+
+        for (int i = 0; i < starImages.Length; i++) {
+            starImages[i].transform.parent.gameObject.SetActive(true);
+        }
+
+        for (int i = 0; i < starImages.Length; i++) {
+            // Each star fills up with [pointsPerStar] points
+            starImages[i].fillAmount = _points / pointsPerStar;
+
+            // Remove the points if the star is full and there are extra points. Otherwise, continue.
+            if (_points != pointsPerStar && starImages[i].fillAmount == 1) {
+                _points -= pointsPerStar;
+            }
+            else { 
+                break; 
+            }
+        }
+    }
+
+    private IEnumerator CountDown() { 
+        while (timeToClean > 0) {
+            yield return new WaitForSeconds(1);
+            timeToClean--;
+        }
+    }
+
+    public void RobotTrash() { robotTrash++; }
     public int Points => points;
     public float PlayerCameraXRot => playerCamera.localEulerAngles.x;
 }
