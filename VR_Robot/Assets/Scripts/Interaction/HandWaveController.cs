@@ -7,6 +7,8 @@ namespace Interaction
 {
     public sealed class HandWaveController : MonoBehaviour
     {
+        public event Action<Transform> handWaved;
+        
         public Transform leftHandAnchor;
         public Transform rightHandAnchor;
         public TextMeshProUGUI text;
@@ -33,7 +35,7 @@ namespace Interaction
                 text.color = Color.red;
                 text.text = "Speed left: " + $"{velocityLeft:0.0}" + ", Speed right: " + $"{velocityRight:0.0}";
                 
-                CheckRequirements(velocityLeft, leftHandAnchor);
+                //CheckRequirements(velocityLeft, leftHandAnchor);
                 CheckRequirements(velocityRight, rightHandAnchor);
                 
                 lastPositionLeft = leftHandAnchor.position;
@@ -41,10 +43,12 @@ namespace Interaction
             }
         }
 
-        public event Action<Transform> handWaved;
-
-        private void CheckRotation()
+        private bool IsUpwardRotation(Transform handTransform)
         {
+            //.Log("Rotation "+handTransform.localEulerAngles.x);
+            //return handTransform.localRotation.eulerAngles.x;
+            // if hand rotation x is between -45 and -135, return true
+            return handTransform.localEulerAngles.x > 315;
         }
         
 /// <summary>
@@ -93,8 +97,9 @@ namespace Interaction
             var velocity = cumulativeVelocity / currentTime;
             Debug.Log("Done! Avg velocity of "+anchorTransform.gameObject+": "+velocity);
             
-            if (velocity > movementThreshold)
+            if (velocity > movementThreshold && IsUpwardRotation(anchorTransform))
             {
+                Debug.Log("Passed");
                 // velocity passed the check 
                 text.color = Color.green;
                 text.text = "Waving! Speed: " + $"{velocity:0.0}";
