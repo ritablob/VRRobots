@@ -11,9 +11,10 @@ namespace Interaction
         
         public Transform leftHandAnchor;
         public Transform rightHandAnchor;
-        public TextMeshProUGUI text;
         public float responseTime = 1.0f;
         public float movementThreshold = 1.2f;
+        public float rotationThreshold = 315f;
+        
         private bool coroutineRunning;
         private Vector3 lastPositionLeft;
         private Vector3 lastPositionRight;
@@ -31,13 +32,7 @@ namespace Interaction
                 float velocityLeft = Vector3.Distance(lastPositionLeft, leftHandAnchor.transform.position)/Time.fixedDeltaTime;
                 float velocityRight = Vector3.Distance(lastPositionRight, rightHandAnchor.transform.position)/Time.fixedDeltaTime;
                 
-                //preview text
-                if (text != null) {
-                    text.color = Color.red;
-                    text.text = "Speed left: " + $"{velocityLeft:0.0}" + ", Speed right: " + $"{velocityRight:0.0}";
-                }
-                
-                //CheckRequirements(velocityLeft, leftHandAnchor);
+                CheckRequirements(velocityLeft, leftHandAnchor);
                 CheckRequirements(velocityRight, rightHandAnchor);
                 
                 lastPositionLeft = leftHandAnchor.position;
@@ -47,10 +42,7 @@ namespace Interaction
 
         private bool IsUpwardRotation(Transform handTransform)
         {
-            //.Log("Rotation "+handTransform.localEulerAngles.x);
-            //return handTransform.localRotation.eulerAngles.x;
-            // if hand rotation x is between -45 and -135, return true
-            return handTransform.localEulerAngles.x > 315;
+            return handTransform.localEulerAngles.x > rotationThreshold;
         }
         
 /// <summary>
@@ -75,7 +67,6 @@ namespace Interaction
         private IEnumerator GetAverageVelocity(Transform anchorTransform)
         {
             coroutineRunning = true;
-            Debug.Log("Called coroutine for "+anchorTransform.gameObject);
             
             var currentTime = 0f;
             var cumulativeVelocity = 0f;
@@ -97,27 +88,10 @@ namespace Interaction
 
             // calculate average velocity
             var velocity = cumulativeVelocity / currentTime;
-            Debug.Log("Done! Avg velocity of "+anchorTransform.gameObject+": "+velocity);
             
             if (velocity > movementThreshold && IsUpwardRotation(anchorTransform))
             {
-                Debug.Log("Passed");
-                // velocity passed the check 
-                if (text != null)
-                {
-                    text.color = Color.green;
-                    text.text = "Waving! Speed: " + $"{velocity:0.0}";
-                }
-                // TODO: check hand rotation 
                 handWaved.Invoke(anchorTransform);
-            }
-            else
-            {
-                // velocity failed the check
-                if (text != null) {
-                    text.color = Color.red;
-                    text.text = "Speed: " + $"{velocity:0.0}";
-                }
             }
             
             coroutineRunning = false;
