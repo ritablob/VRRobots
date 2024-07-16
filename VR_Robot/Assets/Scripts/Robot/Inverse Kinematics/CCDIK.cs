@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.AI;
+using UnityEngine.Animations.Rigging;
 
 public class CCDIK : MonoBehaviour {
     public Transform Tooltip;
     public Transform Target;
     public CCDIKJoint[] joints;
     public Vector3 StartPos;
+    public Quaternion StartRot;
     public float distanceThreshold = 0.1f, timer = 0;
     public int iterations = 10;
     public AnimationCurve curve, scaleCurve;
     public Transform[] garbageCans;
 
+    [HideInInspector] public bool setOnGround;
+
     [SerializeField] private Transform Storage;
+    [SerializeField] private TwoBoneIKConstraint ik;
     private List<GameObject> storedObjects;
 
     private float maxRange;
@@ -38,10 +43,14 @@ public class CCDIK : MonoBehaviour {
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(joints[0].transform.position, maxRange);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(ik.data.tip.transform.position, distanceThreshold);
     }
 
     void Update() {
         if (Target == null) { timer = 0; return; }
+
+        ik.data.target.position = Target.position;
 
         Vector3 targetPos = Target.position;
 
@@ -54,27 +63,23 @@ public class CCDIK : MonoBehaviour {
             targetPos = joints[0].transform.position + (dir.normalized * (maxRange * 0.9f));
         }
 
-        // Catching the obejct!
-        if (StartPos == Vector3.zero && Vector3.Distance(Target.position, Tooltip.position) < distanceThreshold) {
-            Director.instance.GrabObject(true);
-            Rigidbody rb = Target.GetComponent<Rigidbody>();
-            rb.isKinematic = false;
-            rb.velocity = Vector3.zero;
-            rb.useGravity = false;
-            rb.angularVelocity = Vector3.zero;
-        }
+        // Storing the object
+        // Move the arm & object-to-store to the inside of the robot's stomach
+        if (StartPos != Vector3.zero && Target.GetComponent<Rigidbody>().useGravity == false) {
+            Vector3 endPos = Vector3.zero;
 
-        if (StartPos != Vector3.zero) {
-            targetPos = Vector3.Lerp(StartPos, Storage.position, curve.Evaluate(timer));
-            Target.position = targetPos;
-            Target.localScale = Vector3.Lerp(Target.GetComponent<Custom_Interactable>().startScale, Vector3.zero, scaleCurve.Evaluate(timer));
-            timer += Time.deltaTime * 0.5f;
-        }
-
-        for (int i = 0; i < iterations; i++) {
-            for (int j = 0; j < joints.Length; j++) {
-                joints[j].Evaluate(Tooltip, Target, targetPos, j < 2);
+            if (setOnGround) { 
+                endPos = new Vector3(StartPos.x, 0.25f, StartPos.z) + (transform.forward.normalized * 0.5f);
+                Target.rotation = Quaternion.Lerp(StartRot, Quaternion.identity, curve.Evaluate(timer));
             }
+            else { 
+                endPos = Storage.position;
+                Target.localScale = Vector3.Lerp(Target.GetComponent<Custom_Interactable>().startScale, Vector3.zero, scaleCurve.Evaluate(timer));
+            }
+
+            targetPos = Vector3.Lerp(StartPos, endPos, curve.Evaluate(timer));
+            Target.position = targetPos;
+            timer += Time.deltaTime * 0.5f;
         }
     }
 
@@ -107,6 +112,25 @@ public class CCDIK : MonoBehaviour {
         rb.velocity = Vector3.zero;
 
         Destroy(origin);
+    }
+    public void CatchObject() {
+        Director.instance.GrabObject(true);
+
+        Rigidbody rb = Target.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        rb.velocity = Vector3.zero;
+        rb.useGravity = false;
+        rb.angularVelocity = Vector3.zero;
+    }
+
+    public void ReleaseObject() {
+        Rigidbody rb = Target.GetComponent<Rigidbody>();
+        rb.isKinematic = false;
+        rb.velocity = Vector3.zero;
+        rb.useGravity = true;
+        rb.angularVelocity = Vector3.zero;
+
+        Target = null;
     }
 
     public void DumpObjects() {

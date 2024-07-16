@@ -810,6 +810,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Left Primary",
+                    "type": "Button",
+                    "id": "3c8b91e3-5477-4c34-a9d7-42b7ffa00002",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -997,6 +1006,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "56951f03-afea-423f-a0e8-e1196f7fede6",
+                    "path": "<XRController>{LeftHand}/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left Primary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1815,9 +1835,9 @@
             "actions": [
                 {
                     "name": "Teleport Mode",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "a6c7231d-c55d-4dd4-9e87-877bb5522ef5",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -1851,9 +1871,9 @@
                 },
                 {
                     "name": "Move",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "00a4dc9f-1ee6-4349-b0e9-72d5dccaadd6",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -1872,8 +1892,8 @@
                 {
                     "name": "",
                     "id": "62690862-4688-4010-975b-b3d9c6062157",
-                    "path": "<XRController>{RightHand}/{Primary2DAxis}",
-                    "interactions": "Sector(directions=1)",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Teleport Mode",
@@ -1904,17 +1924,6 @@
                 },
                 {
                     "name": "",
-                    "id": "022046aa-be71-4288-859d-6dd42844f6e6",
-                    "path": "<XRController>{RightHand}/{Primary2DAxis}",
-                    "interactions": "",
-                    "processors": "StickDeadzone",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "7ecb549e-ab98-4a4b-b979-38068fe3b811",
                     "path": "<XRController>{RightHand}/{GripButton}",
                     "interactions": "",
@@ -1932,6 +1941,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Snap Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f28f65d5-6c3d-4d89-bafa-abd09b1fccbd",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

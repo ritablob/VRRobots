@@ -10,15 +10,27 @@ public class Robot_Grab : Robot_Interaction_State
 
     public override void EnterState() { }
     public override void ExitState() { }
-    public override void UpdateState() { }
+    public override void UpdateState() { context.Head.LookAt(context.IKController.Target); }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
+        if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD)
+        {
+            Robot_Interaction_State_Machine.ERobotInteractionState temp = context.DEBUG_GetState;
+            context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.BAD);
+            return temp;
+        }
+
         if (context.IKController.Target == null) { return StateKey; }
 
         if (context.IKController.Target.gameObject.layer == 8 &&
-            Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) { 
+            Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) 
+        {
+            context.IKController.CatchObject();
             return Robot_Interaction_State_Machine.ERobotInteractionState.Store; 
-        } else if (Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) {
-            return Robot_Interaction_State_Machine.ERobotInteractionState.Idle;
+        } 
+        else if (Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) 
+        {
+            context.IKController.CatchObject();
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Place;
         }
 
         return StateKey;
@@ -27,6 +39,7 @@ public class Robot_Grab : Robot_Interaction_State
     public override void OnTriggerEnter(Collider _other) { }
     public override void OnTriggerStay(Collider _other) { }
     public override void OnTriggerExit(Collider _other) { }
+    public override void Interact() { }
 
 
     public override void DEBUG_SwitchState(Robot_Interaction_State_Machine.ERobotInteractionState state) {

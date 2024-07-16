@@ -14,14 +14,18 @@ public class Robot_Search : Robot_Interaction_State
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
         if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD)
         {
-            return context.DEBUG_GetState;
+            Robot_Interaction_State_Machine.ERobotInteractionState temp = context.DEBUG_GetState;
+            context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.BAD);
+            return temp;
         }
+
         return StateKey;
     }
     public override void LateUpdateState() { }
     public override void OnTriggerEnter(Collider _other) { }
     public override void OnTriggerStay(Collider _other) { }
     public override void OnTriggerExit(Collider _other) { }
+    public override void Interact() { }
 
     public override void DEBUG_SwitchState(Robot_Interaction_State_Machine.ERobotInteractionState state) { 
         DEBUG_NextState = state; 

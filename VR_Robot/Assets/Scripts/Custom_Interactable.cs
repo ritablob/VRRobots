@@ -35,6 +35,11 @@ public class Custom_Interactable : MonoBehaviour
     private void Update()
     {
         if (reGrabTimer < 1) { reGrabTimer += Time.deltaTime; return; }
+        else if (Director.instance.PlayerCameraXRot > 80 || Director.instance.PlayerCameraXRot < 30) {
+            // If currently lifting, fall back down
+            if (rb.isKinematic) { Release(null); }
+            return; 
+        }
 
         Vector2 _leftHand = new Vector2(leftHand.position.x, leftHand.position.z);
         Vector2 _rightHand = new Vector2(rightHand.position.x, rightHand.position.z);
