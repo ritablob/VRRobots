@@ -44,6 +44,7 @@ public class Director : MonoBehaviour
     #endregion
 
     public void Log(string msg) {
+        if (text == null) { return; }
         text.text = msg;
     }
 

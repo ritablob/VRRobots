@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
 using UnityEngine.AI;
+using Interaction;
 
 public class CustomActions : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class CustomActions : MonoBehaviour
     [SerializeField] private Transform leftHand;
     [SerializeField] private Transform rightHand;
     [SerializeField] private Robot_Interaction_State_Machine robot;
+    [SerializeField] private HandWaveController waver;
 
     bool pressed;
     private Transform raycastStart;
@@ -34,6 +36,8 @@ public class CustomActions : MonoBehaviour
 
         inputActions.XRIRightInteraction.Activate.performed += PressPointR;
         inputActions.XRIRightInteraction.Activate.canceled += ReleasePointR;
+
+        waver.handWaved += Wave;
     }
 
     private void OnDisable()
@@ -45,6 +49,8 @@ public class CustomActions : MonoBehaviour
 
         inputActions.XRIRightInteraction.Activate.performed += PressPointR;
         inputActions.XRIRightInteraction.Activate.canceled -= ReleasePointR;
+
+        waver.handWaved += Wave;
 
         inputActions.Disable();
     }
@@ -107,6 +113,9 @@ public class CustomActions : MonoBehaviour
         pressed = true;
 
         raycastStart = leftHand;
+    }
+    private void Wave(Transform transform) {
+        Director.instance.Log("WAVE!");
     }
 
     private void FindInteractable(Transform raycastStart) {

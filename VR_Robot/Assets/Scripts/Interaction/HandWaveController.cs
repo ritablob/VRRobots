@@ -32,8 +32,10 @@ namespace Interaction
                 float velocityRight = Vector3.Distance(lastPositionRight, rightHandAnchor.transform.position)/Time.fixedDeltaTime;
                 
                 //preview text
-                text.color = Color.red;
-                text.text = "Speed left: " + $"{velocityLeft:0.0}" + ", Speed right: " + $"{velocityRight:0.0}";
+                if (text != null) {
+                    text.color = Color.red;
+                    text.text = "Speed left: " + $"{velocityLeft:0.0}" + ", Speed right: " + $"{velocityRight:0.0}";
+                }
                 
                 //CheckRequirements(velocityLeft, leftHandAnchor);
                 CheckRequirements(velocityRight, rightHandAnchor);
@@ -101,16 +103,21 @@ namespace Interaction
             {
                 Debug.Log("Passed");
                 // velocity passed the check 
-                text.color = Color.green;
-                text.text = "Waving! Speed: " + $"{velocity:0.0}";
+                if (text != null)
+                {
+                    text.color = Color.green;
+                    text.text = "Waving! Speed: " + $"{velocity:0.0}";
+                }
                 // TODO: check hand rotation 
-                //handWaved.Invoke(anchorTransform);
+                handWaved.Invoke(anchorTransform);
             }
             else
             {
                 // velocity failed the check
-                text.color = Color.red;
-                text.text = "Speed: " + $"{velocity:0.0}";
+                if (text != null) {
+                    text.color = Color.red;
+                    text.text = "Speed: " + $"{velocity:0.0}";
+                }
             }
             
             coroutineRunning = false;

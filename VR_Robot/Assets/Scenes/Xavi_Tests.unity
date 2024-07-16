@@ -4178,6 +4178,7 @@ MonoBehaviour:
   leftHand: {fileID: 288212101}
   rightHand: {fileID: 191506337}
   robot: {fileID: 880692794}
+  waver: {fileID: 867079767}
 --- !u!114 &773663140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5107,6 +5108,29 @@ Transform:
   m_Father: {fileID: 1218681954}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &867079766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5167925059111895691, guid: f6336ac4ac8b4d34bc5072418cdc62a0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1100262082}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &867079767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 867079766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e5ee53d9d368264783de003e04677d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftHandAnchor: {fileID: 721186874}
+  rightHandAnchor: {fileID: 62431822}
+  text: {fileID: 0}
+  responseTime: 1
+  movementThreshold: 1.2
 --- !u!114 &880692788
 MonoBehaviour:
   m_ObjectHideFlags: 0
