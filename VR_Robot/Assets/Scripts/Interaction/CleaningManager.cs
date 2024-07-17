@@ -4,18 +4,11 @@ using System.Collections.Generic;
 using Interaction;
 using UnityEngine;
 
+/// <summary>
+/// Add this on cleaning interactables (objects that clean). 
+/// </summary>
 public class CleaningManager : MonoBehaviour
 {
-    /* check if grabbed
-     * check if colliding
-     * check if cleanable object
-     * get cleaning agent
-     * perform cleaning and track cleaning progress
-     * 
-     * 
-     */
-    // Start is called before the first frame update
-
     private void OnCollisionEnter(Collision collision)
     {
         if (!collision.gameObject.GetComponent<Cleanable>()) return;

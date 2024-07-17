@@ -8,33 +8,38 @@ public class Robot_Grab : Robot_Interaction_State
         Robot_Interaction_Context context = _context;
     }
 
-    private float grabLerpTime;
+    float timer = 0;
 
-    public override void EnterState() { context.Anim.SetTrigger("Grab"); grabLerpTime = 0; }
+    public override void EnterState() { timer = 0; }
     public override void ExitState() { }
     public override void UpdateState() {
-        // Move grabable object to grippers
-        context.LookatTarget.position = Vector3.Lerp(context.LookatTarget.position, context.GrabPivot.position, grabLerpTime);
-        grabLerpTime += Time.deltaTime;
+        timer += Time.deltaTime;
+        context.Head.LookAt(context.IKController.Target); 
     }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD) {
-            Robot_Interaction_State_Machine.ERobotInteractionState nextState = context.DEBUG_GetState;
-            context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.BAD);
+        if (context.Attentive && timer > 0.5f) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
 
-            return nextState;
+        if (context.IKController.Target == null) { return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; }
+
+        if (context.IKController.Target.gameObject.layer == 8 &&
+            Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) 
+        {
+            context.IKController.CatchObject();
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Store; 
+        } 
+        else if (Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) 
+        {
+            context.IKController.CatchObject();
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Place;
         }
-
-        //if (Vector3.Distance(context.LookatTarget.position, context.WorldPos) >= 3) {
-        //    return Robot_Interaction_State_Machine.ERobotInteractionState.Search;
-        //}
 
         return StateKey;
     }
-    public override void LateUpdateState() { context.Head.LookAt(context.LookatTarget); }
+    public override void LateUpdateState() { }
     public override void OnTriggerEnter(Collider _other) { }
     public override void OnTriggerStay(Collider _other) { }
     public override void OnTriggerExit(Collider _other) { }
+    public override void Interact() { }
 
 
     public override void DEBUG_SwitchState(Robot_Interaction_State_Machine.ERobotInteractionState state) {
