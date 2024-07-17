@@ -1085,7 +1085,7 @@
                 {
                     "name": "",
                     "id": "f2434611-51f0-4d0c-9ed8-3b93b30026d7",
-                    "path": "<XRController>{LeftHand}/{SecondaryButton}",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -1892,7 +1892,7 @@
                 {
                     "name": "",
                     "id": "62690862-4688-4010-975b-b3d9c6062157",
-                    "path": "<XRController>{RightHand}/{SecondaryButton}",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -2061,6 +2061,28 @@
                     "name": "",
                     "id": "05c1e38e-79dd-41cb-95d5-74f42e65d92f",
                     "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7f3fe72-f6a5-4816-86fa-c5c6bf5b8073",
+                    "path": "<XRController>{LeftHand}/{Point}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Point",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7b205ebe-0fee-4cdc-84b1-8185040b2167",
+                    "path": "<XRController>{RightHand}/{Point}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
