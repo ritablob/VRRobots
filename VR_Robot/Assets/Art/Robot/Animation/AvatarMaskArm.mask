@@ -1,0 +1,125 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AvatarMaskArm
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: model:model:Geo
+    m_Weight: 0
+  - m_Path: model:model:Geo/model:model:Robo_Arm
+    m_Weight: 0
+  - m_Path: model:model:Geo/model:model:Robo_Body
+    m_Weight: 0
+  - m_Path: model:model:Geo/model:model:Robo_Ears
+    m_Weight: 0
+  - m_Path: model:model:Geo/model:model:Robo_Flap
+    m_Weight: 0
+  - m_Path: model:model:Geo/model:model:Robo_Legs
+    m_Weight: 0
+  - m_Path: model:Root
+    m_Weight: 0
+  - m_Path: model:Root/model:Body
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_L
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_L/model:Hip2_L
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_L/model:Hip2_L/model:LegUpRotate_L
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_L/model:Hip2_L/model:LegUpRotate_L/model:LegKnee_L
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_L/model:Hip2_L/model:LegUpRotate_L/model:LegKnee_L/model:LegMidRotate_L
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_L/model:Hip2_L/model:LegUpRotate_L/model:LegKnee_L/model:LegMidRotate_L/model:LegBack_L
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_L/model:Hip2_L/model:LegUpRotate_L/model:LegKnee_L/model:LegMidRotate_L/model:LegBack_L/model:Foot_L
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_L/model:Hip2_L/model:LegUpRotate_L/model:LegKnee_L/model:LegMidRotate_L/model:LegBack_L/model:Foot_L/model:Toes_L
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_L/model:Hip2_L/model:LegUpRotate_L/model:LegKnee_L/model:LegMidRotate_L/model:LegBack_L/model:Foot_L/model:Toes_L/model:ToesEnd_L
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_R
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_R/model:Hip2_R
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_R/model:Hip2_R/model:LegUpRotate_R
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_R/model:Hip2_R/model:LegUpRotate_R/model:LegKnee_R
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_R/model:Hip2_R/model:LegUpRotate_R/model:LegKnee_R/model:LegMidRotate_R
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_R/model:Hip2_R/model:LegUpRotate_R/model:LegKnee_R/model:LegMidRotate_R/model:LegBack_R
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_R/model:Hip2_R/model:LegUpRotate_R/model:LegKnee_R/model:LegMidRotate_R/model:LegBack_R/model:Foot_R
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_R/model:Hip2_R/model:LegUpRotate_R/model:LegKnee_R/model:LegMidRotate_R/model:LegBack_R/model:Foot_R/model:Toes_R
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Hip_R/model:Hip2_R/model:LegUpRotate_R/model:LegKnee_R/model:LegMidRotate_R/model:LegBack_R/model:Foot_R/model:Toes_R/model:ToesEnd_R
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:ArmRotate
+    m_Weight: 1
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:ArmRotate/model:ArmRail
+    m_Weight: 1
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:ArmRotate/model:ArmRail/model:ArmJoint1
+    m_Weight: 1
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:ArmRotate/model:ArmRail/model:ArmJoint1/model:ArmExtend1
+    m_Weight: 1
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:ArmRotate/model:ArmRail/model:ArmJoint1/model:ArmExtend1/model:ArmJoint2
+    m_Weight: 1
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:ArmRotate/model:ArmRail/model:ArmJoint1/model:ArmExtend1/model:ArmJoint2/model:ArmExtend2
+    m_Weight: 1
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:ArmRotate/model:ArmRail/model:ArmJoint1/model:ArmExtend1/model:ArmJoint2/model:ArmExtend2/model:ArmJoint3
+    m_Weight: 1
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:ArmRotate/model:ArmRail/model:ArmJoint1/model:ArmExtend1/model:ArmJoint2/model:ArmExtend2/model:ArmJoint3/model:ArmJoint4
+    m_Weight: 1
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:ArmRotate/model:ArmRail/model:ArmJoint1/model:ArmExtend1/model:ArmJoint2/model:ArmExtend2/model:ArmJoint3/model:ArmJoint4/model:Arm_Rotate1
+    m_Weight: 1
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:ArmRotate/model:ArmRail/model:ArmJoint1/model:ArmExtend1/model:ArmJoint2/model:ArmExtend2/model:ArmJoint3/model:ArmJoint4/model:Arm_Rotate1/model:ArmJoint5
+    m_Weight: 1
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:ArmRotate/model:ArmRail/model:ArmJoint1/model:ArmExtend1/model:ArmJoint2/model:ArmExtend2/model:ArmJoint3/model:ArmJoint4/model:Arm_Rotate1/model:ArmJoint5/model:ArmJoint6
+    m_Weight: 1
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:ArmRotate/model:ArmRail/model:ArmJoint1/model:ArmExtend1/model:ArmJoint2/model:ArmExtend2/model:ArmJoint3/model:ArmJoint4/model:Arm_Rotate1/model:ArmJoint5/model:ArmJoint6/model:ArmRotate1
+    m_Weight: 1
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:ArmRotate/model:ArmRail/model:ArmJoint1/model:ArmExtend1/model:ArmJoint2/model:ArmExtend2/model:ArmJoint3/model:ArmJoint4/model:Arm_Rotate1/model:ArmJoint5/model:ArmJoint6/model:ArmRotate1/model:ArmEnd
+    m_Weight: 1
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Flap1
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Flap1/model:Flap2
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Flap1/model:Flap2/model:Flap3
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Flap1/model:Flap2/model:Flap3/model:Flap4
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Neck1
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Neck1/model:Neck2
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Neck1/model:Neck2/model:Neck3
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Neck1/model:Neck2/model:Neck3/model:Head
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Neck1/model:Neck2/model:Neck3/model:Head/model:Ear1_L
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Neck1/model:Neck2/model:Neck3/model:Head/model:Ear1_L/model:Ear2_L
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Neck1/model:Neck2/model:Neck3/model:Head/model:Ear1_L/model:Ear2_L/model:EarEnd_L
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Neck1/model:Neck2/model:Neck3/model:Head/model:Ear1_R
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Neck1/model:Neck2/model:Neck3/model:Head/model:Ear1_R/model:Ear2_R
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Neck1/model:Neck2/model:Neck3/model:Head/model:Ear1_R/model:Ear2_R/model:EarEnd_R
+    m_Weight: 0
+  - m_Path: model:Root/model:Body/model:Rotate/model:Ball/model:Neck1/model:Neck2/model:Neck3/model:Head/model:Head_End
+    m_Weight: 0
