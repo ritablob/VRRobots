@@ -13,7 +13,7 @@ public class Robot_Attentive : Robot_Interaction_State
         DEBUG_NextState = Robot_Interaction_State_Machine.ERobotInteractionState.BAD;
         context.IKController.Target = null;
         context.SetAttentive(false);
-        Debug.Log("IDNJFIUJFGJDGF");
+        context._searching = false;
     }
     public override void ExitState()
     {

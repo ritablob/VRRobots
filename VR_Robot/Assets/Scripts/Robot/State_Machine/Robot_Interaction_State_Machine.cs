@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.AI;
 
 public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_State_Machine.ERobotInteractionState>
 {
@@ -14,6 +15,7 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
     {
         Idle,
         Search,
+        Scan,
         Grab,
         Store,
         Dump,
@@ -33,13 +35,15 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
     [SerializeField] Transform garbageCanPlastic;
     [SerializeField] Transform garbageCanPaper;
     [SerializeField] Transform head;
+    [SerializeField] LayerMask layerMask;
+    [SerializeField] NavMeshAgent AI;
 
     //Validation & Context setup
     private void Awake()
     {
         ValidateConstraints();
 
-        _context = new Robot_Interaction_Context(anim, head, ikController, transform.position);
+        _context = new Robot_Interaction_Context(anim, head, ikController, AI, layerMask, transform.position);
 
         InitializeStates();
     }
@@ -51,12 +55,13 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
     private void InitializeStates() {
         //Add states to inherited state manager "states" dictionary and set the initial state
         states.Add(ERobotInteractionState.Idle, new Robot_Idle(_context, ERobotInteractionState.Idle));
-        states.Add(ERobotInteractionState.Search, new Robot_Search(_context, ERobotInteractionState.Search));
         states.Add(ERobotInteractionState.Grab, new Robot_Grab(_context, ERobotInteractionState.Grab));
         states.Add(ERobotInteractionState.Store, new Robot_Store(_context, ERobotInteractionState.Store));
         states.Add(ERobotInteractionState.Dump, new Robot_Dump(_context, ERobotInteractionState.Dump));
         states.Add(ERobotInteractionState.Attentive, new Robot_Attentive(_context, ERobotInteractionState.Attentive));
         states.Add(ERobotInteractionState.Place, new Robot_PlaceDown(_context, ERobotInteractionState.Place));
+        states.Add(ERobotInteractionState.Search, new Robot_Search(_context, ERobotInteractionState.Search));
+        states.Add(ERobotInteractionState.Scan, new Robot_Scan(_context, ERobotInteractionState.Scan));
 
         currentState = states[ERobotInteractionState.Idle];
     }

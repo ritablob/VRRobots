@@ -88,6 +88,7 @@ public class CustomActions : MonoBehaviour
 
     private void Wave(Transform hand)
     {
+        return;
         // If not looking near the robot, return
         if (!IsLookingAt()) { return; }
 

@@ -9874,6 +9874,10 @@ MonoBehaviour:
   garbageCanPlastic: {fileID: 46230980}
   garbageCanPaper: {fileID: 618188508}
   head: {fileID: 1575501415}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 448
+  AI: {fileID: 880692797}
 --- !u!4 &880692795 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: cfe1f92824f4d9648b6a39652600ec73,
@@ -17085,7 +17089,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1385014025}
   m_LocalRotation: {x: -0, y: 0.41256556, z: -0, w: 0.91092795}
-  m_LocalPosition: {x: -0.761, y: 0.204, z: -0.773}
+  m_LocalPosition: {x: -3.255, y: 0.204, z: -0.776}
   m_LocalScale: {x: 0.1910989, y: 0.1910989, z: 0.1910989}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18380,7 +18384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525779015}
   m_LocalRotation: {x: -0, y: -0.40156135, z: -0, w: 0.9158321}
-  m_LocalPosition: {x: 0.652, y: 0.204, z: -1.964}
+  m_LocalPosition: {x: -0.579, y: 0.204, z: -3.899}
   m_LocalScale: {x: 0.1910989, y: 0.1910989, z: 0.1910989}
   m_ConstrainProportionsScale: 0
   m_Children:

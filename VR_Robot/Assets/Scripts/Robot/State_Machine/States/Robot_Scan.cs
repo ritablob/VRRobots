@@ -2,19 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Robot_Idle : Robot_Interaction_State
+public class Robot_Scan : Robot_Interaction_State
 {
-    public Robot_Idle(Robot_Interaction_Context _context, Robot_Interaction_State_Machine.ERobotInteractionState estate) : base (_context, estate) {
+    public Robot_Scan(Robot_Interaction_Context _context, Robot_Interaction_State_Machine.ERobotInteractionState estate) : base (_context, estate) {
         Robot_Interaction_Context context = _context;
     }
 
     private float timer;
 
     public override void EnterState() {
-        if (context._searching) { timer = 3; }
-        else { timer = 0; }
-        context.IKController.Target = null;
-        context.IKController.StartPos = Vector3.zero;
+        timer = 0;
     }
     public override void ExitState() { }
     public override void UpdateState() {
@@ -23,15 +20,19 @@ public class Robot_Idle : Robot_Interaction_State
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
         if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
 
-        // If we've been idling for a while, move to search state
-        if (timer > 3) {
-            return Robot_Interaction_State_Machine.ERobotInteractionState.Search;
-        }
+        // After the 'scan', either store or ignore the object. If ignoring it, move directly to search state again
+        if (timer > 2) {
+            Debug.Log("Scan over");
 
-        if (context._dump == true) { return Robot_Interaction_State_Machine.ERobotInteractionState.Dump; }
-
-        if (context.IKController.Target != null) {
-            return Robot_Interaction_State_Machine.ERobotInteractionState.Grab;
+            if (context.CheckedObjects[0].TryGetComponent<Garbage_Bit>(out Garbage_Bit bit)) {
+                context.IKController.Target = context.CheckedObjects[0];
+                context.IKController.CatchObject();
+                return Robot_Interaction_State_Machine.ERobotInteractionState.Store;
+            }
+            else {
+                Debug.Log("Return to searh");
+                return Robot_Interaction_State_Machine.ERobotInteractionState.Search;
+            }
         }
 
         return StateKey;
