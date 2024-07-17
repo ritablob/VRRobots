@@ -8,7 +8,7 @@ using UnityEngine.Animations.Rigging;
 public class CCDIK : MonoBehaviour {
     public Transform Tooltip;
     public Transform Target;
-    public CCDIKJoint[] joints;
+    public Transform[] joints;
     public Vector3 StartPos;
     public Quaternion StartRot;
     public float distanceThreshold = 0.1f, timer = 0;
@@ -42,7 +42,7 @@ public class CCDIK : MonoBehaviour {
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(joints[0].transform.position, maxRange);
+        Gizmos.DrawWireSphere(joints[0].position, maxRange);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(ik.data.tip.transform.position, distanceThreshold);
     }
@@ -55,12 +55,12 @@ public class CCDIK : MonoBehaviour {
         Vector3 targetPos = Target.position;
 
         // If out of range, move to the closest position within range
-        if (Vector3.Distance(joints[0].transform.position, Target.position) > maxRange) {
+        if (Vector3.Distance(joints[0].position, Target.position) > maxRange) {
             // Get direction of vector
-            Vector3 dir = Target.position - joints[0].transform.position;
+            Vector3 dir = Target.position - joints[0].position;
 
             // Normalize, and set the position to the edge of the boundry
-            targetPos = joints[0].transform.position + (dir.normalized * (maxRange * 0.9f));
+            targetPos = joints[0].position + (dir.normalized * (maxRange * 0.9f));
         }
 
         // Storing the object
@@ -75,6 +75,7 @@ public class CCDIK : MonoBehaviour {
             else { 
                 endPos = Storage.position;
                 Target.localScale = Vector3.Lerp(Target.GetComponent<Custom_Interactable>().startScale, Vector3.zero, scaleCurve.Evaluate(timer));
+                Debug.Log("KDFKDNFDKNJF");
             }
 
             targetPos = Vector3.Lerp(StartPos, endPos, curve.Evaluate(timer));

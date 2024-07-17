@@ -22,15 +22,12 @@ public class Robot_Scan : Robot_Interaction_State
 
         // After the 'scan', either store or ignore the object. If ignoring it, move directly to search state again
         if (timer > 2) {
-            Debug.Log("Scan over");
-
             if (context.CheckedObjects[0].TryGetComponent<Garbage_Bit>(out Garbage_Bit bit)) {
                 context.IKController.Target = context.CheckedObjects[0];
                 context.IKController.CatchObject();
                 return Robot_Interaction_State_Machine.ERobotInteractionState.Store;
             }
             else {
-                Debug.Log("Return to searh");
                 return Robot_Interaction_State_Machine.ERobotInteractionState.Search;
             }
         }
