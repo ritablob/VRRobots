@@ -22,13 +22,6 @@ public class Robot_Dump : Robot_Interaction_State
         timer += Time.deltaTime;
     }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD)
-        {
-            Robot_Interaction_State_Machine.ERobotInteractionState temp = context.DEBUG_GetState;
-            context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.BAD);
-            return temp;
-        }
-
         if (timer >= 2) {
             return Robot_Interaction_State_Machine.ERobotInteractionState.Idle;
         }

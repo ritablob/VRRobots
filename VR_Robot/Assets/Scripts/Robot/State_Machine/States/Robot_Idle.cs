@@ -8,17 +8,24 @@ public class Robot_Idle : Robot_Interaction_State
         Robot_Interaction_Context context = _context;
     }
 
+    private float timer;
+
     public override void EnterState() {
+        if (context._searching) { timer = 3; }
+        else { timer = 0; }
         context.IKController.Target = null;
         context.IKController.StartPos = Vector3.zero;
     }
     public override void ExitState() { }
-    public override void UpdateState() { }
+    public override void UpdateState() {
+        timer += Time.deltaTime;
+    }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD) {
-            Robot_Interaction_State_Machine.ERobotInteractionState temp = context.DEBUG_GetState;
-            context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.BAD);
-            return temp;
+        if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
+
+        // If we've been idling for a while, move to search state
+        if (timer > 3) {
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Search;
         }
 
         if (context._dump == true) { return Robot_Interaction_State_Machine.ERobotInteractionState.Dump; }

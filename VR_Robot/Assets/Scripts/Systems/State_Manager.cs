@@ -19,8 +19,9 @@ public abstract class StateManager<Estate> : MonoBehaviour where Estate : Enum
 
         if (!isTransitioningState && nextStateKey.Equals(currentState.StateKey)) {
             currentState.UpdateState();
-            Debug.Log(currentState);
+            Director.instance.Log(currentState.ToString());
         } else if (!isTransitioningState) {
+            Debug.Log("IDNJFIUJFGJDGF" + currentState);
             TransitionToState(nextStateKey);
         }
     }

@@ -8,18 +8,18 @@ public class Robot_Grab : Robot_Interaction_State
         Robot_Interaction_Context context = _context;
     }
 
-    public override void EnterState() { }
-    public override void ExitState() { }
-    public override void UpdateState() { context.Head.LookAt(context.IKController.Target); }
-    public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD)
-        {
-            Robot_Interaction_State_Machine.ERobotInteractionState temp = context.DEBUG_GetState;
-            context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.BAD);
-            return temp;
-        }
+    float timer = 0;
 
-        if (context.IKController.Target == null) { return StateKey; }
+    public override void EnterState() { timer = 0; }
+    public override void ExitState() { }
+    public override void UpdateState() {
+        timer += Time.deltaTime;
+        context.Head.LookAt(context.IKController.Target); 
+    }
+    public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
+        if (context.Attentive && timer > 0.5f) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
+
+        if (context.IKController.Target == null) { return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; }
 
         if (context.IKController.Target.gameObject.layer == 8 &&
             Vector3.Distance(context.IKController.Tooltip.position, context.IKController.Target.position) < context.IKController.distanceThreshold) 
