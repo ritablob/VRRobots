@@ -11,6 +11,7 @@ public class Robot_Scan : Robot_Interaction_State
     private float timer;
 
     public override void EnterState() {
+        context.Anim.SetBool("Walking", false);
         timer = 0;
     }
     public override void ExitState() { }
@@ -20,12 +21,16 @@ public class Robot_Scan : Robot_Interaction_State
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
         if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
 
+        if (context.IKController.Target != null)
+        {
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Grab;
+        }
+
         // After the 'scan', either store or ignore the object. If ignoring it, move directly to search state again
         if (timer > 2) {
             if (context.CheckedObjects[0].TryGetComponent<Garbage_Bit>(out Garbage_Bit bit)) {
                 context.IKController.Target = context.CheckedObjects[0];
-                context.IKController.CatchObject();
-                return Robot_Interaction_State_Machine.ERobotInteractionState.Store;
+                return Robot_Interaction_State_Machine.ERobotInteractionState.Grab;
             }
             else {
                 return Robot_Interaction_State_Machine.ERobotInteractionState.Search;

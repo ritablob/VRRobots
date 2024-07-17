@@ -12,17 +12,22 @@ public class Robot_Dump : Robot_Interaction_State
 
     public override void EnterState() {
         context.IKController.DumpObjects();
-        context.Anim.SetTrigger("Open");
         context._dump = false;
         timer = 0;  
     }
-    public override void ExitState() { }
+    public override void ExitState() {
+        context.Anim.SetBool("FlapOpen", false);
+    }
     public override void UpdateState()
     {
-        timer += Time.deltaTime;
+        context.AI.transform.LookAt(context.garbagePos);
+
+        if (context.IKController.storedObjects.Count == 0) {
+            timer += Time.deltaTime;
+        }
     }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (timer >= 2) {
+        if (timer >= 1) {
             return Robot_Interaction_State_Machine.ERobotInteractionState.Idle;
         }
 

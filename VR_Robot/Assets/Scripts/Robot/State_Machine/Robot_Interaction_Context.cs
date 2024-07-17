@@ -2,6 +2,7 @@
 //Robot_Interaction_Context holds all variables shared between robot states
 //All variables are protected
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -18,9 +19,10 @@ public class Robot_Interaction_Context : MonoBehaviour
     private List<Transform> _checkedObjects = new List<Transform>(0);
     public bool _dump, _attentive, _searching;
     private List<GameObject> _garbageBits = new List<GameObject>(0);
+    public Vector3 garbagePos;
     private NavMeshAgent _AI;
 
-    //Constructor
+    // Constructor
     public Robot_Interaction_Context(Animator anim, Transform head, CCDIK ikController, NavMeshAgent ai, LayerMask layerMask, Vector3 worldPos) {
         _anim = anim;
         _head = head;
@@ -44,6 +46,11 @@ public class Robot_Interaction_Context : MonoBehaviour
     public bool Attentive => _attentive;
 
     public Robot_Interaction_State_Machine.ERobotInteractionState DEBUG_GetState => _DEBUG_state;
+
+    public void LerpArmWeight(int desiredWeight, float speed) {
+        AI.GetComponent<Robot_Interaction_State_Machine>().LerpArmWeight(desiredWeight, speed);
+    }
+
 
     public void DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState _state) {
         _DEBUG_state = _state;

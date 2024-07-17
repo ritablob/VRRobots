@@ -38,6 +38,7 @@ public class Robot_Search : Robot_Interaction_State
 
         // Once we have a nearest object, navigate to it
         context.AI.SetDestination(cols[nearestID].transform.position);
+        context.Anim.SetBool("Walking", true);
         target = cols[nearestID].transform;
         context._searching = true;
     }
@@ -45,6 +46,11 @@ public class Robot_Search : Robot_Interaction_State
     public override void UpdateState() { }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
         if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
+
+        if (context.IKController.Target != null)
+        {
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Grab;
+        }
 
         if (DEBUG_NextState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD) {
             return DEBUG_NextState;

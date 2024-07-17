@@ -19,8 +19,8 @@ public class CCDIK : MonoBehaviour {
     [HideInInspector] public bool setOnGround;
 
     [SerializeField] private Transform Storage;
-    [SerializeField] private TwoBoneIKConstraint ik;
-    private List<GameObject> storedObjects;
+    public TwoBoneIKConstraint ik;
+    public List<GameObject> storedObjects;
 
     private float maxRange;
 
@@ -75,7 +75,6 @@ public class CCDIK : MonoBehaviour {
             else { 
                 endPos = Storage.position;
                 Target.localScale = Vector3.Lerp(Target.GetComponent<Custom_Interactable>().startScale, Vector3.zero, scaleCurve.Evaluate(timer));
-                Debug.Log("KDFKDNFDKNJF");
             }
 
             targetPos = Vector3.Lerp(StartPos, endPos, curve.Evaluate(timer));
@@ -159,18 +158,19 @@ public class CCDIK : MonoBehaviour {
 
             // If there is a type mistmatch, move to the correct garbage can, then wait
             if (storedObjects[i].GetComponent<Garbage_Bit>().type != lastType) {
-                Transform _garbageTarget = GarbagecanMoveTo(storedObjects[i].GetComponent<Garbage_Bit>().type);
-                agent.SetDestination(_garbageTarget.position);
-                GetComponent<Animator>().SetTrigger("Close");
+                Vector3 garbagePos = GarbagecanMoveTo(storedObjects[i].GetComponent<Garbage_Bit>().type).position;
+                garbagePos = new Vector3(garbagePos.x, transform.position.y, garbagePos.z);
+                GetComponent<Robot_Interaction_State_Machine>().Context.garbagePos = garbagePos;
+                GetComponent<NavMeshAgent>().SetDestination(garbagePos);
+                GetComponent<Animator>().SetBool("FlapOpen", false);
 
                 while (Vector3.Distance(agent.destination, transform.position) > 0.1f) {
-                    transform.LookAt(_garbageTarget);
+                    transform.LookAt(Vector3.zero);
                     yield return null;
                 }
 
-                GetComponent<Animator>().SetTrigger("Open");
+                GetComponent<Animator>().SetBool("FlapOpen", true);
                 yield return new WaitForSeconds(0.33f);
-                transform.LookAt(_garbageTarget);
             }
 
             yield return new WaitForSeconds(0.25f);
@@ -187,7 +187,7 @@ public class CCDIK : MonoBehaviour {
 
         storedObjects.Clear();
 
-        GetComponent<Animator>().SetTrigger("Close");
+        GetComponent<Animator>().SetBool("FlapOpen", false);
     }
 
     private int GarbagePresentInList(GarbageType type) {

@@ -93,7 +93,6 @@ public class CustomActions : MonoBehaviour
         if (!IsLookingAt()) { return; }
 
         robot.Context.SetAttentive(true);
-        Debug.Log("IDNJFIUJFGJDGF WAVE");
     }
 
     private void DEBUG_Wave(InputAction.CallbackContext ctx)
@@ -141,12 +140,14 @@ public class CustomActions : MonoBehaviour
             // If it is a piece of garbage, clean it up
             else if (hit.collider.TryGetComponent<Garbage_Bit>(out Garbage_Bit garbageBit)) {
                 robot.GetComponent<NavMeshAgent>().SetDestination(hit.point);
+                robot.GetComponent<Animator>().SetTrigger("Start Walk");
                 robot.Context.IKController.Target = hit.collider.transform;
                 robot.GetState.DEBUG_SwitchState(Robot_Interaction_State_Machine.ERobotInteractionState.Grab);
             }
             // If nothing else, move the robot to that location
             else if (robot.GetCurrentState == Robot_Interaction_State_Machine.ERobotInteractionState.Attentive) {
                 robot.gameObject.GetComponent<NavMeshAgent>().SetDestination(hit.point);
+                robot.GetComponent<Animator>().SetTrigger("Start Walk");
                 robot.GetState.DEBUG_SwitchState(Robot_Interaction_State_Machine.ERobotInteractionState.Idle);
             }
         }

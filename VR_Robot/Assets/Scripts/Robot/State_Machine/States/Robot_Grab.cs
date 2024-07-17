@@ -10,14 +10,23 @@ public class Robot_Grab : Robot_Interaction_State
 
     float timer = 0;
 
-    public override void EnterState() { timer = 0; }
-    public override void ExitState() { }
+    public override void EnterState() { 
+        timer = 0; context.LerpArmWeight(1, 2.5f);
+        context.Anim.SetBool("Start Grab", true);
+        context.Anim.SetTrigger("End Walk");
+    }
+    public override void ExitState() { 
+    }
     public override void UpdateState() {
         timer += Time.deltaTime;
         context.Head.LookAt(context.IKController.Target); 
     }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (context.Attentive && timer > 0.5f) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
+        if (timer < 1) {
+            return StateKey;
+        }
+
+        if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
 
         if (context.IKController.Target == null) { return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; }
 

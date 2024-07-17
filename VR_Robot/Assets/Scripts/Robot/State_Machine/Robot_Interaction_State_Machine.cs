@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.AI;
+using UnityEngine.Animations.Rigging;
 
 public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_State_Machine.ERobotInteractionState>
 {
@@ -37,6 +38,9 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
     [SerializeField] Transform head;
     [SerializeField] LayerMask layerMask;
     [SerializeField] NavMeshAgent AI;
+    [SerializeField] AnimationCurve curve;
+
+    float timer = 1;
 
     //Validation & Context setup
     private void Awake()
@@ -44,6 +48,8 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
         ValidateConstraints();
 
         _context = new Robot_Interaction_Context(anim, head, ikController, AI, layerMask, transform.position);
+
+        anim.Play("Robot@FlapOpen 0", 2, 1);
 
         InitializeStates();
     }
@@ -72,6 +78,28 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
 
     public void TossItems(ActivateEventArgs args) {
         Context._dump = true;
+    }
+
+    public void LerpArmWeight(int desiredWeight, float speed)
+    {
+        StopAllCoroutines();
+        StartCoroutine(E_LerpArmWeight(_context.IKController.ik.GetComponent<Rig>().weight, desiredWeight, speed));
+    }
+
+    private IEnumerator E_LerpArmWeight(float startWeight, int desiredWeight, float speed)
+    {
+        timer = 1 - timer;
+
+        Debug.Log($"start weight = {startWeight}, timer = {timer}, desired Weight = {desiredWeight}");
+
+        while (timer < 1)
+        {
+            timer += Time.deltaTime * speed;
+            _context.IKController.ik.GetComponent<Rig>().weight = Mathf.Lerp(startWeight, desiredWeight, curve.Evaluate(timer));
+            yield return null;
+        }
+
+        Mathf.Clamp(timer, 0, 1);
     }
 
     public void InteractWithRobot() { 

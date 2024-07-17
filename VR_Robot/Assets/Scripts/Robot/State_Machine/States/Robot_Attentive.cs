@@ -14,10 +14,13 @@ public class Robot_Attentive : Robot_Interaction_State
         context.IKController.Target = null;
         context.SetAttentive(false);
         context._searching = false;
+        context.Anim.SetTrigger("End Walk");
+        context.Anim.SetBool("Attention!", true);
     }
     public override void ExitState()
     {
         context.Head.localEulerAngles = new Vector3(0, 0, 79.192f);
+        context.Anim.SetBool("Attention!", false);
     }
     public override void UpdateState() { 
         context.Head.LookAt(Director.instance.playerCamera);

@@ -7,6 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(XRGrabInteractable))]
 public class Custom_Interactable : MonoBehaviour
 {
     public Vector3 startScale;
