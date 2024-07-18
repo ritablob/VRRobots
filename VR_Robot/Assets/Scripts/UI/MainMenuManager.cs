@@ -15,6 +15,7 @@ namespace UI
         public GameObject credits;
         public GameObject sign;
         public GameObject arrow;
+
         //public GameObject head;
         public Door door;
         
@@ -24,6 +25,7 @@ namespace UI
             credits.SetActive(false);
             sign.SetActive(false);
             arrow.SetActive(false);
+            Director.instance.robot.gameObject.SetActive(false);
             mainMenu.SetActive(true);
         }
         
@@ -37,6 +39,7 @@ namespace UI
         {
             sign.SetActive(false);
             arrow.SetActive(true);
+            Director.instance.robot.gameObject.SetActive(true);
             door.Open();
         }
         public void OptionsPressed()
@@ -62,7 +65,6 @@ namespace UI
             EditorApplication.ExitPlaymode();
 #endif
             Application.Quit();
-
         }
 
         public void BackToMainMenuPressed()
