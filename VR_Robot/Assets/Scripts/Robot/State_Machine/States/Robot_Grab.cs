@@ -8,24 +8,19 @@ public class Robot_Grab : Robot_Interaction_State
         Robot_Interaction_Context context = _context;
     }
 
-    float timer = 0;
 
     public override void EnterState() { 
-        timer = 0; context.LerpArmWeight(1, 2.5f);
+        context.LerpArmWeight(1, 2.5f);
         context.Anim.SetBool("Start Grab", true);
+        context.Anim.SetBool("Scanning", false);
         context.Anim.SetTrigger("End Walk");
     }
     public override void ExitState() { 
     }
     public override void UpdateState() {
-        timer += Time.deltaTime;
         context.Head.LookAt(context.IKController.Target); 
     }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (timer < 1) {
-            return StateKey;
-        }
-
         if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
 
         if (context.IKController.Target == null) { return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; }

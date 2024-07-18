@@ -13,11 +13,11 @@ public class Robot_Store : Robot_Interaction_State
         context.IKController.setOnGround = false;
         context.Anim.SetTrigger("Store");
         context.Anim.SetBool("FlapOpen", true);
-        context.Anim.SetBool("Start Grab", false);
-        context.LerpArmWeight(0, 1);
+        context.LerpArmWeight(0, 3);
     }
     public override void ExitState() {
         context.Anim.SetBool("FlapOpen", false);
+        context.Anim.SetBool("Start Grab", false);
         context.LerpArmWeight(0, 1);
         if (context.IKController.Target != null) { Director.instance.CopyObject(context.IKController.Target.gameObject); } 
     }  

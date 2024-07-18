@@ -12,9 +12,11 @@ public class Robot_Scan : Robot_Interaction_State
 
     public override void EnterState() {
         context.Anim.SetBool("Walking", false);
+        context.Anim.SetBool("Scanning", true);
         timer = 0;
     }
-    public override void ExitState() { }
+    public override void ExitState() {
+    }
     public override void UpdateState() {
         timer += Time.deltaTime;
     }
@@ -33,6 +35,7 @@ public class Robot_Scan : Robot_Interaction_State
                 return Robot_Interaction_State_Machine.ERobotInteractionState.Grab;
             }
             else {
+                context.Anim.SetBool("Scanning", false);
                 return Robot_Interaction_State_Machine.ERobotInteractionState.Search;
             }
         }

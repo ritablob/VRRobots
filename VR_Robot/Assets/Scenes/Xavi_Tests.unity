@@ -2632,9 +2632,9 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.5
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
@@ -2729,7 +2729,7 @@ MonoBehaviour:
   - {fileID: 185879969}
   StartPos: {x: 0, y: 0, z: 0}
   StartRot: {x: 0, y: 0, z: 0, w: 0}
-  distanceThreshold: 0.33
+  distanceThreshold: 0.2
   timer: 0
   iterations: 10
   curve:

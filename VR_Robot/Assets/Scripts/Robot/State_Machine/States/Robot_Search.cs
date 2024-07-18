@@ -57,7 +57,7 @@ public class Robot_Search : Robot_Interaction_State
         }
 
         // When we have reached out destination, enter the SCAN state. Add the target to the context list
-        if (Vector3.Distance(context.AI.transform.position, context.AI.destination) < 0.33f) {
+        if (Vector3.Distance(context.AI.transform.position, context.AI.destination) <= context.AI.stoppingDistance) {
             context.AddChekedObjects(target);
             return Robot_Interaction_State_Machine.ERobotInteractionState.Scan;
         }
