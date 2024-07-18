@@ -91,7 +91,7 @@ namespace Interaction
             
             if (velocity > movementThreshold && IsUpwardRotation(anchorTransform))
             {
-                handWaved.Invoke(anchorTransform);
+                handWaved?.Invoke(anchorTransform);
             }
             
             coroutineRunning = false;
