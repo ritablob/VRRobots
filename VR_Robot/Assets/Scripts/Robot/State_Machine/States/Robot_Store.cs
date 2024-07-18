@@ -11,20 +11,28 @@ public class Robot_Store : Robot_Interaction_State
     public override void EnterState() {
         context.IKController.StartPos = context.IKController.Tooltip.position;
         context.IKController.setOnGround = false;
-        context.Anim.SetTrigger("Open");
-        context.Anim.SetTrigger("Close");
+        context.Anim.SetTrigger("Store");
+        context.Anim.SetBool("FlapOpen", true);
+        context.Anim.SetBool("Start Grab", false);
+        context.LerpArmWeight(0, 1);
     }
-    public override void ExitState() { if (context.IKController.Target != null) { Director.instance.CopyObject(context.IKController.Target.gameObject); } }  
+    public override void ExitState() {
+        context.Anim.SetBool("FlapOpen", false);
+        context.LerpArmWeight(0, 1);
+        if (context.IKController.Target != null) { Director.instance.CopyObject(context.IKController.Target.gameObject); } 
+    }  
     public override void UpdateState() { }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (context.DEBUG_GetState != Robot_Interaction_State_Machine.ERobotInteractionState.BAD)
-        {
-            Robot_Interaction_State_Machine.ERobotInteractionState temp = context.DEBUG_GetState;
-            context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.BAD);
-            return temp;
-        }
+        if (context.IKController.Timer >= 1) {
+            if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
 
-        if (context.IKController.Timer >= 1) { return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; }
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; 
+        }
+        if (context.IKController.Timer == 0) {
+            if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
+
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Idle; 
+        }
 
         return StateKey;
     }

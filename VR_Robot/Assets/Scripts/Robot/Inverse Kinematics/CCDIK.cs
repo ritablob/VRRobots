@@ -8,7 +8,7 @@ using UnityEngine.Animations.Rigging;
 public class CCDIK : MonoBehaviour {
     public Transform Tooltip;
     public Transform Target;
-    public CCDIKJoint[] joints;
+    public Transform[] joints;
     public Vector3 StartPos;
     public Quaternion StartRot;
     public float distanceThreshold = 0.1f, timer = 0;
@@ -19,8 +19,8 @@ public class CCDIK : MonoBehaviour {
     [HideInInspector] public bool setOnGround;
 
     [SerializeField] private Transform Storage;
-    [SerializeField] private TwoBoneIKConstraint ik;
-    private List<GameObject> storedObjects;
+    public TwoBoneIKConstraint ik;
+    public List<GameObject> storedObjects;
 
     private float maxRange;
 
@@ -42,7 +42,7 @@ public class CCDIK : MonoBehaviour {
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(joints[0].transform.position, maxRange);
+        Gizmos.DrawWireSphere(joints[0].position, maxRange);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(ik.data.tip.transform.position, distanceThreshold);
     }
@@ -55,12 +55,12 @@ public class CCDIK : MonoBehaviour {
         Vector3 targetPos = Target.position;
 
         // If out of range, move to the closest position within range
-        if (Vector3.Distance(joints[0].transform.position, Target.position) > maxRange) {
+        if (Vector3.Distance(joints[0].position, Target.position) > maxRange) {
             // Get direction of vector
-            Vector3 dir = Target.position - joints[0].transform.position;
+            Vector3 dir = Target.position - joints[0].position;
 
             // Normalize, and set the position to the edge of the boundry
-            targetPos = joints[0].transform.position + (dir.normalized * (maxRange * 0.9f));
+            targetPos = joints[0].position + (dir.normalized * (maxRange * 0.9f));
         }
 
         // Storing the object
@@ -84,7 +84,18 @@ public class CCDIK : MonoBehaviour {
     }
 
     private void SetTarget(Transform _target) {
-        Target = _target;
+        StartCoroutine(SetTargetDelay(_target));
+    }
+
+    private IEnumerator SetTargetDelay(Transform _target) {
+        yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
+
+        _target.TryGetComponent<Rigidbody>(out Rigidbody rb);
+        
+        if (timer == 0 && Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y) + Mathf.Abs(rb.velocity.z) > 1.5f) {
+            Target = _target;
+        }
     }
 
     private void CreateCopy(GameObject origin) {
@@ -147,18 +158,19 @@ public class CCDIK : MonoBehaviour {
 
             // If there is a type mistmatch, move to the correct garbage can, then wait
             if (storedObjects[i].GetComponent<Garbage_Bit>().type != lastType) {
-                Transform _garbageTarget = GarbagecanMoveTo(storedObjects[i].GetComponent<Garbage_Bit>().type);
-                agent.SetDestination(_garbageTarget.position);
-                GetComponent<Animator>().SetTrigger("Close");
+                Vector3 garbagePos = GarbagecanMoveTo(storedObjects[i].GetComponent<Garbage_Bit>().type).position;
+                garbagePos = new Vector3(garbagePos.x, transform.position.y, garbagePos.z);
+                GetComponent<Robot_Interaction_State_Machine>().Context.garbagePos = garbagePos;
+                GetComponent<NavMeshAgent>().SetDestination(garbagePos);
+                GetComponent<Animator>().SetBool("FlapOpen", false);
 
                 while (Vector3.Distance(agent.destination, transform.position) > 0.1f) {
-                    transform.LookAt(_garbageTarget);
+                    transform.LookAt(Vector3.zero);
                     yield return null;
                 }
 
-                GetComponent<Animator>().SetTrigger("Open");
+                GetComponent<Animator>().SetBool("FlapOpen", true);
                 yield return new WaitForSeconds(0.33f);
-                transform.LookAt(_garbageTarget);
             }
 
             yield return new WaitForSeconds(0.25f);
@@ -170,11 +182,12 @@ public class CCDIK : MonoBehaviour {
             rb.useGravity = true;
             rb.AddForce(transform.forward * 4, ForceMode.Impulse);
             lastType = storedObjects[i].GetComponent<Garbage_Bit>().type;
+            Director.instance.RobotTrash();
         }
 
         storedObjects.Clear();
 
-        GetComponent<Animator>().SetTrigger("Close");
+        GetComponent<Animator>().SetBool("FlapOpen", false);
     }
 
     private int GarbagePresentInList(GarbageType type) {

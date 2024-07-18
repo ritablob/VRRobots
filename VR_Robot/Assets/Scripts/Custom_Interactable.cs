@@ -7,6 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(XRGrabInteractable))]
 public class Custom_Interactable : MonoBehaviour
 {
     public Vector3 startScale;
@@ -16,6 +17,7 @@ public class Custom_Interactable : MonoBehaviour
     private Rigidbody rb;
     private Collider col;
     private float reGrabTimer = 1;
+    private bool grabbed;
 
     private void Start() 
     {
@@ -37,7 +39,7 @@ public class Custom_Interactable : MonoBehaviour
         if (reGrabTimer < 1) { reGrabTimer += Time.deltaTime; return; }
         else if (Director.instance.PlayerCameraXRot > 80 || Director.instance.PlayerCameraXRot < 30) {
             // If currently lifting, fall back down
-            if (rb.isKinematic) { Release(null); }
+            if (rb.isKinematic && !grabbed) { Release(null); }
             return; 
         }
 
@@ -51,15 +53,21 @@ public class Custom_Interactable : MonoBehaviour
             if (!rb.isKinematic) { StartCoroutine(LerpUp(rightHand)); }
             rb.isKinematic = true;
         }
-        else if (rb.isKinematic) {
+        else if (rb.isKinematic && !grabbed) {
             Release(null);
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (grabbed) { rb.useGravity = false; }
     }
 
     private UnityAction<SelectExitEventArgs> release;
     private void Release(SelectExitEventArgs ctx)
     {
         col.enabled = true;
+        grabbed = false;
         StopAllCoroutines();
         reGrabTimer = 0;
         rb.isKinematic = false;
@@ -73,6 +81,7 @@ public class Custom_Interactable : MonoBehaviour
     private UnityAction<SelectEnterEventArgs> grab;
     private void Grab(SelectEnterEventArgs ctx) {
         col.enabled = false;
+        grabbed = true;
     }
 
     private IEnumerator LerpUp(Transform handToTrack) {

@@ -13,8 +13,11 @@ public class CustomActions : MonoBehaviour
     [SerializeField] private LayerMask raycastMask;
     [SerializeField] private Transform leftHand;
     [SerializeField] private Transform rightHand;
+    [SerializeField] private Transform head;
     [SerializeField] private Robot_Interaction_State_Machine robot;
     [SerializeField] private HandWaveController waver;
+
+    public float lookAngleThreshold;
 
     bool pressed;
     private Transform raycastStart;
@@ -29,28 +32,28 @@ public class CustomActions : MonoBehaviour
     {
         inputActions.Enable();
 
-        inputActions.XRILeftInteraction.LeftPrimary.performed += OnLeftXButtonPressed;
+        waver.handWaved += Wave;
+
+        inputActions.XRILeftInteraction.LeftPrimary.performed += DEBUG_Wave;
 
         inputActions.XRILeftInteraction.Activate.performed += PressPointL;
         inputActions.XRILeftInteraction.Activate.canceled += ReleasePointL;
 
         inputActions.XRIRightInteraction.Activate.performed += PressPointR;
         inputActions.XRIRightInteraction.Activate.canceled += ReleasePointR;
-
-        waver.handWaved += Wave;
     }
 
     private void OnDisable()
     {
-        inputActions.XRILeftInteraction.LeftPrimary.performed -= OnLeftXButtonPressed;
+        waver.handWaved -= Wave;
+
+        inputActions.XRILeftInteraction.LeftPrimary.performed -= DEBUG_Wave;
 
         inputActions.XRILeftInteraction.Activate.performed += PressPointL;
         inputActions.XRILeftInteraction.Activate.canceled -= ReleasePointL;
 
         inputActions.XRIRightInteraction.Activate.performed += PressPointR;
         inputActions.XRIRightInteraction.Activate.canceled -= ReleasePointR;
-
-        waver.handWaved += Wave;
 
         inputActions.Disable();
     }
@@ -60,13 +63,10 @@ public class CustomActions : MonoBehaviour
         // If currently holding the point button, highlight aany interactable that you come across
         if (pressed) {
             if (Physics.Raycast(raycastStart.position, raycastStart.forward, out RaycastHit hit, 10, raycastMask)) {
-                Director.instance.Log("Raycast good!");
                 if (hit.collider.gameObject.TryGetComponent<Highlighter>(out Highlighter _highlight)) {
-                    Director.instance.Log("Found highlight component");
                     // If highlighting a different object, un-highlight the previous one, and highlight this
                     if (prevHighlighted != null &&_highlight != prevHighlighted) {
                         prevHighlighted.HoverHighlight(false);
-                        Director.instance.Log("Remove prev highlight!");
                         prevHighlighted = _highlight;
                         prevHighlighted.HoverHighlight(true);
                         return;
@@ -74,7 +74,6 @@ public class CustomActions : MonoBehaviour
                     else if (prevHighlighted == null) {
                         prevHighlighted = _highlight;
                         prevHighlighted.HoverHighlight(true);
-                        Director.instance.Log("Add new highlight good!");
                     }
                 }
             }
@@ -87,9 +86,21 @@ public class CustomActions : MonoBehaviour
         }
     }
 
-    private void OnLeftXButtonPressed(InputAction.CallbackContext ctx)
+    private void Wave(Transform hand)
     {
-        robot.Context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.Attentive);
+        return;
+        // If not looking near the robot, return
+        if (!IsLookingAt()) { return; }
+
+        robot.Context.SetAttentive(true);
+    }
+
+    private void DEBUG_Wave(InputAction.CallbackContext ctx)
+    {
+        // If not looking near the robot, return
+        if (!IsLookingAt()) { return; }
+
+        robot.Context.SetAttentive(true);
     }
 
     private void ReleasePointL(InputAction.CallbackContext ctx) {
@@ -114,9 +125,6 @@ public class CustomActions : MonoBehaviour
 
         raycastStart = leftHand;
     }
-    private void Wave(Transform transform) {
-        Director.instance.Log("WAVE!");
-    }
 
     private void FindInteractable(Transform raycastStart) {
         if (Physics.Raycast(raycastStart.position, raycastStart.forward, out RaycastHit hit, 10, raycastMask)) {
@@ -127,20 +135,31 @@ public class CustomActions : MonoBehaviour
             }
             // If garbage can, throw it away
             else if (hit.collider.TryGetComponent<Garbagecan>(out Garbagecan garbageCan)) {
-                robot.Context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.Dump);
+                robot.GetState.DEBUG_SwitchState(Robot_Interaction_State_Machine.ERobotInteractionState.Dump);
             }
             // If it is a piece of garbage, clean it up
             else if (hit.collider.TryGetComponent<Garbage_Bit>(out Garbage_Bit garbageBit)) {
                 robot.GetComponent<NavMeshAgent>().SetDestination(hit.point);
+                robot.GetComponent<Animator>().SetTrigger("Start Walk");
                 robot.Context.IKController.Target = hit.collider.transform;
-                robot.Context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.Grab);
+                robot.GetState.DEBUG_SwitchState(Robot_Interaction_State_Machine.ERobotInteractionState.Grab);
             }
             // If nothing else, move the robot to that location
             else if (robot.GetCurrentState == Robot_Interaction_State_Machine.ERobotInteractionState.Attentive) {
-                Director.instance.Log("MOVE TO POS!");
                 robot.gameObject.GetComponent<NavMeshAgent>().SetDestination(hit.point);
-                robot.Context.DEBUG_SetState(Robot_Interaction_State_Machine.ERobotInteractionState.Idle);
+                robot.GetComponent<Animator>().SetTrigger("Start Walk");
+                robot.GetState.DEBUG_SwitchState(Robot_Interaction_State_Machine.ERobotInteractionState.Idle);
             }
         }
+    }
+
+    private bool IsLookingAt() {
+        // Normalize position vectors to player-head height
+        Vector3 roboPos = new Vector3(robot.transform.position.x, head.position.y, robot.transform.position.z);
+
+        Vector3 directionToB = (roboPos - head.position).normalized;
+        float angle = Vector3.Angle(head.forward, directionToB);
+
+        return angle <= lookAngleThreshold / 2;
     }
 }
