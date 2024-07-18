@@ -13,36 +13,32 @@ namespace UI
         public GameObject mainMenu;
         public GameObject options;
         public GameObject credits;
-        public GameObject head;
+        public GameObject sign;
+        public GameObject arrow;
+        //public GameObject head;
+        public Door door;
         
         private void Start()
         {
             options.SetActive(false);
             credits.SetActive(false);
-            //mainMenu.SetActive(true);
-            Invoke(nameof(PositionANdRevealMainMenu), 1f);
-        }
-
-        private void PositionANdRevealMainMenu()
-        {
-            // get camera height / 2
-            // get head rotation and make the canvas face it
-            //Vector3 playerPosition = headPositionInpu
-            Vector3 menuPosition = new Vector3(head.transform.position.x, head.transform.position.y,
-                head.transform.position.z + 0.5f);
-            canvas.transform.position = menuPosition;
-            canvas.transform.eulerAngles = new Vector3(0, head.transform.eulerAngles.y,
-                0);
+            sign.SetActive(false);
+            arrow.SetActive(false);
             mainMenu.SetActive(true);
         }
+        
         public void StartGamePressed()
         {
-            // TODO: level loading pre-scene (fade)
-            
-            // start level
-            SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1);
+            sign.SetActive(true);
+            mainMenu.SetActive(false);
         }
 
+        public void SignPressed()
+        {
+            sign.SetActive(false);
+            arrow.SetActive(true);
+            door.Open();
+        }
         public void OptionsPressed()
         {
             // hide main menu screen
@@ -64,9 +60,9 @@ namespace UI
             // close game 
 #if UNITY_EDITOR
             EditorApplication.ExitPlaymode();
-#else
-            Application.Quit();
 #endif
+            Application.Quit();
+
         }
 
         public void BackToMainMenuPressed()
