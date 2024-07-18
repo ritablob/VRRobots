@@ -30,7 +30,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
             ""actions"": [
                 {
                     ""name"": ""Position"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""1a9029f8-7a46-46b9-9eff-e9ae8365f611"",
                     ""expectedControlType"": ""Vector3"",
                     ""processors"": """",
@@ -1051,9 +1051,9 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
             ""actions"": [
                 {
                     ""name"": ""Teleport Mode"",
-                    ""type"": ""Value"",
+                    ""type"": ""Button"",
                     ""id"": ""a21db72c-4843-4839-b4d0-3ce8d287cb86"",
-                    ""expectedControlType"": ""Vector2"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -1107,9 +1107,9 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""8da6ed3a-f621-49fe-8c76-1f6b7d7754d6"",
-                    ""path"": ""<XRController>{LeftHand}/{Primary2DAxis}"",
-                    ""interactions"": ""Sector(directions=1)"",
+                    ""id"": ""f2434611-51f0-4d0c-9ed8-3b93b30026d7"",
+                    ""path"": ""<XRController>{LeftHand}/{PrimaryButton}"",
+                    ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Teleport Mode"",
@@ -1915,7 +1915,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                 {
                     ""name"": """",
                     ""id"": ""62690862-4688-4010-975b-b3d9c6062157"",
-                    ""path"": ""<XRController>{RightHand}/{SecondaryButton}"",
+                    ""path"": ""<XRController>{RightHand}/{PrimaryButton}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -2084,6 +2084,28 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                     ""name"": """",
                     ""id"": ""05c1e38e-79dd-41cb-95d5-74f42e65d92f"",
                     ""path"": ""<Touchscreen>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7f3fe72-f6a5-4816-86fa-c5c6bf5b8073"",
+                    ""path"": ""<XRController>{LeftHand}/{Point}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Point"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b205ebe-0fee-4cdc-84b1-8185040b2167"",
+                    ""path"": ""<XRController>{RightHand}/{Point}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -2436,6 +2458,28 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                     ""name"": """",
                     ""id"": ""198e6869-709e-448d-96d4-27186c9d56e6"",
                     ""path"": ""<Touchscreen>/Press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42c46efd-46ac-40f5-9d3f-b2765c98fe6f"",
+                    ""path"": ""<XRController>{LeftHand}/{TriggerButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2f8cc5dc-cd5c-487b-9041-3082a733924c"",
+                    ""path"": ""<XRController>{RightHand}/{TriggerButton}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
