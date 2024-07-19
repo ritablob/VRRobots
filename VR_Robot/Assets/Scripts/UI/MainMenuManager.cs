@@ -25,7 +25,7 @@ namespace UI
             credits.SetActive(false);
             sign.SetActive(false);
             arrow.SetActive(false);
-            Director.instance.robot.gameObject.SetActive(false);
+            //Director.instance.robot.gameObject.SetActive(false);
             mainMenu.SetActive(true);
             door.enabled = false;
         }
