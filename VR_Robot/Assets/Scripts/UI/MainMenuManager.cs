@@ -68,10 +68,10 @@ namespace UI
         }
 
         public void BackToMainMenuPressed()
-        {
+        {            
+            mainMenu.SetActive(true);
             credits.SetActive(false);
             options.SetActive(false);
-            mainMenu.SetActive(true);
         }
     }
 }

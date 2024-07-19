@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Move: {fileID: 6972639530819350904, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   m_UIScroll: {fileID: 2464016903823916871, guid: c348712bda248c246b8c49b3db54643f,
     type: 3}
-  m_SmoothMotionEnabled: 1
+  m_SmoothMotionEnabled: 0
   m_SmoothTurnEnabled: 0
   m_NearFarEnableTeleportDuringNearInteraction: 1
   m_UIScrollingEnabled: 1
@@ -573,7 +573,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &890337260688542654
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1347,8 +1347,10 @@ MonoBehaviour:
     m_Bits: 960
   leftHand: {fileID: 1964950855873470383}
   rightHand: {fileID: 4232130274558573494}
+  head: {fileID: 0}
   robot: {fileID: 0}
   waver: {fileID: 890337260331361327}
+  lookAngleThreshold: 0
 --- !u!1 &2895536633861545172
 GameObject:
   m_ObjectHideFlags: 0
