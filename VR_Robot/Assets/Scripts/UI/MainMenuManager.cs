@@ -27,6 +27,7 @@ namespace UI
             arrow.SetActive(false);
             Director.instance.robot.gameObject.SetActive(false);
             mainMenu.SetActive(true);
+            door.enabled = false;
         }
         
         public void StartGamePressed()
@@ -40,6 +41,7 @@ namespace UI
             sign.SetActive(false);
             arrow.SetActive(true);
             Director.instance.robot.gameObject.SetActive(true);
+            door.enabled = true;
             door.Open();
         }
         public void OptionsPressed()
