@@ -40,7 +40,7 @@ namespace UI
         {
             sign.SetActive(false);
             arrow.SetActive(true);
-            Director.instance.robot.gameObject.SetActive(true);
+            //Director.instance.robot.gameObject.SetActive(true);
             door.enabled = true;
             door.Open();
         }
