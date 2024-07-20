@@ -15,10 +15,9 @@ namespace UI
         public GameObject credits;
         public GameObject sign;
         public GameObject arrow;
-
-        //public GameObject head;
         public Door door;
-        
+
+        private AudioSource source;
         private void Start()
         {
             options.SetActive(false);
@@ -28,8 +27,13 @@ namespace UI
             //Director.instance.robot.gameObject.SetActive(false);
             mainMenu.SetActive(true);
             door.enabled = false;
+            source = GetComponent<AudioSource>();
         }
-        
+
+        public void PlayClick()
+        {
+            source.Play();
+        }
         public void StartGamePressed()
         {
             sign.SetActive(true);
