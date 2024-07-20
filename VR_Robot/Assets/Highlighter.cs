@@ -5,10 +5,15 @@ using UnityEngine;
 public class Highlighter : MonoBehaviour
 {
     public GameObject[] highlightObjs;
+    
 
     private void Start()
     {
         Director.instance.highlightObjects += Highlight;
+        for (int i = 0; i < highlightObjs.Length; i++) {
+            VFXApplicationHelper.instance.ApplyHighlightParticleOnStart(highlightObjs[i]);
+        }
+
     }
 
     private void OnDestroy()
