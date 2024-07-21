@@ -21,17 +21,12 @@ public class Door : MonoBehaviour
     public void Open()
     {
         //Debug.Log("Opening door");
-        openPosition.localPosition = new Vector3(openPosition.localPosition.x, door.localPosition.y, openPosition.localPosition.z);
+        if (isOpen) return;
+        openPosition.localPosition = new Vector3(openPosition.localPosition.x, door.localPosition.y,
+            openPosition.localPosition.z);
         OGposition = door.localPosition;
         StartCoroutine(OpenDoor());
 
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //Debug.Log("TriggerEnter with "+other + " of "+other.gameObject);
-        if (!isOpen)
-            Open();
     }
 
     private void OnTriggerExit(Collider other)
@@ -43,7 +38,8 @@ public class Door : MonoBehaviour
 
     public void Close()
     {
-        StartCoroutine(CloseDoor());
+        if (isOpen)
+            StartCoroutine(CloseDoor());
 
     }
 
