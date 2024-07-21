@@ -11,11 +11,11 @@ GameObject:
   - component: {fileID: 4701386904003260925}
   - component: {fileID: -5754084199372789682}
   - component: {fileID: -7511558181221131132}
-  - component: {fileID: -7352447876596953137}
-  - component: {fileID: 8975910489751216896}
-  - component: {fileID: -1280598326060577991}
+  - component: {fileID: -4314569420441173719}
+  - component: {fileID: -1040004500907899085}
+  - component: {fileID: 7611217829656016711}
   m_Layer: 0
-  m_Name: Letter_Prefab
+  m_Name: Cumped_Paper_2_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5852556001958898009}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.4432247, y: 0.81755644, z: 0.504929}
+  m_LocalPosition: {x: 3.8612535, y: 0.86766636, z: 0.65777814}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5852556001958898009}
-  m_Mesh: {fileID: -485584604646427042, guid: fa16ebada4dd6bc41a65345ae1cbd68a, type: 3}
+  m_Mesh: {fileID: 2299700860119268870, guid: 266fc7cc021234947a0765b6beb00876, type: 3}
 --- !u!23 &-7511558181221131132
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 5561349426305759274, guid: fa16ebada4dd6bc41a65345ae1cbd68a, type: 3}
+  - {fileID: 5561349426305759274, guid: 266fc7cc021234947a0765b6beb00876, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -86,7 +86,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-7352447876596953137
+--- !u!64 &-4314569420441173719
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,8 +99,8 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: -485584604646427042, guid: fa16ebada4dd6bc41a65345ae1cbd68a, type: 3}
---- !u!54 &8975910489751216896
+  m_Mesh: {fileID: 2299700860119268870, guid: 266fc7cc021234947a0765b6beb00876, type: 3}
+--- !u!54 &-1040004500907899085
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,7 +116,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-1280598326060577991
+--- !u!114 &7611217829656016711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

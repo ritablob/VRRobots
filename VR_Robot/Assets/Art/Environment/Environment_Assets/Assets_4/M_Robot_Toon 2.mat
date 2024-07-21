@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-887898297390634061
+--- !u!114 &-1021437086198152293
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,13 +20,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Assets_1_Mat
+  m_Name: M_Robot_Toon 2
   m_Shader: {fileID: 4800000, guid: be891319084e9d147b09d89e80ce60e0, type: 3}
   m_ValidKeywords:
   - _EMISSIVE_SIMPLE
   - _IS_ANGELRING_OFF
-  - _IS_CLIPPING_OFF
-  - _IS_OUTLINE_CLIPPING_NO
+  - _IS_CLIPPING_TRANSMODE
+  - _IS_OUTLINE_CLIPPING_YES
   - _OUTLINE_NML
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -35,7 +35,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap:
     IgnoreProjection: False
-    RenderType: Opaque
+    RenderType: TransparentCutout
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColor:
-        m_Texture: {fileID: 2800000, guid: 5c226aa030e639c48bffcf89f47255c4, type: 3}
+        m_Texture: {fileID: 2800000, guid: bd75b96c752bc8a458edb3247de0861f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
@@ -69,7 +69,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 5c226aa030e639c48bffcf89f47255c4, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BentNormalMap:
@@ -81,7 +81,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 8e077c64956767e4a85e51bd80abe083, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ClippingMask:
@@ -141,11 +141,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 14a0595399523b1409e94b6651cfc6f3, type: 3}
+        m_Texture: {fileID: 2800000, guid: f4cdab8a6e3fa2447ba061d278688559, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskMap:
-        m_Texture: {fileID: 2800000, guid: 43236d79f3c688e4fb0eed575f4c8b02, type: 3}
+        m_Texture: {fileID: 2800000, guid: c832800ecf618424fb58683eec0eed98, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCap_Sampler:
@@ -193,7 +193,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Set_HighColorMask:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e1ea4e3abea11394daa930b019245667, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Set_MatcapMask:
@@ -250,11 +250,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _1st2nd_Shades_Feather: 0.0001
-    - _1st_ShadeColor_Feather: 0.0001
-    - _1st_ShadeColor_Step: 0.5
-    - _2nd_ShadeColor_Feather: 0.0001
-    - _2nd_ShadeColor_Step: 0
+    - _1st2nd_Shades_Feather: 0.053
+    - _1st_ShadeColor_Feather: 0.016
+    - _1st_ShadeColor_Step: 0.719
+    - _2nd_ShadeColor_Feather: 0.053
+    - _2nd_ShadeColor_Step: 0.374
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ARSampler_AlphaOn: 0
@@ -283,8 +283,8 @@ Material:
     - _AutoRenderQueue: 1
     - _BaseColorOverridden: 0
     - _BaseColorVisible: 1
-    - _BaseColor_Step: 0.5
-    - _BaseShade_Feather: 0.0001
+    - _BaseColor_Step: 0.719
+    - _BaseShade_Feather: 0.016
     - _Base_Speed: 0
     - _Blend: 0
     - _BlendMode: 0
@@ -296,7 +296,7 @@ Material:
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _ClippingMatteMode: 0
-    - _ClippingMode: 0
+    - _ClippingMode: 2
     - _Clipping_Level: 0
     - _CoatMask: 0
     - _ColorShift_Speed: 0
@@ -359,7 +359,7 @@ Material:
     - _HeightPoMAmplitude: 2
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
-    - _HighColor_Power: 0
+    - _HighColor_Power: 0.262
     - _HighlightOverridden: 0
     - _HighlightVisible: 1
     - _InvTilingScale: 1
@@ -369,14 +369,14 @@ Material:
     - _Ior: 1
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
-    - _IsBaseMapAlphaAsClippingMask: 0
+    - _IsBaseMapAlphaAsClippingMask: 1
     - _Is_BLD: 0
     - _Is_BakedNormal: 0
-    - _Is_BlendAddToHiColor: 0
+    - _Is_BlendAddToHiColor: 1
     - _Is_BlendAddToMatCap: 1
     - _Is_BlendBaseColor: 0
     - _Is_ColorShift: 0
-    - _Is_Filter_HiCutPointLightColor: 1
+    - _Is_Filter_HiCutPointLightColor: 0
     - _Is_Filter_LightColor: 1
     - _Is_LightColor_1st_Shade: 1
     - _Is_LightColor_2nd_Shade: 1
@@ -394,7 +394,7 @@ Material:
     - _Is_Ortho: 0
     - _Is_OutlineTex: 0
     - _Is_PingPong_Base: 0
-    - _Is_SpecularToHighColor: 0
+    - _Is_SpecularToHighColor: 1
     - _Is_UseTweakHighColorOnShadow: 0
     - _Is_UseTweakMatCapOnShadow: 0
     - _Is_ViewCoord_Scroll: 0
@@ -415,7 +415,7 @@ Material:
     - _Offset_Z: 0
     - _OutlineOverridden: 0
     - _OutlineVisible: 1
-    - _Outline_Width: 0
+    - _Outline_Width: 8.41
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
@@ -432,7 +432,7 @@ Material:
     - _RimLightVisible: 1
     - _RimLight_FeatherOff: 0
     - _RimLight_InsideMask: 0.0001
-    - _RimLight_Power: 0.1
+    - _RimLight_Power: 0
     - _Rotate_EmissiveUV: 0
     - _Rotate_MatCapUV: 0
     - _Rotate_NormalMapForMatCapUV: 0
@@ -444,7 +444,7 @@ Material:
     - _SecondShadeOverridden: 0
     - _SecondShadeVisible: 1
     - _Set_SystemShadowsToBase: 1
-    - _ShadeColor_Step: 0
+    - _ShadeColor_Step: 0.374
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -469,21 +469,11 @@ Material:
     - _StencilWriteMaskDistortionVec: 64
     - _StencilWriteMaskGBuffer: 3
     - _StencilWriteMaskMV: 128
-    - _StepOffset: 0
+    - _StepOffset: 0.5
     - _SubsurfaceMask: 1
     - _SupportDecals: 1
     - _Surface: 0
     - _SurfaceType: 0
-    - _TessEdgeLength: 5
-    - _TessExtrusionAmount: 0
-    - _TessPhongStrength: 0.5
-    - _TessellationBackFaceCullEpsilon: -0.25
-    - _TessellationFactor: 4
-    - _TessellationFactorMaxDistance: 50
-    - _TessellationFactorMinDistance: 20
-    - _TessellationFactorTriangleSize: 100
-    - _TessellationMode: 0
-    - _TessellationShapeFactor: 0.75
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
@@ -500,13 +490,13 @@ Material:
     - _TransparentZWrite: 0
     - _TweakHighColorOnShadow: 0
     - _TweakMatCapOnShadow: 0
-    - _Tweak_HighColorMaskLevel: 0
+    - _Tweak_HighColorMaskLevel: -0.287
     - _Tweak_LightDirection_MaskLevel: 0
     - _Tweak_MatCapUV: 0
     - _Tweak_MatcapMaskLevel: 0
     - _Tweak_RimLightMaskLevel: 0
     - _Tweak_ShadingGradeMapLevel: 0
-    - _Tweak_SystemShadowsLevel: 0
+    - _Tweak_SystemShadowsLevel: 0.003
     - _Tweak_transparency: 0
     - _UVBase: 0
     - _UVDetail: 0
@@ -531,8 +521,8 @@ Material:
     - _utsVersionY: 8
     - _utsVersionZ: 5
     m_Colors:
-    - _1st_ShadeColor: {r: 0.21698111, g: 0.15454787, b: 0.15454787, a: 1}
-    - _2nd_ShadeColor: {r: 0.122641504, g: 0.041073337, b: 0.041073337, a: 1}
+    - _1st_ShadeColor: {r: 0.61639374, g: 0.78467786, b: 0.9150943, a: 1}
+    - _2nd_ShadeColor: {r: 0.42831078, g: 0.6314963, b: 0.7264151, a: 1}
     - _AngelRingMaskColor: {r: 0, g: 1, b: 0, a: 1}
     - _AngelRing_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Ap_RimLightColor: {r: 1, g: 1, b: 1, a: 1}
@@ -548,14 +538,14 @@ Material:
     - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _Emissive_Color: {r: 0, g: 0, b: 0, a: 1}
     - _FirstShadeMaskColor: {r: 0, g: 1, b: 1, a: 1}
-    - _HighColor: {r: 0, g: 0, b: 0, a: 1}
+    - _HighColor: {r: 1, g: 1, b: 1, a: 1}
     - _HighlightMaskColor: {r: 1, g: 1, b: 0, a: 1}
     - _Hue_Emissive: {r: 0, g: 0.8783557, b: 1, a: 0}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _MatCapColor: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineMaskColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Outline_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Outline_Color: {r: 0, g: 0, b: 0, a: 1}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimLightMaskColor: {r: 1, g: 0, b: 1, a: 1}
     - _SecondShadeMaskColor: {r: 0, g: 0, b: 1, a: 1}
