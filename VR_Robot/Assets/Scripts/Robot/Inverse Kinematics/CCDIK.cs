@@ -14,7 +14,7 @@ public class CCDIK : MonoBehaviour {
     public float distanceThreshold = 0.1f, timer = 0;
     public int iterations = 10;
     public AnimationCurve curve, scaleCurve;
-    public Transform[] garbageCans;
+    public Transform[] garbageCans, garbageStandPoint;
 
     [HideInInspector] public bool setOnGround;
 
@@ -78,7 +78,9 @@ public class CCDIK : MonoBehaviour {
             }
 
             targetPos = Vector3.Lerp(StartPos, endPos, curve.Evaluate(timer));
-            Target.position = targetPos;
+
+            if (timer < 0.75f) { Target.position = Tooltip.position; }
+
             timer += Time.deltaTime * 0.5f;
         }
     }
@@ -161,7 +163,7 @@ public class CCDIK : MonoBehaviour {
                 Vector3 garbagePos = GarbagecanMoveTo(storedObjects[i].GetComponent<Garbage_Bit>().type).position;
                 garbagePos = new Vector3(garbagePos.x, transform.position.y, garbagePos.z);
                 GetComponent<Robot_Interaction_State_Machine>().Context.garbagePos = garbagePos;
-                GetComponent<NavMeshAgent>().SetDestination(garbagePos);
+                GetComponent<NavMeshAgent>().SetDestination(GarbageCanPos(storedObjects[i].GetComponent<Garbage_Bit>().type));
                 GetComponent<Animator>().SetBool("FlapOpen", false);
 
                 while (Vector3.Distance(transform.position, agent.destination) > 0.5f) {
@@ -208,6 +210,16 @@ public class CCDIK : MonoBehaviour {
             case GarbageType.Plastic: return garbageCans[2];
             default: return null;
        }
+    }
+
+    private Vector3 GarbageCanPos(GarbageType type) {
+        switch (type)
+        {
+            case GarbageType.General: return garbageStandPoint[0].position;
+            case GarbageType.Paper: return garbageStandPoint[1].position;
+            case GarbageType.Plastic: return garbageStandPoint[2].position;
+            default: return Vector3.zero;
+        }
     }
 
     public float Timer => timer;

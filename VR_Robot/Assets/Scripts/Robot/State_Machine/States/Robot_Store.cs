@@ -13,7 +13,7 @@ public class Robot_Store : Robot_Interaction_State
         context.IKController.setOnGround = false;
         context.Anim.SetTrigger("Store");
         context.Anim.SetBool("FlapOpen", true);
-        context.LerpArmWeight(0, 3);
+        context.LerpArmWeight(0, 2);
     }
     public override void ExitState() {
         context.Anim.SetBool("FlapOpen", false);

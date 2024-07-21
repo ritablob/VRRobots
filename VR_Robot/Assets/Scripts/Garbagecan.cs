@@ -11,6 +11,7 @@ public class Garbagecan : MonoBehaviour
         if (other.TryGetComponent<Garbage_Bit>(out Garbage_Bit bit) && !other.GetComponent<Rigidbody>().isKinematic) {
             other.transform.localScale -= Vector3.one * Time.deltaTime * 100;
 
+            if (other.TryGetComponent<StartSize>(out StartSize size)) { size.StopAllCoroutines(); }
             if (other.TryGetComponent<Custom_Interactable>(out Custom_Interactable interactable)) { Destroy(interactable); }
 
             if (other.transform.localScale.x <= 0) {
