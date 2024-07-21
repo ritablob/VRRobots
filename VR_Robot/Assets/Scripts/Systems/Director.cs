@@ -14,6 +14,7 @@ public class Director : MonoBehaviour
     public Transform leftHand, rightHand, playerCamera;
     public Transform robot;
     public Image[] starImages;
+    public GameObject highlightObject;
     public int maxPiecesOfTrash, maxTimeToClean;
 
     private int points;

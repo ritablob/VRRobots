@@ -164,11 +164,12 @@ public class CCDIK : MonoBehaviour {
                 GetComponent<NavMeshAgent>().SetDestination(garbagePos);
                 GetComponent<Animator>().SetBool("FlapOpen", false);
 
-                while (Vector3.Distance(agent.destination, transform.position) > 0.1f) {
-                    transform.LookAt(Vector3.zero);
+                while (Vector3.Distance(transform.position, agent.destination) > 0.5f) {
+                    transform.LookAt(garbagePos);
                     yield return null;
                 }
 
+                GetComponent<Animator>().SetBool("Walking", false);
                 GetComponent<Animator>().SetBool("FlapOpen", true);
                 yield return new WaitForSeconds(0.33f);
             }

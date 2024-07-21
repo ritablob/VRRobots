@@ -11,25 +11,32 @@ public class Door : MonoBehaviour
     public Transform openPosition;
     public bool isOpen;
     private Vector3 OGposition;
-    
+    private AudioSource audio;
+
+    private void Start()
+    {
+        audio = GetComponent<AudioSource>();
+    }
+
     public void Open()
     {
-        Debug.Log("Opening door");
+        //Debug.Log("Opening door");
         openPosition.localPosition = new Vector3(openPosition.localPosition.x, door.localPosition.y, openPosition.localPosition.z);
         OGposition = door.localPosition;
         StartCoroutine(OpenDoor());
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("TriggerEnter with "+other + " of "+other.gameObject);
+        //Debug.Log("TriggerEnter with "+other + " of "+other.gameObject);
         if (!isOpen)
             Open();
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("TriggerExit with "+other + " of "+other.gameObject);
+        //Debug.Log("TriggerExit with "+other + " of "+other.gameObject);
         // closes door with delay
         Invoke(nameof(Close), 1f);
     }
@@ -37,6 +44,7 @@ public class Door : MonoBehaviour
     public void Close()
     {
         StartCoroutine(CloseDoor());
+
     }
 
     private IEnumerator OpenDoor()
@@ -44,6 +52,7 @@ public class Door : MonoBehaviour
         isOpen = true;
         float currentTime = 0;
         yield return new WaitForSeconds(1);
+        audio.Play();
         while (currentTime < openingDuration)
         {
             door.localPosition = Vector3.Lerp(OGposition, openPosition.localPosition, currentTime/openingDuration);
@@ -59,6 +68,7 @@ public class Door : MonoBehaviour
     {
         float currentTime = 0;
         yield return new WaitForSeconds(1);
+        audio.Play();
         while (currentTime < openingDuration)
         {
             door.localPosition = Vector3.Lerp(openPosition.localPosition, OGposition, currentTime/openingDuration);
@@ -66,6 +76,7 @@ public class Door : MonoBehaviour
             yield return null;
         }
         isOpen = false;
+
         yield return null;
     }
     
