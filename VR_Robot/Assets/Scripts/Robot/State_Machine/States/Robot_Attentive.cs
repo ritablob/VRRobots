@@ -16,6 +16,8 @@ public class Robot_Attentive : Robot_Interaction_State
         context._searching = false;
         context.Anim.SetTrigger("End Walk");
         context.Anim.SetBool("Attention!", true);
+        context.Anim.SetTrigger("Attention_T");
+        context.AI.destination = context.AI.transform.position;
     }
     public override void ExitState()
     {

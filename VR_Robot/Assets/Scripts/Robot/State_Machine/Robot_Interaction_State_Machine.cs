@@ -80,6 +80,19 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
         Context._dump = true;
     }
 
+    public override void ExtraUpdate() {
+        if (currentState.StateKey == ERobotInteractionState.Dump) { return; }
+
+        if (_context.AI.remainingDistance <= _context.AI.stoppingDistance)
+        {
+            _context.Anim.SetBool("Walking", false);
+        }
+        else
+        {
+            _context.Anim.SetBool("Walking", true);
+        }
+    }
+
     public void LerpArmWeight(int desiredWeight, float speed)
     {
         StopAllCoroutines();

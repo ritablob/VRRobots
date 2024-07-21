@@ -21,7 +21,6 @@ public abstract class StateManager<Estate> : MonoBehaviour where Estate : Enum
             currentState.UpdateState();
             Director.instance.Log(currentState.ToString());
         } else if (!isTransitioningState) {
-            Debug.Log("IDNJFIUJFGJDGF" + currentState);
             TransitionToState(nextStateKey);
         }
     }
@@ -33,6 +32,8 @@ public abstract class StateManager<Estate> : MonoBehaviour where Estate : Enum
         if (!isTransitioningState && nextStateKey.Equals(currentState.StateKey)) {
             currentState.LateUpdateState();
         }
+
+        ExtraUpdate();
     }
 
     public void TransitionToState(Estate _stateKey) {
@@ -42,6 +43,8 @@ public abstract class StateManager<Estate> : MonoBehaviour where Estate : Enum
         currentState.EnterState();
         isTransitioningState = false;
     }
+
+    public virtual void ExtraUpdate() { }
 
     private void OnTriggerEnter(Collider other) {
         currentState.OnTriggerEnter(other);

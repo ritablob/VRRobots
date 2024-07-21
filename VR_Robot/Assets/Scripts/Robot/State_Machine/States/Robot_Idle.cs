@@ -18,7 +18,9 @@ public class Robot_Idle : Robot_Interaction_State
     }
     public override void ExitState() { }
     public override void UpdateState() {
-        timer += Time.deltaTime;
+        if (context.AI.remainingDistance <= context.AI.stoppingDistance) {
+            timer += Time.deltaTime;
+        }
     }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
         if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }

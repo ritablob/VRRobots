@@ -13,7 +13,8 @@ public class Robot_Dump : Robot_Interaction_State
     public override void EnterState() {
         context.IKController.DumpObjects();
         context._dump = false;
-        timer = 0;  
+        timer = 0;
+        context.Anim.SetBool("Walking", true);
     }
     public override void ExitState() {
         context.Anim.SetBool("FlapOpen", false);

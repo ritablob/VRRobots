@@ -159,6 +159,39 @@ Transform:
   m_Father: {fileID: 2516958750573129541}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 40.46143, y: -90, z: 0}
+--- !u!1 &432375785364483998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 252e6b505ab609742a62ba30f69649cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 4283769889608249615}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4393749043451287268}
+  m_Layer: 0
+  m_Name: '20240715_VRRRobot_HandVacume (Missing Prefab with guid: 252e6b505ab609742a62ba30f69649cd)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4393749043451287268
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 252e6b505ab609742a62ba30f69649cd,
+    type: 3}
+  m_PrefabInstance: {fileID: 4283769889608249615}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 432375785364483998}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9043313433464464425}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &848318387502384759
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,6 +751,7 @@ Transform:
   m_Children:
   - {fileID: 4393749043451287268}
   - {fileID: 2593138068733029794}
+  - {fileID: 888182250274915671}
   m_Father: {fileID: 204624587586526864}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0.00043056847, y: -0.00043056856, z: 90.00002}
@@ -903,6 +937,39 @@ Transform:
   m_Father: {fileID: 6269604589149445847}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -3.5991597, y: 177.3016, z: 126.89835}
+--- !u!1 &3305242618146671267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b988d963abe86d43bd6067e2ac58d8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2627309598387898953}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2593138068733029794}
+  m_Layer: 0
+  m_Name: '20240715_VRRRobot_HandGrab (Missing Prefab with guid: 3b988d963abe86d43bd6067e2ac58d8a)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2593138068733029794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3b988d963abe86d43bd6067e2ac58d8a,
+    type: 3}
+  m_PrefabInstance: {fileID: 2627309598387898953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3305242618146671267}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9043313433464464425}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3409424238217034963
 GameObject:
   m_ObjectHideFlags: 0
@@ -2585,6 +2652,86 @@ Transform:
   m_Father: {fileID: 1921207553612989623}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 89.99996, z: 0}
+--- !u!1001 &853938387882402492
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 9043313433464464425}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 5481adca442437d4f9a25512c379db24,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5481adca442437d4f9a25512c379db24,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5481adca442437d4f9a25512c379db24,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5481adca442437d4f9a25512c379db24,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5481adca442437d4f9a25512c379db24,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5481adca442437d4f9a25512c379db24,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5481adca442437d4f9a25512c379db24,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5481adca442437d4f9a25512c379db24,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5481adca442437d4f9a25512c379db24,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5481adca442437d4f9a25512c379db24,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 5481adca442437d4f9a25512c379db24,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5481adca442437d4f9a25512c379db24,
+        type: 3}
+      propertyPath: m_Name
+      value: 20240721_VRRRobot_HandGrab_v2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5481adca442437d4f9a25512c379db24,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5481adca442437d4f9a25512c379db24, type: 3}
+--- !u!4 &888182250274915671 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5481adca442437d4f9a25512c379db24,
+    type: 3}
+  m_PrefabInstance: {fileID: 853938387882402492}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2627309598387898953
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2669,12 +2816,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b988d963abe86d43bd6067e2ac58d8a, type: 3}
---- !u!4 &2593138068733029794 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3b988d963abe86d43bd6067e2ac58d8a,
-    type: 3}
-  m_PrefabInstance: {fileID: 2627309598387898953}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4283769889608249615
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2764,9 +2905,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 252e6b505ab609742a62ba30f69649cd, type: 3}
---- !u!4 &4393749043451287268 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 252e6b505ab609742a62ba30f69649cd,
-    type: 3}
-  m_PrefabInstance: {fileID: 4283769889608249615}
-  m_PrefabAsset: {fileID: 0}
