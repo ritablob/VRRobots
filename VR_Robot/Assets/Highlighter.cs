@@ -10,6 +10,18 @@ public class Highlighter : MonoBehaviour
     private void Start()
     {
         Director.instance.highlightObjects += Highlight;
+
+        // If no object, automatically create it
+        if (highlightObjs.Length == 0) {
+            GameObject highlight = Instantiate(Director.instance.highlightObject, transform);
+            highlight.GetComponent<MeshFilter>().mesh = GetComponent<MeshFilter>().mesh;
+            highlight.transform.localScale *= 1.2f;
+            highlight.SetActive(false);
+            highlightObjs = new GameObject[1];
+            highlightObjs[0] = highlight;
+            return;
+        }
+
         for (int i = 0; i < highlightObjs.Length; i++) {
             VFXApplicationHelper.instance.ApplyHighlightParticleOnStart(highlightObjs[i]);
         }
