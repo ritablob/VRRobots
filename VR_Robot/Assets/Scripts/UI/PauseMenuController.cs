@@ -10,13 +10,13 @@ namespace UI
     public class PauseMenuController : MonoBehaviour
     {
         /* - follows gaze position
-     * - rotation updates once you are no longer facing it for a certain amount of time
-     * 
-     */
+         * - rotation updates once you are no longer facing it for a certain amount of time
+         *
+         */
         public GameObject pauseMenu;
         public GameObject optionsMenu;
         public float zOffset;
-        
+
         private bool facingMenu;
         private Vector3 newRotation;
 
@@ -26,7 +26,7 @@ namespace UI
             optionsMenu.SetActive(false);
             zOffset = pauseMenu.transform.position.z;
         }
-        
+
         private void Update()
         {
             CheckForHeadRotation();
@@ -47,6 +47,7 @@ namespace UI
             // call IEnumerator to lerp from last position to the new one 
             // rotate according to the player's head rotation
         }
+
         #region Button Callbacks
 
         public void ResumePressed()
@@ -54,7 +55,7 @@ namespace UI
             // close pause menu
             pauseMenu.SetActive(false);
         }
-        
+
         public void MainMenuPressed()
         {
             // switch to main menu scene
@@ -78,6 +79,7 @@ namespace UI
             Application.Quit();
 #endif
         }
+
         #endregion
     }
 }

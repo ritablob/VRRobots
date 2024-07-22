@@ -18,6 +18,7 @@ namespace UI
         public Door door;
 
         private AudioSource source;
+
         private void Start()
         {
             options.SetActive(false);
@@ -26,7 +27,6 @@ namespace UI
             arrow.SetActive(false);
             //Director.instance.robot.gameObject.SetActive(false);
             mainMenu.SetActive(true);
-            door.enabled = false;
             source = GetComponent<AudioSource>();
         }
 
@@ -34,10 +34,21 @@ namespace UI
         {
             source.Play();
         }
+
         public void StartGamePressed()
         {
             sign.SetActive(true);
             mainMenu.SetActive(false);
+        }
+
+        public void ResetMainMenu()
+        {
+            options.SetActive(false);
+            credits.SetActive(false);
+            sign.SetActive(false);
+            arrow.SetActive(false);
+            //Director.instance.robot.gameObject.SetActive(false);
+            mainMenu.SetActive(true);
         }
 
         public void SignPressed()
@@ -45,23 +56,26 @@ namespace UI
             sign.SetActive(false);
             arrow.SetActive(true);
             //Director.instance.robot.gameObject.SetActive(true);
-            door.enabled = true;
+            //VFXApplicationHelper.instance.RobotCanvasManager.ShowSpeechBubbleMessage("Hi! Let's clean together!");
             door.Open();
         }
+
         public void OptionsPressed()
         {
             // hide main menu screen
             // unhide options menu
-            options.SetActive(true);
+
             mainMenu.SetActive(false);
+            options.SetActive(true);
         }
 
         public void CreditsPressed()
         {
             // hide main menu screen
             // unhide credits menu
-            credits.SetActive(true);
+
             mainMenu.SetActive(false);
+            credits.SetActive(true);
         }
 
         public void QuitGamePressed()
@@ -74,10 +88,10 @@ namespace UI
         }
 
         public void BackToMainMenuPressed()
-        {            
-            mainMenu.SetActive(true);
+        {
             credits.SetActive(false);
             options.SetActive(false);
+            mainMenu.SetActive(true);
         }
     }
 }
