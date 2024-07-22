@@ -23,15 +23,18 @@ public class Robot_Idle : Robot_Interaction_State
         }
     }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
+        // If attention is active or buffered, transition to the 'Attentive' state
         if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
 
-        // If we've been idling for a while, move to search state
+        // If we've been idling for a while, move to the 'Search' state
         if (timer > 3) {
             return Robot_Interaction_State_Machine.ERobotInteractionState.Search;
         }
 
+        // If dumping command is buffered, move to the 'Dump' state
         if (context._dump == true) { return Robot_Interaction_State_Machine.ERobotInteractionState.Dump; }
 
+        // If there is a valid target for the robot to grab, transition to the 'Grab' state
         if (context.IKController.Target != null) {
             return Robot_Interaction_State_Machine.ERobotInteractionState.Grab;
         }

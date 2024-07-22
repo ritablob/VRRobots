@@ -37,6 +37,12 @@ public class Highlighter : MonoBehaviour
         for (int i = 0; i < highlightObjs.Length; i++) {
             highlightObjs[i].SetActive(state);
         }
+
+        if (!state) {
+            Director.instance.SetCurrentHighlighted(highlightObjs[0].transform, false);
+        } else {
+            Director.instance.SetCurrentHighlighted(highlightObjs[0].transform, true);
+        }     
     }
 
     public void Highlight(bool state) {
