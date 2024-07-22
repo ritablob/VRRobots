@@ -27,7 +27,6 @@ namespace UI
             arrow.SetActive(false);
             //Director.instance.robot.gameObject.SetActive(false);
             mainMenu.SetActive(true);
-            door.enabled = false;
             source = GetComponent<AudioSource>();
         }
 
@@ -56,9 +55,8 @@ namespace UI
         {
             sign.SetActive(false);
             arrow.SetActive(true);
-            Director.instance.robot.gameObject.SetActive(true);
-            VFXApplicationHelper.instance.RobotCanvasManager.ShowSpeechBubbleMessage("Hi! Let's clean together!");
-            door.enabled = true;
+            //Director.instance.robot.gameObject.SetActive(true);
+            //VFXApplicationHelper.instance.RobotCanvasManager.ShowSpeechBubbleMessage("Hi! Let's clean together!");
             door.Open();
         }
 
