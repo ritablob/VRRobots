@@ -29,7 +29,7 @@ public class Robot_Idle : Robot_Interaction_State
         if (context._headpat) { return Robot_Interaction_State_Machine.ERobotInteractionState.Headpat; }
 
         // If we've been idling for a while, move to the 'Search' state
-        if (timer > 30) {
+        if (timer > 3) {
             return Robot_Interaction_State_Machine.ERobotInteractionState.Search;
         }
 

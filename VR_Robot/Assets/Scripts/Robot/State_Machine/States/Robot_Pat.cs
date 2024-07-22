@@ -11,19 +11,19 @@ public class Robot_Pat : Robot_Interaction_State
     private float timer;
 
     public override void EnterState() {
-        timer = 0;
         context._headpat = false;
-        context.Anim.SetTrigger("Headpat");
+        context.Anim.SetBool("Headpat", true);
+        VFXApplicationHelper.instance.RobotCanvasManager.ShowSpeechBubbleMessage(":3");
     }
     public override void ExitState() {
-        timer = 0;
+        context.Anim.SetBool("Headpat", false);
+        VFXApplicationHelper.instance.RobotCanvasManager.HideSpeechBubble();
     }
     public override void UpdateState()
     {
-        timer += Time.deltaTime;
     }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (timer >= 4) {
+        if (context._headpat == false) {
             return Robot_Interaction_State_Machine.ERobotInteractionState.Idle;
         }
 

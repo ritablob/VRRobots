@@ -4,26 +4,32 @@ using UnityEngine;
 
 public class HeadPat : MonoBehaviour
 {
-    bool pat = false;
+    public List<Collider> hands;
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
     {
-        if (other.tag == "hand") { 
-            if (pat) {
-                StopAllCoroutines();
-                pat = false;
-                Director.instance.robot.GetComponent<Robot_Interaction_State_Machine>().Headpat();
+        foreach(Collider hand in hands) { 
+            if (Vector3.Distance(hand.transform.position, transform.position) < 0.3f) {
+                hand.enabled = true;
             }
             else {
-                StartCoroutine(HeadpatTimer());
-                pat = true;
+                hand.enabled = false;
             }
         }
     }
 
-    IEnumerator HeadpatTimer() {
-        yield return new WaitForSeconds(1);
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "hand") { 
+            Director.instance.robot.GetComponent<Robot_Interaction_State_Machine>().Headpat(true);
+        }
+    }
 
-        pat = false;
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "hand")
+        {
+            Director.instance.robot.GetComponent<Robot_Interaction_State_Machine>().Headpat(false);
+        }
     }
 }

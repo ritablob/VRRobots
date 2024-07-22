@@ -95,8 +95,8 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
         }
     }
 
-    public void Headpat() {
-        _context._headpat = true;
+    public void Headpat(bool state) {
+        _context._headpat = state;
     }
 
     public void LerpArmWeight(int desiredWeight, float speed)

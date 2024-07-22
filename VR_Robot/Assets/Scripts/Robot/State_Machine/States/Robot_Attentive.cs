@@ -21,6 +21,7 @@ public class Robot_Attentive : Robot_Interaction_State
         context.Anim.SetBool("Attention!", true);
         context.Anim.SetTrigger("Attention_T");
         context.AI.destination = context.AI.transform.position;
+        VFXApplicationHelper.instance.RobotCanvasManager.ShowSpeechBubbleMessage("Awaiting Command!");
 
         // Lerp stuff
         timer = 0;
@@ -31,6 +32,7 @@ public class Robot_Attentive : Robot_Interaction_State
     {
         context.Head.localEulerAngles = new Vector3(0, 0, 79.192f);
         context.Anim.SetBool("Attention!", false);
+        VFXApplicationHelper.instance.RobotCanvasManager.HideSpeechBubble();
     }
     public override void UpdateState() { }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
