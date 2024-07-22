@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 109
+  controlID: 122
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 97
+  controlID: 20
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 98
+  controlID: 21
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -418,9 +418,9 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 67.5, y: -163.33334}
+      snapOffset: {x: 67.5, y: 86}
       snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 2
+      snapCorner: 0
       id: Orientation
       index: 0
       layout: 4
@@ -566,9 +566,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.36323762, y: 1.6870284, z: 1.0458543}
+    m_Target: {x: -1.8074725, y: 1.0967816, z: -2.6082199}
     speed: 2
-    m_Value: {x: 0.36323762, y: 1.6870284, z: 1.0458543}
+    m_Value: {x: -1.8074725, y: 1.0967816, z: -2.6082199}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -615,13 +615,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.19824877, y: 0.068723425, z: -0.013152144, w: 0.97825426}
+    m_Target: {x: 0.106242225, y: -0.6401869, z: 0.09044073, w: 0.7562465}
     speed: 2
-    m_Value: {x: 0.19668452, y: 0.06723556, z: -0.012746102, w: 0.9780756}
+    m_Value: {x: 0.10491084, y: -0.6410667, z: 0.08958215, w: 0.75498503}
   m_Size:
     m_Target: 0.1912598
     speed: 2
-    m_Value: 0.18302374
+    m_Value: 0.1912598
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -677,10 +677,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 638}
-      m_SelectedIDs: 30f9ffff
-      m_LastClickedID: -1744
-      m_ExpandedIDs: 88b6fdff9ce0ffffc8f8ffffdaf8ffff30f9ffff32f9ffff667e000058840000348600003a8a0000468e0000c0910000
+      scrollPos: {x: 0, y: 134}
+      m_SelectedIDs: 54dfffff
+      m_LastClickedID: -8364
+      m_ExpandedIDs: fefaffff0e7d0000ce8800002c900000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -923,22 +923,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Art/Environment/Environment_Assets/Assets_1
+    - Assets/Art/Environment/Prefabs/Trash
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Art/Environment/Environment_Assets/Assets_1
+  - Assets/Art/Environment/Prefabs/Trash
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\kahal\TH_CollabProjects\Collab4\VRRobots\VR_Robot
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 120}
-    m_SelectedIDs: 32a30000
-    m_LastClickedID: 41778
-    m_ExpandedIDs: 00000000fea2000000a3000002a3000004a3000006a300000ea300003ca3000048a3000000ca9a3b
+    scrollPos: {x: 0, y: 225.66669}
+    m_SelectedIDs: 3ea20000
+    m_LastClickedID: 41534
+    m_ExpandedIDs: 00000000bca10000bea10000c0a10000c2a10000c4a1000004a2000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -966,7 +966,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000fea2000000a3000002a3000004a3000006a30000
+    m_ExpandedIDs: 00000000bca10000bea10000c0a10000c2a10000c4a10000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -993,7 +993,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
