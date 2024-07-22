@@ -26,7 +26,6 @@ public class Door : MonoBehaviour
             openPosition.localPosition.z);
         OGposition = door.localPosition;
         StartCoroutine(OpenDoor());
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -40,7 +39,6 @@ public class Door : MonoBehaviour
     {
         if (isOpen)
             StartCoroutine(CloseDoor());
-
     }
 
     private IEnumerator OpenDoor()
@@ -51,7 +49,7 @@ public class Door : MonoBehaviour
         audio.Play();
         while (currentTime < openingDuration)
         {
-            door.localPosition = Vector3.Lerp(OGposition, openPosition.localPosition, currentTime/openingDuration);
+            door.localPosition = Vector3.Lerp(OGposition, openPosition.localPosition, currentTime / openingDuration);
             currentTime += Time.deltaTime;
             yield return null;
         }
@@ -67,13 +65,13 @@ public class Door : MonoBehaviour
         audio.Play();
         while (currentTime < openingDuration)
         {
-            door.localPosition = Vector3.Lerp(openPosition.localPosition, OGposition, currentTime/openingDuration);
+            door.localPosition = Vector3.Lerp(openPosition.localPosition, OGposition, currentTime / openingDuration);
             currentTime += Time.deltaTime;
             yield return null;
         }
+
         isOpen = false;
 
         yield return null;
     }
-    
 }

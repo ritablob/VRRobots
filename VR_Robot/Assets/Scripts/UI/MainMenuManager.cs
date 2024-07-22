@@ -18,6 +18,7 @@ namespace UI
         public Door door;
 
         private AudioSource source;
+
         private void Start()
         {
             options.SetActive(false);
@@ -34,6 +35,7 @@ namespace UI
         {
             source.Play();
         }
+
         public void StartGamePressed()
         {
             sign.SetActive(true);
@@ -52,13 +54,14 @@ namespace UI
 
         public void SignPressed()
         {
-            
             sign.SetActive(false);
             arrow.SetActive(true);
-            //Director.instance.robot.gameObject.SetActive(true);
+            Director.instance.robot.gameObject.SetActive(true);
+            VFXApplicationHelper.instance.RobotCanvasManager.ShowSpeechBubbleMessage("Hi! Let's clean together!");
             door.enabled = true;
             door.Open();
         }
+
         public void OptionsPressed()
         {
             // hide main menu screen
@@ -72,7 +75,7 @@ namespace UI
         {
             // hide main menu screen
             // unhide credits menu
-            
+
             mainMenu.SetActive(false);
             credits.SetActive(true);
         }
@@ -87,7 +90,7 @@ namespace UI
         }
 
         public void BackToMainMenuPressed()
-        {           
+        {
             credits.SetActive(false);
             options.SetActive(false);
             mainMenu.SetActive(true);

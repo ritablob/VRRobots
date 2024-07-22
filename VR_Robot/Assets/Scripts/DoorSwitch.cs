@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class DoorSwitch : MonoBehaviour
 {
     public UnityEvent onPressSwitch;
+
     private void OnTriggerEnter(Collider other)
     {
         onPressSwitch.Invoke();

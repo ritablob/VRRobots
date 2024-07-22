@@ -12,23 +12,22 @@ namespace UI
         private XRControllerWithRumble controller;
         // https://forum.unity.com/threads/haptic-feedback-for-ui.1420253/
         // onPointerEnter 
-        
+
         public XRUIInputModule inputModule;
-            //=> EventSystem.current.currentInputModule as XRUIInputModule;
-            
+        //=> EventSystem.current.currentInputModule as XRUIInputModule;
+
         public void OnUIPointerEnter(BaseEventData data)
         {
-            
             Debug.Log("on pointer being called");
             // feedback
             if (data is not PointerEventData eventData) return;
             NearFarInteractor interactor = inputModule.GetInteractor(eventData.pointerId) as NearFarInteractor;
-            if (!interactor) { return; }
+            if (!interactor)
+            {
+                return;
+            }
 
             interactor.SendHapticImpulse(.5f, .5f);
-
-
-
         }
 
         public void OnUIPointerExit(BaseEventData data)
@@ -38,8 +37,7 @@ namespace UI
             //{
             //    xr.SendImpulse(.5f, .5f);
 
-           // }
-
+            // }
         }
     }
 }

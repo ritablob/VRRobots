@@ -21,11 +21,11 @@ namespace Interaction
 
         public IEnumerator CleanDirt(float cleaningSpeed)
         {
-            Debug.Log("Dirtiness - "+dirtDecal.fadeFactor);
+            Debug.Log("Dirtiness - " + dirtDecal.fadeFactor);
             if (dirtDecal.fadeFactor > 0f)
             {
                 yield return new WaitForSeconds(cleaningSpeed);
-                dirtDecal.fadeFactor -= 0.1f*cleaningTempo;
+                dirtDecal.fadeFactor -= 0.1f * cleaningTempo;
                 StartCoroutine(CleanDirt(cleaningSpeed));
             }
             else
