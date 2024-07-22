@@ -5,11 +5,13 @@ public class RobotCanvasManager : MonoBehaviour
 {
     public GameObject speechBubble;
     private TextMeshProUGUI text;
+    private AudioSource sound;
 
     void Start()
     {
         text = speechBubble.GetComponentInChildren<TextMeshProUGUI>();
         speechBubble.SetActive(false);
+        sound = gameObject.GetComponent<AudioSource>();
     }
 
 
@@ -17,6 +19,7 @@ public class RobotCanvasManager : MonoBehaviour
     {
         text.text = mssg;
         speechBubble.SetActive(true);
+        sound.Play();
     }
 
     public void HideSpeechBubble()
