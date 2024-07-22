@@ -13,15 +13,20 @@ public class CustomActions : MonoBehaviour
     [SerializeField] private LayerMask raycastMask;
     [SerializeField] private Transform leftHand;
     [SerializeField] private Transform rightHand;
+    [SerializeField] private Transform rightHandSpawn;
+    [SerializeField] private Transform leftHandSpawn;
     [SerializeField] private Transform head;
     [SerializeField] private Robot_Interaction_State_Machine robot;
     [SerializeField] private HandWaveController waver;
+
+    public GameObject pointerCube;
 
     public float lookAngleThreshold;
 
     bool pressed;
     private Transform raycastStart;
     private Highlighter prevHighlighted;
+    private GameObject currentPointer;
 
     private void Awake()
     {
@@ -107,23 +112,41 @@ public class CustomActions : MonoBehaviour
         pressed = false;
 
         FindInteractable(leftHand);
+
+        if (currentPointer != null) { Destroy(currentPointer); }
     }
 
     private void ReleasePointR(InputAction.CallbackContext ctx) {
         pressed = false;
 
         FindInteractable(rightHand);
+
+        if (currentPointer != null) { Destroy(currentPointer); }
     }
 
     private void PressPointR(InputAction.CallbackContext ctx) {
+        if (pressed) { return; }
+
         pressed = true;
 
         raycastStart = rightHand;
+
+        // Create the pointer object
+        currentPointer = Instantiate(pointerCube, rightHandSpawn);
+        currentPointer.transform.localScale = new Vector3(0.5f, 500, 0.5f);
+        currentPointer.transform.localPosition = new Vector3(0, 0, 5);
     }
     private void PressPointL(InputAction.CallbackContext ctx) {
+        if (pressed) { return; }
+
         pressed = true;
 
         raycastStart = leftHand;
+
+        // Create the pointer object
+        currentPointer = Instantiate(pointerCube, leftHandSpawn);
+        currentPointer.transform.localScale = new Vector3(0.5f, 500, 0.5f);
+        currentPointer.transform.localPosition = new Vector3(0, 0, 5);
     }
 
     private void FindInteractable(Transform raycastStart) {

@@ -13,9 +13,12 @@ public class Director : MonoBehaviour
     public AnimationCurve interactLerpCurve;
     public Transform leftHand, rightHand, playerCamera;
     public Transform robot;
+    [HideInInspector] public Transform currentHighlighted;
     public Image[] starImages;
     public GameObject highlightObject;
     public int maxPiecesOfTrash, maxTimeToClean;
+
+    [HideInInspector] public float highlightLerpTimer;
 
     private int points;
     private int piecesOfTrash;
@@ -68,6 +71,22 @@ public class Director : MonoBehaviour
         piecesOfTrash = maxPiecesOfTrash;
         timeToClean = maxTimeToClean;
         StartCoroutine(CountDown());
+    }
+
+    public void SetCurrentHighlighted(Transform target, bool state) {
+        if (!state && currentHighlighted == target) { 
+            currentHighlighted = null;
+            highlightLerpTimer = 0;
+        }
+        else if (state) {
+            currentHighlighted = target;
+            highlightLerpTimer = 0;
+        }
+    }
+
+    private void Update()
+    {
+        highlightLerpTimer += Time.deltaTime;
     }
 
     public void Log(string msg) {
