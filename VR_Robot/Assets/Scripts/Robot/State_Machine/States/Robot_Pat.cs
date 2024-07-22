@@ -11,16 +11,19 @@ public class Robot_Pat : Robot_Interaction_State
     private float timer;
 
     public override void EnterState() {
+        timer = 0;
+        context._headpat = false;
         context.Anim.SetTrigger("Headpat");
     }
     public override void ExitState() {
+        timer = 0;
     }
     public override void UpdateState()
     {
         timer += Time.deltaTime;
     }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
-        if (timer >= 1) {
+        if (timer >= 4) {
             return Robot_Interaction_State_Machine.ERobotInteractionState.Idle;
         }
 

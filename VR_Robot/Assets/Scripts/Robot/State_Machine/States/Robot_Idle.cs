@@ -26,8 +26,10 @@ public class Robot_Idle : Robot_Interaction_State
         // If attention is active or buffered, transition to the 'Attentive' state
         if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
 
+        if (context._headpat) { return Robot_Interaction_State_Machine.ERobotInteractionState.Headpat; }
+
         // If we've been idling for a while, move to the 'Search' state
-        if (timer > 3) {
+        if (timer > 30) {
             return Robot_Interaction_State_Machine.ERobotInteractionState.Search;
         }
 

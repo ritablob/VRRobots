@@ -22,6 +22,7 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
         Dump,
         Attentive,
         Place,
+        Headpat,
         BAD //Use for null/exit cases
     }
 
@@ -68,6 +69,7 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
         states.Add(ERobotInteractionState.Place, new Robot_PlaceDown(_context, ERobotInteractionState.Place));
         states.Add(ERobotInteractionState.Search, new Robot_Search(_context, ERobotInteractionState.Search));
         states.Add(ERobotInteractionState.Scan, new Robot_Scan(_context, ERobotInteractionState.Scan));
+        states.Add(ERobotInteractionState.Headpat, new Robot_Pat(_context, ERobotInteractionState.Headpat));
 
         currentState = states[ERobotInteractionState.Idle];
     }
@@ -91,6 +93,10 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
         {
             _context.Anim.SetBool("Walking", true);
         }
+    }
+
+    public void Headpat() {
+        _context._headpat = true;
     }
 
     public void LerpArmWeight(int desiredWeight, float speed)
