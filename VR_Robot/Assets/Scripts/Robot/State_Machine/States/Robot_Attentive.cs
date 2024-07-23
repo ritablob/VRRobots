@@ -22,7 +22,6 @@ public class Robot_Attentive : Robot_Interaction_State
         context.Anim.SetTrigger("Attention_T");
         context.AI.destination = context.AI.transform.position;
         VFXApplicationHelper.instance.RobotCanvasManager.ShowSpeechBubbleMessage("Awaiting Command!");
-        context.GetComponent<Robot_Interaction_State_Machine>().LerpArmWeight(0, 1);
 
         // Lerp stuff
         timer = 0;

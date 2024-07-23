@@ -92,7 +92,9 @@ public class CustomActions : MonoBehaviour
     }
 
     private void Wave(Transform hand)
-    {        // If not looking near the robot, return
+    {
+        return;
+        // If not looking near the robot, return
         if (!IsLookingAt()) { return; }
 
         robot.Context.SetAttentive(true);
@@ -100,7 +102,6 @@ public class CustomActions : MonoBehaviour
 
     private void DEBUG_Wave(InputAction.CallbackContext ctx)
     {
-        return;
         // If not looking near the robot, return
         if (!IsLookingAt()) { return; }
 
