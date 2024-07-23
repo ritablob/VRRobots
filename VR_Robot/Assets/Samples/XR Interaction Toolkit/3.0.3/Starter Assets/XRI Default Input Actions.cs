@@ -858,17 +858,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                 },
                 {
                     ""name"": """",
-                    ""id"": ""73325635-d9e5-481a-9279-ae7be089422d"",
-                    ""path"": ""<MetaAimHand>{LeftHand}/indexPressed"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""49a23327-a116-48c0-8af9-0d2c50c15a88"",
                     ""path"": ""<XRController>{LeftHand}/{Grip}"",
                     ""interactions"": """",
@@ -1023,17 +1012,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6da93bce-faae-4d49-bb4c-8ca5ba16dfe8"",
-                    ""path"": ""<XRController>{LeftHand}/{TriggerButton}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Select"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""56951f03-afea-423f-a0e8-e1196f7fede6"",
                     ""path"": ""<XRController>{LeftHand}/primaryButton"",
                     ""interactions"": """",
@@ -1066,24 +1044,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Turn"",
-                    ""type"": ""Value"",
-                    ""id"": ""9164e093-ebd4-4923-af32-1b52f31c2d66"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Snap Turn"",
-                    ""type"": ""Value"",
-                    ""id"": ""8c14e969-a054-4f12-840c-4e0bd85173d9"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Move"",
@@ -1129,17 +1089,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                 },
                 {
                     ""name"": """",
-                    ""id"": ""99cb7ad1-51ec-4611-af68-92a85f2c17d6"",
-                    ""path"": ""<XRController>{LeftHand}/{Primary2DAxis}"",
-                    ""interactions"": ""Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Turn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""8e383b1a-270f-4c20-819b-89a59cffb498"",
                     ""path"": ""<XRController>{LeftHand}/{Primary2DAxis}"",
                     ""interactions"": """",
@@ -1157,17 +1106,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Grab Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a46b49d0-0754-4dac-a9a5-a822e10751f2"",
-                    ""path"": ""<XRController>{LeftHand}/{Primary2DAxis}"",
-                    ""interactions"": ""Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Snap Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1875,24 +1813,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Turn"",
-                    ""type"": ""Value"",
-                    ""id"": ""9fb2eb2b-2fb6-4328-8167-10a1bf11b424"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""Snap Turn"",
-                    ""type"": ""Value"",
-                    ""id"": ""44441ad6-5762-466d-ad54-aa44fcd61a5c"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Move"",
                     ""type"": ""Button"",
                     ""id"": ""00a4dc9f-1ee6-4349-b0e9-72d5dccaadd6"",
@@ -1936,34 +1856,12 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d6c08c3d-3d41-4695-994d-1ac9016a5a9e"",
-                    ""path"": ""<XRController>{RightHand}/{Primary2DAxis}"",
-                    ""interactions"": ""Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Turn"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""7ecb549e-ab98-4a4b-b979-38068fe3b811"",
                     ""path"": ""<XRController>{RightHand}/{GripButton}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Grab Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""31d838df-4d4e-4c16-a373-b9c07d9d2e2a"",
-                    ""path"": ""<XRController>{RightHand}/{Primary2DAxis}"",
-                    ""interactions"": ""Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Snap Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -2921,8 +2819,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
         m_XRILeftLocomotion = asset.FindActionMap("XRI Left Locomotion", throwIfNotFound: true);
         m_XRILeftLocomotion_TeleportMode = m_XRILeftLocomotion.FindAction("Teleport Mode", throwIfNotFound: true);
         m_XRILeftLocomotion_TeleportModeCancel = m_XRILeftLocomotion.FindAction("Teleport Mode Cancel", throwIfNotFound: true);
-        m_XRILeftLocomotion_Turn = m_XRILeftLocomotion.FindAction("Turn", throwIfNotFound: true);
-        m_XRILeftLocomotion_SnapTurn = m_XRILeftLocomotion.FindAction("Snap Turn", throwIfNotFound: true);
         m_XRILeftLocomotion_Move = m_XRILeftLocomotion.FindAction("Move", throwIfNotFound: true);
         m_XRILeftLocomotion_GrabMove = m_XRILeftLocomotion.FindAction("Grab Move", throwIfNotFound: true);
         // XRI Right
@@ -2959,8 +2855,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
         m_XRIRightLocomotion = asset.FindActionMap("XRI Right Locomotion", throwIfNotFound: true);
         m_XRIRightLocomotion_TeleportMode = m_XRIRightLocomotion.FindAction("Teleport Mode", throwIfNotFound: true);
         m_XRIRightLocomotion_TeleportModeCancel = m_XRIRightLocomotion.FindAction("Teleport Mode Cancel", throwIfNotFound: true);
-        m_XRIRightLocomotion_Turn = m_XRIRightLocomotion.FindAction("Turn", throwIfNotFound: true);
-        m_XRIRightLocomotion_SnapTurn = m_XRIRightLocomotion.FindAction("Snap Turn", throwIfNotFound: true);
         m_XRIRightLocomotion_Move = m_XRIRightLocomotion.FindAction("Move", throwIfNotFound: true);
         m_XRIRightLocomotion_GrabMove = m_XRIRightLocomotion.FindAction("Grab Move", throwIfNotFound: true);
         // XRI UI
@@ -3455,8 +3349,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
     private List<IXRILeftLocomotionActions> m_XRILeftLocomotionActionsCallbackInterfaces = new List<IXRILeftLocomotionActions>();
     private readonly InputAction m_XRILeftLocomotion_TeleportMode;
     private readonly InputAction m_XRILeftLocomotion_TeleportModeCancel;
-    private readonly InputAction m_XRILeftLocomotion_Turn;
-    private readonly InputAction m_XRILeftLocomotion_SnapTurn;
     private readonly InputAction m_XRILeftLocomotion_Move;
     private readonly InputAction m_XRILeftLocomotion_GrabMove;
     public struct XRILeftLocomotionActions
@@ -3465,8 +3357,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
         public XRILeftLocomotionActions(@XRIDefaultInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @TeleportMode => m_Wrapper.m_XRILeftLocomotion_TeleportMode;
         public InputAction @TeleportModeCancel => m_Wrapper.m_XRILeftLocomotion_TeleportModeCancel;
-        public InputAction @Turn => m_Wrapper.m_XRILeftLocomotion_Turn;
-        public InputAction @SnapTurn => m_Wrapper.m_XRILeftLocomotion_SnapTurn;
         public InputAction @Move => m_Wrapper.m_XRILeftLocomotion_Move;
         public InputAction @GrabMove => m_Wrapper.m_XRILeftLocomotion_GrabMove;
         public InputActionMap Get() { return m_Wrapper.m_XRILeftLocomotion; }
@@ -3484,12 +3374,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
             @TeleportModeCancel.started += instance.OnTeleportModeCancel;
             @TeleportModeCancel.performed += instance.OnTeleportModeCancel;
             @TeleportModeCancel.canceled += instance.OnTeleportModeCancel;
-            @Turn.started += instance.OnTurn;
-            @Turn.performed += instance.OnTurn;
-            @Turn.canceled += instance.OnTurn;
-            @SnapTurn.started += instance.OnSnapTurn;
-            @SnapTurn.performed += instance.OnSnapTurn;
-            @SnapTurn.canceled += instance.OnSnapTurn;
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
@@ -3506,12 +3390,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
             @TeleportModeCancel.started -= instance.OnTeleportModeCancel;
             @TeleportModeCancel.performed -= instance.OnTeleportModeCancel;
             @TeleportModeCancel.canceled -= instance.OnTeleportModeCancel;
-            @Turn.started -= instance.OnTurn;
-            @Turn.performed -= instance.OnTurn;
-            @Turn.canceled -= instance.OnTurn;
-            @SnapTurn.started -= instance.OnSnapTurn;
-            @SnapTurn.performed -= instance.OnSnapTurn;
-            @SnapTurn.canceled -= instance.OnSnapTurn;
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
@@ -3825,8 +3703,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
     private List<IXRIRightLocomotionActions> m_XRIRightLocomotionActionsCallbackInterfaces = new List<IXRIRightLocomotionActions>();
     private readonly InputAction m_XRIRightLocomotion_TeleportMode;
     private readonly InputAction m_XRIRightLocomotion_TeleportModeCancel;
-    private readonly InputAction m_XRIRightLocomotion_Turn;
-    private readonly InputAction m_XRIRightLocomotion_SnapTurn;
     private readonly InputAction m_XRIRightLocomotion_Move;
     private readonly InputAction m_XRIRightLocomotion_GrabMove;
     public struct XRIRightLocomotionActions
@@ -3835,8 +3711,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
         public XRIRightLocomotionActions(@XRIDefaultInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @TeleportMode => m_Wrapper.m_XRIRightLocomotion_TeleportMode;
         public InputAction @TeleportModeCancel => m_Wrapper.m_XRIRightLocomotion_TeleportModeCancel;
-        public InputAction @Turn => m_Wrapper.m_XRIRightLocomotion_Turn;
-        public InputAction @SnapTurn => m_Wrapper.m_XRIRightLocomotion_SnapTurn;
         public InputAction @Move => m_Wrapper.m_XRIRightLocomotion_Move;
         public InputAction @GrabMove => m_Wrapper.m_XRIRightLocomotion_GrabMove;
         public InputActionMap Get() { return m_Wrapper.m_XRIRightLocomotion; }
@@ -3854,12 +3728,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
             @TeleportModeCancel.started += instance.OnTeleportModeCancel;
             @TeleportModeCancel.performed += instance.OnTeleportModeCancel;
             @TeleportModeCancel.canceled += instance.OnTeleportModeCancel;
-            @Turn.started += instance.OnTurn;
-            @Turn.performed += instance.OnTurn;
-            @Turn.canceled += instance.OnTurn;
-            @SnapTurn.started += instance.OnSnapTurn;
-            @SnapTurn.performed += instance.OnSnapTurn;
-            @SnapTurn.canceled += instance.OnSnapTurn;
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
@@ -3876,12 +3744,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
             @TeleportModeCancel.started -= instance.OnTeleportModeCancel;
             @TeleportModeCancel.performed -= instance.OnTeleportModeCancel;
             @TeleportModeCancel.canceled -= instance.OnTeleportModeCancel;
-            @Turn.started -= instance.OnTurn;
-            @Turn.performed -= instance.OnTurn;
-            @Turn.canceled -= instance.OnTurn;
-            @SnapTurn.started -= instance.OnSnapTurn;
-            @SnapTurn.performed -= instance.OnSnapTurn;
-            @SnapTurn.canceled -= instance.OnSnapTurn;
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
@@ -4173,8 +4035,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
     {
         void OnTeleportMode(InputAction.CallbackContext context);
         void OnTeleportModeCancel(InputAction.CallbackContext context);
-        void OnTurn(InputAction.CallbackContext context);
-        void OnSnapTurn(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnGrabMove(InputAction.CallbackContext context);
     }
@@ -4214,8 +4074,6 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
     {
         void OnTeleportMode(InputAction.CallbackContext context);
         void OnTeleportModeCancel(InputAction.CallbackContext context);
-        void OnTurn(InputAction.CallbackContext context);
-        void OnSnapTurn(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnGrabMove(InputAction.CallbackContext context);
     }
