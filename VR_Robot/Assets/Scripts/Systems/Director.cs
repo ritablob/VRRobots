@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Director : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class Director : MonoBehaviour
     public GameObject highlightObject;
     public int maxPiecesOfTrash, maxTimeToClean;
     public LayerMask interactables;
+
+    public bool debugShowScore;
 
     [HideInInspector] public float highlightLerpTimer;
 
@@ -87,6 +90,10 @@ public class Director : MonoBehaviour
     private void Update()
     {
         highlightLerpTimer += Time.deltaTime;
+
+        if (!feedbackText.gameObject.activeInHierarchy && debugShowScore) {
+            ShowScore();
+        }
     }
 
     public void Log(string msg) { }
@@ -102,6 +109,7 @@ public class Director : MonoBehaviour
 
     public void ShowScore() {
         StopAllCoroutines();
+        StartCoroutine(ReloadGame());
 
         // 180 = max points! 
         float _points = points;
@@ -164,6 +172,12 @@ public class Director : MonoBehaviour
                 break; 
             }
         }
+    }
+
+    private IEnumerator ReloadGame() {
+        yield return new WaitForSeconds(16);
+
+        SceneManager.LoadScene("DemoLevel");
     }
 
     private IEnumerator CountDown() { 
