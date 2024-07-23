@@ -15,6 +15,7 @@ public class Robot_Store : Robot_Interaction_State
         context.Anim.SetBool("FlapOpen", true);
         context.LerpArmWeight(0, 2);
         VFXApplicationHelper.instance.RobotCanvasManager.ShowSpeechBubbleMessage("Storing Trash");
+        context.AI.SetDestination(context.AI.transform.position);
     }
     public override void ExitState() {
         context.Anim.SetBool("FlapOpen", false);
@@ -25,6 +26,12 @@ public class Robot_Store : Robot_Interaction_State
     }  
     public override void UpdateState() { }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {
+        if (context.IKController.Target == null) {
+            if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
+
+            return Robot_Interaction_State_Machine.ERobotInteractionState.Idle;
+        }
+
         if (context.IKController.Timer >= 1) {
             if (context.Attentive) { return Robot_Interaction_State_Machine.ERobotInteractionState.Attentive; }
 

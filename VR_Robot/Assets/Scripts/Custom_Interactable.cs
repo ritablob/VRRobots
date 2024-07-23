@@ -31,6 +31,8 @@ public class Custom_Interactable : MonoBehaviour
         GetComponent<XRBaseInteractable>().selectEntered.AddListener(grab);
 
         if (startScale == Vector3.zero) { startScale = transform.localScale; }
+
+        if (gameObject.layer == 0) { gameObject.layer = 7; }
     }
 
     // If the player's hand is close to the object on the x,z plane, raise the object to be just below the hand on a y level

@@ -4,29 +4,25 @@ using UnityEngine;
 
 public class Highlighter : MonoBehaviour
 {
-    public GameObject[] highlightObjs;
+    public GameObject highlightObj;
 
 
     private void Start()
     {
         Director.instance.highlightObjects += Highlight;
 
-        // If no object, automatically create it
-        if (highlightObjs.Length == 0)
+        // If no object (or first element is null), automatically create it
+        if (highlightObj == null)
         {
             GameObject highlight = Instantiate(Director.instance.highlightObject, transform);
-            highlight.GetComponent<MeshFilter>().mesh = GetComponent<MeshFilter>().mesh;
-            highlight.transform.localScale *= 1.2f;
-            highlight.SetActive(false);
-            highlightObjs = new GameObject[1];
-            highlightObjs[0] = highlight;
+            highlightObj = highlight.gameObject;
+            highlightObj.GetComponent<MeshFilter>().mesh = GetComponent<MeshFilter>().mesh;
+            highlightObj.transform.localScale *= 1.2f;
+            highlightObj.SetActive(false);
             return;
         }
 
-        for (int i = 0; i < highlightObjs.Length; i++)
-        {
-            VFXApplicationHelper.instance.ApplyHighlightParticleOnStart(highlightObjs[i]);
-        }
+            VFXApplicationHelper.instance.ApplyHighlightParticleOnStart(highlightObj);
     }
 
     private void OnDestroy()
@@ -36,15 +32,12 @@ public class Highlighter : MonoBehaviour
 
     public void HoverHighlight(bool state)
     {
-        for (int i = 0; i < highlightObjs.Length; i++)
-        {
-            highlightObjs[i].SetActive(state);
-        }
+        highlightObj.SetActive(state);
 
         if (!state) {
-            Director.instance.SetCurrentHighlighted(highlightObjs[0].transform, false);
+            Director.instance.SetCurrentHighlighted(highlightObj.transform, false);
         } else {
-            Director.instance.SetCurrentHighlighted(highlightObjs[0].transform, true);
+            Director.instance.SetCurrentHighlighted(highlightObj.transform, true);
         }     
     }
 
@@ -56,10 +49,7 @@ public class Highlighter : MonoBehaviour
 
     private void ToggleHighlight(bool state)
     {
-        for (int i = 0; i < highlightObjs.Length; i++)
-        {
-            highlightObjs[i].SetActive(state);
-        }
+        highlightObj.SetActive(state);
 
         if (state)
         {

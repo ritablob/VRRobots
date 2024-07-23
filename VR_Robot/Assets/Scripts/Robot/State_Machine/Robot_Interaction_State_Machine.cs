@@ -33,9 +33,9 @@ public class Robot_Interaction_State_Machine : StateManager<Robot_Interaction_St
     [SerializeField] Transform lookatTarget;
     [SerializeField] Transform storage;
     [SerializeField] CCDIK ikController;
-    [SerializeField] Transform garbageCanGeneral;
-    [SerializeField] Transform garbageCanPlastic;
-    [SerializeField] Transform garbageCanPaper;
+    [SerializeField] Transform garbagecanFood;
+    [SerializeField] Transform garbagecanRecycling;
+    [SerializeField] Transform garbagecanGlass;
     [SerializeField] Transform head;
     [SerializeField] LayerMask layerMask;
     [SerializeField] NavMeshAgent AI;

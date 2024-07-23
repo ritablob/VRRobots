@@ -83,6 +83,10 @@ public class CCDIK : MonoBehaviour {
 
             timer += Time.deltaTime * 0.5f;
         }
+        else
+        {
+            timer = 0;
+        }
     }
 
     private void SetTarget(Transform _target) {
@@ -205,9 +209,9 @@ public class CCDIK : MonoBehaviour {
 
     private Transform GarbagecanMoveTo(GarbageType type) {
        switch (type) {
-            case GarbageType.General: return garbageCans[0];
-            case GarbageType.Paper: return garbageCans[1];
-            case GarbageType.Plastic: return garbageCans[2];
+            case GarbageType.Food: return garbageCans[0];
+            case GarbageType.Recycling: return garbageCans[1];
+            case GarbageType.Glass: return garbageCans[2];
             default: return null;
        }
     }
@@ -215,9 +219,9 @@ public class CCDIK : MonoBehaviour {
     private Vector3 GarbageCanPos(GarbageType type) {
         switch (type)
         {
-            case GarbageType.General: return garbageStandPoint[0].position;
-            case GarbageType.Paper: return garbageStandPoint[1].position;
-            case GarbageType.Plastic: return garbageStandPoint[2].position;
+            case GarbageType.Food: return garbageStandPoint[0].position;
+            case GarbageType.Recycling: return garbageStandPoint[1].position;
+            case GarbageType.Glass: return garbageStandPoint[2].position;
             default: return Vector3.zero;
         }
     }

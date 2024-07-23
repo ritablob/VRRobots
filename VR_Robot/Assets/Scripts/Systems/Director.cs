@@ -17,6 +17,7 @@ public class Director : MonoBehaviour
     public Image[] starImages;
     public GameObject highlightObject;
     public int maxPiecesOfTrash, maxTimeToClean;
+    public LayerMask interactables;
 
     [HideInInspector] public float highlightLerpTimer;
 

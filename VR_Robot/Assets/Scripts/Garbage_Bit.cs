@@ -13,8 +13,8 @@ public class Garbage_Bit : MonoBehaviour
 
 public enum GarbageType
 {
-    General,
-    Paper,
-    Plastic,
+    Food,
+    Recycling,
+    Glass,
     BAD
 }

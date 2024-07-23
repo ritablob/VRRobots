@@ -32,10 +32,11 @@ Transform:
   m_GameObject: {fileID: 1368871734653938554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.47, y: 0, z: -5.66}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1452722037098386370}
+  - {fileID: 4471131132058550116}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -95,8 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbaf639fd92c6184cb2d7369b2065a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightObjs:
-  - {fileID: 0}
+  highlightObj: {fileID: 3714703978039311089}
 --- !u!54 &1368871734653938535
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -262,6 +262,89 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startScale: {x: 0, y: 0, z: 0}
   grabDistance: 0.33
+--- !u!1 &3714703978039311089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4471131132058550116}
+  - component: {fileID: 1108575813266936891}
+  - component: {fileID: 9167801196491895553}
+  m_Layer: 0
+  m_Name: Highlight
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &4471131132058550116
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3714703978039311089}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.231, z: 0}
+  m_LocalScale: {x: 0.51513, y: 0.50018126, z: 0.7359}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1368871734653938530}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1108575813266936891
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3714703978039311089}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &9167801196491895553
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3714703978039311089}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 4c40de98be667cd4089046870e91c915, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1001 &1415154493311218729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -429,7 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2cf495a0914d2469969c4326f13784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
 --- !u!114 &4116847627926561606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbaf639fd92c6184cb2d7369b2065a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightObjs: []
+  highlightObj: {fileID: 0}
 --- !u!114 &8605416354604194592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,7 +722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbaf639fd92c6184cb2d7369b2065a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightObjs: []
+  highlightObj: {fileID: 0}
 --- !u!114 &6976921484745279993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -800,7 +883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2cf495a0914d2469969c4326f13784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
 --- !u!4 &1452722037098386370 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ea34f6f99235f7f47aa9195dac3d4c7a,
@@ -855,7 +938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2cf495a0914d2469969c4326f13784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
 --- !u!114 &6584807552639492505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1002,7 +1085,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbaf639fd92c6184cb2d7369b2065a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightObjs: []
+  highlightObj: {fileID: 0}
 --- !u!114 &8353804086813017592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1225,7 +1308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbaf639fd92c6184cb2d7369b2065a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightObjs: []
+  highlightObj: {fileID: 0}
 --- !u!114 &8247807107601063573
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1238,7 +1321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2cf495a0914d2469969c4326f13784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
 --- !u!1 &4926066660510483333 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6340861587343259564, guid: ea34f6f99235f7f47aa9195dac3d4c7a,
@@ -1435,7 +1518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbaf639fd92c6184cb2d7369b2065a7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightObjs: []
+  highlightObj: {fileID: 0}
 --- !u!114 &9143113806279792854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1448,7 +1531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2cf495a0914d2469969c4326f13784, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
 --- !u!4 &5928807114544762749 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4748193870639217492, guid: ea34f6f99235f7f47aa9195dac3d4c7a,
