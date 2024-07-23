@@ -8,13 +8,13 @@ namespace Interaction
     public sealed class HandWaveController : MonoBehaviour
     {
         public event Action<Transform> handWaved;
-        
+
         public Transform leftHandAnchor;
         public Transform rightHandAnchor;
         public float responseTime = 1.0f;
         public float movementThreshold = 1.2f;
         public float rotationThreshold = 315f;
-        
+
         private bool coroutineRunning;
         private Vector3 lastPositionLeft;
         private Vector3 lastPositionRight;
@@ -29,12 +29,14 @@ namespace Interaction
             // if coroutine is not running (i.e. no waving coroutine has started)
             if (!coroutineRunning)
             {
-                float velocityLeft = Vector3.Distance(lastPositionLeft, leftHandAnchor.transform.position)/Time.fixedDeltaTime;
-                float velocityRight = Vector3.Distance(lastPositionRight, rightHandAnchor.transform.position)/Time.fixedDeltaTime;
-                
+                float velocityLeft = Vector3.Distance(lastPositionLeft, leftHandAnchor.transform.position) /
+                                     Time.fixedDeltaTime;
+                float velocityRight = Vector3.Distance(lastPositionRight, rightHandAnchor.transform.position) /
+                                      Time.fixedDeltaTime;
+
                 CheckRequirements(velocityLeft, leftHandAnchor);
                 CheckRequirements(velocityRight, rightHandAnchor);
-                
+
                 lastPositionLeft = leftHandAnchor.position;
                 lastPositionRight = rightHandAnchor.position;
             }
@@ -44,13 +46,13 @@ namespace Interaction
         {
             return handTransform.localEulerAngles.x > rotationThreshold;
         }
-        
-/// <summary>
-/// Checks whether the immediate requirements are met, then starts the GetAverageVelocity coroutine to check whether
-/// the requirements are being met over a period of time.
-/// </summary>
-/// <param name="velocity">current velocity of an object.</param>
-/// <param name="handTransform">Transform of a hand </param>
+
+        /// <summary>
+        /// Checks whether the immediate requirements are met, then starts the GetAverageVelocity coroutine to check whether
+        /// the requirements are being met over a period of time.
+        /// </summary>
+        /// <param name="velocity">current velocity of an object.</param>
+        /// <param name="handTransform">Transform of a hand </param>
         private void CheckRequirements(float velocity, Transform handTransform)
         {
             if (velocity > movementThreshold)
@@ -59,15 +61,15 @@ namespace Interaction
             }
         }
 
-/// <summary>
-/// Coroutine to calculate an average velocity over a period of time.
-/// </summary>
-/// <param name="anchorTransform">transform of the hand object</param>
-/// <returns></returns>
+        /// <summary>
+        /// Coroutine to calculate an average velocity over a period of time.
+        /// </summary>
+        /// <param name="anchorTransform">transform of the hand object</param>
+        /// <returns></returns>
         private IEnumerator GetAverageVelocity(Transform anchorTransform)
         {
             coroutineRunning = true;
-            
+
             var currentTime = 0f;
             var cumulativeVelocity = 0f;
             var lastPosition = anchorTransform.position;
@@ -88,14 +90,14 @@ namespace Interaction
 
             // calculate average velocity
             var velocity = cumulativeVelocity / currentTime;
-            
+
             if (velocity > movementThreshold && IsUpwardRotation(anchorTransform))
             {
                 handWaved?.Invoke(anchorTransform);
             }
-            
+
             coroutineRunning = false;
             yield return null;
         }
     }
- }
+}

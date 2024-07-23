@@ -13,13 +13,15 @@ public class Robot_Store : Robot_Interaction_State
         context.IKController.setOnGround = false;
         context.Anim.SetTrigger("Store");
         context.Anim.SetBool("FlapOpen", true);
-        context.LerpArmWeight(0, 3);
+        context.LerpArmWeight(0, 2);
+        VFXApplicationHelper.instance.RobotCanvasManager.ShowSpeechBubbleMessage("Storing Trash");
     }
     public override void ExitState() {
         context.Anim.SetBool("FlapOpen", false);
         context.Anim.SetBool("Start Grab", false);
         context.LerpArmWeight(0, 1);
-        if (context.IKController.Target != null) { Director.instance.CopyObject(context.IKController.Target.gameObject); } 
+        if (context.IKController.Target != null) { Director.instance.CopyObject(context.IKController.Target.gameObject); }
+        VFXApplicationHelper.instance.RobotCanvasManager.HideSpeechBubble();
     }  
     public override void UpdateState() { }
     public override Robot_Interaction_State_Machine.ERobotInteractionState GetNextState() {

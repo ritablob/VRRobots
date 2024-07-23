@@ -14,8 +14,10 @@ public class Robot_Grab : Robot_Interaction_State
         context.Anim.SetBool("Start Grab", true);
         context.Anim.SetBool("Scanning", false);
         context.Anim.SetTrigger("End Walk");
+        VFXApplicationHelper.instance.RobotCanvasManager.ShowSpeechBubbleMessage("Target acquired");
     }
-    public override void ExitState() { 
+    public override void ExitState() {
+        VFXApplicationHelper.instance.RobotCanvasManager.HideSpeechBubble();
     }
     public override void UpdateState() {
         context.Head.LookAt(context.IKController.Target); 

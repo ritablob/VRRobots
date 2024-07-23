@@ -27,5 +27,7 @@ public class Cuttable_Box : MonoBehaviour
 
             if (parts.Count == 0) { Destroy(gameObject); }
         }
+
+        Debug.Log("HAND - " + other.tag, other.gameObject);
     }
 }

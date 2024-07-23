@@ -21,17 +21,11 @@ public class Door : MonoBehaviour
     public void Open()
     {
         //Debug.Log("Opening door");
-        openPosition.localPosition = new Vector3(openPosition.localPosition.x, door.localPosition.y, openPosition.localPosition.z);
+        if (isOpen) return;
+        openPosition.localPosition = new Vector3(openPosition.localPosition.x, door.localPosition.y,
+            openPosition.localPosition.z);
         OGposition = door.localPosition;
         StartCoroutine(OpenDoor());
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        //Debug.Log("TriggerEnter with "+other + " of "+other.gameObject);
-        if (!isOpen)
-            Open();
     }
 
     private void OnTriggerExit(Collider other)
@@ -43,8 +37,8 @@ public class Door : MonoBehaviour
 
     public void Close()
     {
-        StartCoroutine(CloseDoor());
-
+        if (isOpen)
+            StartCoroutine(CloseDoor());
     }
 
     private IEnumerator OpenDoor()
@@ -55,7 +49,7 @@ public class Door : MonoBehaviour
         audio.Play();
         while (currentTime < openingDuration)
         {
-            door.localPosition = Vector3.Lerp(OGposition, openPosition.localPosition, currentTime/openingDuration);
+            door.localPosition = Vector3.Lerp(OGposition, openPosition.localPosition, currentTime / openingDuration);
             currentTime += Time.deltaTime;
             yield return null;
         }
@@ -71,13 +65,13 @@ public class Door : MonoBehaviour
         audio.Play();
         while (currentTime < openingDuration)
         {
-            door.localPosition = Vector3.Lerp(openPosition.localPosition, OGposition, currentTime/openingDuration);
+            door.localPosition = Vector3.Lerp(openPosition.localPosition, OGposition, currentTime / openingDuration);
             currentTime += Time.deltaTime;
             yield return null;
         }
+
         isOpen = false;
 
         yield return null;
     }
-    
 }

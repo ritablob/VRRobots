@@ -17,7 +17,7 @@ public class Robot_Interaction_Context : MonoBehaviour
     private Transform _head;
     private LayerMask _layerMask;
     private List<Transform> _checkedObjects = new List<Transform>(0);
-    public bool _dump, _attentive, _searching;
+    public bool _dump, _attentive, _searching, _headpat;
     private List<GameObject> _garbageBits = new List<GameObject>(0);
     public Vector3 garbagePos;
     private NavMeshAgent _AI;

@@ -22,12 +22,10 @@ public class CleaningManager : MonoBehaviour
         Cleanable cleanable = collision.gameObject.GetComponent<Cleanable>();
         cleanable.StopAllCoroutines();
         Debug.Log("Not cleaning anymore");
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
     }
 }

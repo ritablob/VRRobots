@@ -9,13 +9,16 @@ public class Director : MonoBehaviour
 {
     public static Director instance;
 
-    public TextMeshProUGUI text, timeStat, robotCleanPerc;
+    public TextMeshProUGUI feedbackText;
     public AnimationCurve interactLerpCurve;
     public Transform leftHand, rightHand, playerCamera;
     public Transform robot;
+    [HideInInspector] public Transform currentHighlighted;
     public Image[] starImages;
     public GameObject highlightObject;
     public int maxPiecesOfTrash, maxTimeToClean;
+
+    [HideInInspector] public float highlightLerpTimer;
 
     private int points;
     private int piecesOfTrash;
@@ -62,18 +65,30 @@ public class Director : MonoBehaviour
             starImages[i].transform.parent.gameObject.SetActive(false);
         }
 
-        timeStat.gameObject.SetActive(false);
-        robotCleanPerc.gameObject.SetActive(false);
+        feedbackText.gameObject.SetActive(false);
 
         piecesOfTrash = maxPiecesOfTrash;
         timeToClean = maxTimeToClean;
         StartCoroutine(CountDown());
     }
 
-    public void Log(string msg) {
-        if (text == null) { return; }
-        text.text = msg;
+    public void SetCurrentHighlighted(Transform target, bool state) {
+        if (!state && currentHighlighted == target) { 
+            currentHighlighted = null;
+            highlightLerpTimer = 0;
+        }
+        else if (state) {
+            currentHighlighted = target;
+            highlightLerpTimer = 0;
+        }
     }
+
+    private void Update()
+    {
+        highlightLerpTimer += Time.deltaTime;
+    }
+
+    public void Log(string msg) { }
 
     public void GetPoints(int pts) {
         points += pts;
@@ -92,23 +107,45 @@ public class Director : MonoBehaviour
         // Can only recieve up to 4 stars if sorting perfectly WITHOUT the robot
         float pointsPerStar = ((float)maxPiecesOfTrash * 5) / 3;
 
-        timeStat.gameObject.SetActive(true);
-        robotCleanPerc.gameObject.SetActive(true);
+        feedbackText.gameObject.SetActive(true);
 
+        string feedback = $"Remaining time = {timeToClean} seconds \n";
+        feedback += $"Robot clean % = { (robotTrash / (float)maxPiecesOfTrash) * 100}\n\n";
         // Add full star if level is completed with 1/3rd time to spare
-        if (timeToClean > (float)maxTimeToClean / 3) { _points += pointsPerStar; }
+        if (timeToClean > (float)maxTimeToClean / 3) { 
+            _points += pointsPerStar;
+            feedback += "You worked extremely fast! +1 star";
+        }
         // Add half-a-star worth of points if level is completed before the time limit
-        else if (timeToClean > 0) { _points += pointsPerStar / 2; }
+        else if (timeToClean > 0) { 
+            _points += pointsPerStar / 2;
+            feedback += "You finished in time. Keep your eye on the robot and make sure it's working efficiently! +0.5 stars";
+        }
+        else {
+            feedback += "You finished too late. Try multi-tasking with the robot for a better time. +0 stars";
+        }
 
-        timeStat.text = $"Remaining time = {timeToClean}";
+        feedback += "\n\n";
 
         // Remove a full star if the robot threw away everything!
-        if (robotTrash >= (float)maxPiecesOfTrash * 0.9f) { _points -= pointsPerStar; }
-        else if (robotTrash >= (float)maxPiecesOfTrash / 3) { _points += pointsPerStar; }
+        if (robotTrash >= (float)maxPiecesOfTrash * 0.9f) { 
+            _points -= pointsPerStar;
+            feedback += "You made the robot do too much work! -1 star";
+        }
+        else if (robotTrash >= (float)maxPiecesOfTrash / 3) { 
+            _points += pointsPerStar;
+            feedback += "You split the work with the robot really well! +1 star";
+        }
         // Add half-a-star worth of points if the robot threw away at least a QUARTER of all trash
-        else if (robotTrash >= (float)maxPiecesOfTrash / 4) { _points += pointsPerStar / 2; }
+        else if (robotTrash >= (float)maxPiecesOfTrash / 5) {
+            _points += pointsPerStar / 2;
+            feedback += "You split a small amount of work with the robot. Make sure it's consistently storing or throwing things away. +0.5 stars";
+        }
+        else {
+            feedback += "You didn't utilize the robot enough. Try throwing trash at it to store, then directing it to the trash cans. +0 stars";
+        }
 
-        robotCleanPerc.text = $"Robot clean % = {(robotTrash / (float)maxPiecesOfTrash) * 100}";
+        feedbackText.text += feedback;
 
         for (int i = 0; i < starImages.Length; i++) {
             starImages[i].transform.parent.gameObject.SetActive(true);

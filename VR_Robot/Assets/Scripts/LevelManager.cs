@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 /// </summary>
 public class LevelManager : MonoBehaviour
 {
-     public List<OneSidedDoor> Doors;
+    public List<OneSidedDoor> Doors;
 
     public static LevelManager instance { get; private set; }
 
@@ -24,13 +24,14 @@ public class LevelManager : MonoBehaviour
         }
     }
 }
+
 [System.Serializable]
 public class OneSidedDoor
 {
     public Door door;
     public GameObject roomToEnter;
     public GameObject roomToExit;
-    
+
     public void EnterNextRoom()
     {
         if (!door.isOpen)
@@ -39,14 +40,13 @@ public class OneSidedDoor
             door.Open();
         }
     }
-    
+
     public void ExitPreviousRoom()
     {
         if (door.isOpen)
         {
-            door.Close();            
+            door.Close();
             roomToExit.SetActive(false);
         }
     }
-    
 }

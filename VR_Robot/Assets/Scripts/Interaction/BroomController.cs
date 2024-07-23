@@ -16,7 +16,7 @@ public class BroomController : MonoBehaviour
      * - attach to floor
      * - track how many hands hold the broom
      */
-    
+
 
     void Start()
     {
@@ -26,18 +26,17 @@ public class BroomController : MonoBehaviour
     public void AddInteraction()
     {
         interactions++;
-        Debug.Log("interactions "+interactions);
+        Debug.Log("interactions " + interactions);
     }
 
     public void RemoveInteraction()
     {
         interactions--;
-        Debug.Log("interactions "+interactions);
-
+        Debug.Log("interactions " + interactions);
     }
+
     public void CountInteractions()
     {
-        
     }
 
     private void ToggleFloorAttach()
@@ -49,13 +48,13 @@ public class BroomController : MonoBehaviour
     {
         if (interactions == 2)
             attachedToFloor = true;
-        
     }
 
     public void DetachFromFloor()
     {
         attachedToFloor = false;
     }
+
     private void Update()
     {
         if (attachedToFloor)

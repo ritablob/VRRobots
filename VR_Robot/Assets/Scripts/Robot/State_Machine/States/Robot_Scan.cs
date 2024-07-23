@@ -14,8 +14,10 @@ public class Robot_Scan : Robot_Interaction_State
         context.Anim.SetBool("Walking", false);
         context.Anim.SetBool("Scanning", true);
         timer = 0;
+        VFXApplicationHelper.instance.RobotCanvasManager.ShowSpeechBubbleMessage("Scanning...");
     }
     public override void ExitState() {
+        VFXApplicationHelper.instance.RobotCanvasManager.HideSpeechBubble();
     }
     public override void UpdateState() {
         timer += Time.deltaTime;
