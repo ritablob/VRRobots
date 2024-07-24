@@ -40,6 +40,7 @@ public class CustomActions : MonoBehaviour
         waver.handWaved += Wave;
 
         inputActions.XRILeftInteraction.LeftPrimary.performed += DEBUG_Wave;
+        inputActions.XRIRightInteraction.RightPrimary.performed += DEBUG_Wave;
 
         inputActions.XRILeftInteraction.Activate.performed += PressPointL;
         inputActions.XRILeftInteraction.Activate.canceled += ReleasePointL;
@@ -53,6 +54,7 @@ public class CustomActions : MonoBehaviour
         waver.handWaved -= Wave;
 
         inputActions.XRILeftInteraction.LeftPrimary.performed -= DEBUG_Wave;
+        inputActions.XRIRightInteraction.RightPrimary.performed -= DEBUG_Wave;
 
         inputActions.XRILeftInteraction.Activate.performed += PressPointL;
         inputActions.XRILeftInteraction.Activate.canceled -= ReleasePointL;

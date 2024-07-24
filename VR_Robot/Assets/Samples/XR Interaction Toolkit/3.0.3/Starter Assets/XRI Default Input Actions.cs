@@ -1240,6 +1240,15 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Right Primary"",
+                    ""type"": ""Button"",
+                    ""id"": ""8c0d6853-c418-4d5f-baf5-f55c5bed66a7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1482,6 +1491,17 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Thumbstick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8390876a-ff0e-4e79-8e33-1f22540cb102"",
+                    ""path"": ""<XRController>{RightHand}/{PrimaryButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right Primary"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -2837,6 +2857,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
         m_XRIRight_GripPosition = m_XRIRight.FindAction("Grip Position", throwIfNotFound: true);
         m_XRIRight_GripRotation = m_XRIRight.FindAction("Grip Rotation", throwIfNotFound: true);
         m_XRIRight_Thumbstick = m_XRIRight.FindAction("Thumbstick", throwIfNotFound: true);
+
         // XRI Right Interaction
         m_XRIRightInteraction = asset.FindActionMap("XRI Right Interaction", throwIfNotFound: true);
         m_XRIRightInteraction_Select = m_XRIRightInteraction.FindAction("Select", throwIfNotFound: true);
@@ -2851,6 +2872,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
         m_XRIRightInteraction_DirectionalManipulation = m_XRIRightInteraction.FindAction("Directional Manipulation", throwIfNotFound: true);
         m_XRIRightInteraction_ScaleToggle = m_XRIRightInteraction.FindAction("Scale Toggle", throwIfNotFound: true);
         m_XRIRightInteraction_ScaleOverTime = m_XRIRightInteraction.FindAction("Scale Over Time", throwIfNotFound: true);
+        m_XRIRightInteraction_RightPrimary = m_XRIRight.FindAction("Right Primary", throwIfNotFound: true);
         // XRI Right Locomotion
         m_XRIRightLocomotion = asset.FindActionMap("XRI Right Locomotion", throwIfNotFound: true);
         m_XRIRightLocomotion_TeleportMode = m_XRIRightLocomotion.FindAction("Teleport Mode", throwIfNotFound: true);
@@ -3431,6 +3453,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
     private readonly InputAction m_XRIRight_GripPosition;
     private readonly InputAction m_XRIRight_GripRotation;
     private readonly InputAction m_XRIRight_Thumbstick;
+
     public struct XRIRightActions
     {
         private @XRIDefaultInputActions m_Wrapper;
@@ -3449,6 +3472,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
         public InputAction @GripPosition => m_Wrapper.m_XRIRight_GripPosition;
         public InputAction @GripRotation => m_Wrapper.m_XRIRight_GripRotation;
         public InputAction @Thumbstick => m_Wrapper.m_XRIRight_Thumbstick;
+
         public InputActionMap Get() { return m_Wrapper.m_XRIRight; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -3500,6 +3524,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
             @Thumbstick.started += instance.OnThumbstick;
             @Thumbstick.performed += instance.OnThumbstick;
             @Thumbstick.canceled += instance.OnThumbstick;
+
         }
 
         private void UnregisterCallbacks(IXRIRightActions instance)
@@ -3546,6 +3571,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
             @Thumbstick.started -= instance.OnThumbstick;
             @Thumbstick.performed -= instance.OnThumbstick;
             @Thumbstick.canceled -= instance.OnThumbstick;
+
         }
 
         public void RemoveCallbacks(IXRIRightActions instance)
@@ -3579,6 +3605,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
     private readonly InputAction m_XRIRightInteraction_DirectionalManipulation;
     private readonly InputAction m_XRIRightInteraction_ScaleToggle;
     private readonly InputAction m_XRIRightInteraction_ScaleOverTime;
+    private readonly InputAction m_XRIRightInteraction_RightPrimary;
     public struct XRIRightInteractionActions
     {
         private @XRIDefaultInputActions m_Wrapper;
@@ -3595,6 +3622,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
         public InputAction @DirectionalManipulation => m_Wrapper.m_XRIRightInteraction_DirectionalManipulation;
         public InputAction @ScaleToggle => m_Wrapper.m_XRIRightInteraction_ScaleToggle;
         public InputAction @ScaleOverTime => m_Wrapper.m_XRIRightInteraction_ScaleOverTime;
+        public InputAction @RightPrimary => m_Wrapper.m_XRIRightInteraction_RightPrimary;
         public InputActionMap Get() { return m_Wrapper.m_XRIRightInteraction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -3640,6 +3668,9 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
             @ScaleOverTime.started += instance.OnScaleOverTime;
             @ScaleOverTime.performed += instance.OnScaleOverTime;
             @ScaleOverTime.canceled += instance.OnScaleOverTime;
+            @RightPrimary.started += instance.OnRightPrimary;
+            @RightPrimary.performed += instance.OnRightPrimary;
+            @RightPrimary.canceled += instance.OnRightPrimary;
         }
 
         private void UnregisterCallbacks(IXRIRightInteractionActions instance)
@@ -3680,6 +3711,9 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
             @ScaleOverTime.started -= instance.OnScaleOverTime;
             @ScaleOverTime.performed -= instance.OnScaleOverTime;
             @ScaleOverTime.canceled -= instance.OnScaleOverTime;
+            @RightPrimary.started -= instance.OnRightPrimary;
+            @RightPrimary.performed -= instance.OnRightPrimary;
+            @RightPrimary.canceled -= instance.OnRightPrimary;
         }
 
         public void RemoveCallbacks(IXRIRightInteractionActions instance)
@@ -4054,6 +4088,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
         void OnGripPosition(InputAction.CallbackContext context);
         void OnGripRotation(InputAction.CallbackContext context);
         void OnThumbstick(InputAction.CallbackContext context);
+        void OnRightPrimary(InputAction.CallbackContext context);
     }
     public interface IXRIRightInteractionActions
     {
@@ -4069,6 +4104,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
         void OnDirectionalManipulation(InputAction.CallbackContext context);
         void OnScaleToggle(InputAction.CallbackContext context);
         void OnScaleOverTime(InputAction.CallbackContext context);
+        void OnRightPrimary(InputAction.CallbackContext context);
     }
     public interface IXRIRightLocomotionActions
     {
