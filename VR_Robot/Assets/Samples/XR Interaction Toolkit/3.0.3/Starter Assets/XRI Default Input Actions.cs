@@ -1068,7 +1068,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                 {
                     ""name"": """",
                     ""id"": ""f2434611-51f0-4d0c-9ed8-3b93b30026d7"",
-                    ""path"": ""<XRController>{LeftHand}/{PrimaryButton}"",
+                    ""path"": ""<XRController>{LeftHand}/{SecondaryButton}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -1835,7 +1835,7 @@ public partial class @XRIDefaultInputActions: IInputActionCollection2, IDisposab
                 {
                     ""name"": """",
                     ""id"": ""62690862-4688-4010-975b-b3d9c6062157"",
-                    ""path"": ""<XRController>{RightHand}/{PrimaryButton}"",
+                    ""path"": ""<XRController>{RightHand}/{SecondaryButton}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
