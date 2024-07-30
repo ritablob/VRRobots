@@ -1,5 +1,5 @@
 # VR Robot - A Trash Tale
-### Team: Rita, Liz, Xavi, Katarina, Diego, Ali
+### Team: Rita, Liz, Xavier, Katharina, Diego, Ali
 
 **Engine used:** Unity 2021.3.3f1
 
